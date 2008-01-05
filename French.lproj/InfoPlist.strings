@@ -1,0 +1,4 @@
+CFBundleName = "Moniteur de la Mémoire";
+CFBundleDisplayName = "Moniteur de la Mémoire";
+NSHumanReadableCopyright = "Copyright © 2001-2006 Bernhard Baehr";
+CFBundleHelpBookName = "Aide de Moniteur de la Mémoire";

@@ -1,0 +1,271 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+<meta name="AppleTitle" content="Aide de Moniteur de la M&eacute;moire">
+<meta name="AppleIcon" content="Help/MemoryMonitor.gif">
+<meta name="AppleFont" content="Lucida Grande,Helvetica">
+<meta name="AppleSearchResultsFont" content="Lucida Grande,Helvetica">
+<meta robots="ROBOTS" content="NOINDEX">
+<title>Aide de Moniteur de la M&eacute;moire</title>
+<style type="text/css" media="screen">
+p {
+	font-family: "Lucida Grande", Arial, "Sans Serif";
+	font-size: 10pt;
+	text-decoration: none
+}
+pre {
+	font-family: Courier;
+	font-size: 10pt;
+	text-decoration: none
+}
+h4 {
+	font-family: "Lucida Grande", Arial, "Sans Serif";
+	font-size: 10pt;
+	text-decoration: bold
+}
+</style>
+</head>
+
+<body>
+
+<h4>Gestion de la m&eacute;moire de Mac OS X</h4>
+
+<p>
+Comme l'application CPU Monitor (Moniteur d'Activit&eacute; sur Mac OS X 10.3 et
+ult&eacute;rieur) montre l'utilisation du temps processeur, Memory
+Monitor affiche l'utilisation de la m&eacute;moire sur un
+syst&egrave;me Mac OS X. Toutefois, pour comprendre ce que Memory
+Monitor pr&eacute;sente dans son icon, il faut comprendre les bases de
+la gestion de la m&eacute;moire par le syst&egrave;me Mac OS X. Comme
+Mac OS X est bas&eacute; sur Darwin, un syst&egrave;me d'exploitation
+d&eacute;riv&eacute; d'Unix, ce petit tutorial traitera de la gestion
+de la m&eacute;moire virtuel par Unix. Ne vous inqui&eacute;tez pas,
+l'utilisateur moyen du Mac n'a pas besoin de savoir &ccedil;a, mais
+l'utilisateur expert, lui, le voudra ! Quand vous voulez
+contr&ocirc;ler les processus (applications et t&acirc;ches
+syst&egrave;mes) en train de fonctionner sur votre Mac, vous utilisez
+l'application Moniteur d'Activit&eacute; (sur Mac OS X 10.3 et
+suivant). L'&eacute;quivalent en commande Unix est l'instruction
+&laquo;top&raquo; (tapez simplement &laquo;top&raquo; dans une
+fen&ecirc;tre du terminal). Celle-ci vous affiche en plus des lignes
+suppl&eacute;mentaires dans l'ent&ecirc;te dont une donnant des
+informations sur la m&eacute;moire. Par exemple :
+</p>
+
+<pre>PhysMem: 50M wired, 194M active, 181M inactive, 425M used, 23M free
+</pre>
+
+<p>
+Ces informations, qui semblent &eacute;tranges par rapport aux informations de l'utilisation
+de la m&eacute;moire qu'affichait la bo&icirc;te de dialogue &laquo;&Agrave;
+propos de ce Macintosh&raquo; sous Mac OS 9, sont pr&eacute;sent&eacute; par
+Memory Monitor, mais que cela repr&eacute;sente-t-il ?
+</p>
+
+<p>
+50 Mo de m&eacute;moire physique sont &laquo;fix&eacute;s en place&raquo;. C'est ce
+qui doit rester en m&eacute;moire r&eacute;elle et ne peut pas
+&ecirc;tre stock&eacute; sur le disque par le gestionnaire de
+m&eacute;moire virtuelle. La taille de la m&eacute;moire fix&eacute;e
+est repr&eacute;sent&eacute; par la barre la plus bas de l'icon de Dock
+de Memory Monitor.
+</p>
+
+<p>
+194 Mo de m&eacute;moire physique sont utilis&eacute;s par les
+applications ou le syst&egrave;me, mais peuvent &ecirc;tre
+d&eacute;charg&eacute;s sur le disque si n&eacute;cessaire. Cette
+partie de la m&eacute;moire est appel&eacute;e &laquo;active&raquo; et est
+repr&eacute;sent&eacute;e par la seconde barre depuis le bas de l'icon
+de Dock.
+</p>
+
+<p>
+181 Mo de m&eacute;moire physique contient des donn&eacute;es qui ne
+sont pas actuellement utilis&eacute;s. Unix est un peu paresseux pour
+nettoyer la m&eacute;moire. Il se contente de la marqu&eacute;e
+&laquo;inactive&raquo; mais sans la vider avant dans avoir besoin. Dans certain
+cas, il peut la &laquo;r&eacute;activer&raquo;, par exemple, si elle contient le
+code d'une application r&eacute;cemment quitt&eacute;e et qui est
+relanc&eacute;e. Cela permet d'acc&eacute;l&eacute;rer le
+d&eacute;marrage de l'application comme vous pouvez le tester vous
+m&ecirc;me:le premier d&eacute;marrage d'une application est plus
+long que le second ou la troisi&egrave;me fois. La partie inactive de
+la m&eacute;moire physique est une sorte de cache disque dynamique de
+taille variable. Sa taille est repr&eacute;sent&eacute;e par la
+troisi&egrave;me barre de l'icon de Dock.
+</p>
+
+<p>
+425 Mo est la somme de la m&eacute;moire fixe, active et inactive. Le
+reste de la m&eacute;moire physique est libre. L'exemple provient d'un
+Mac avec 488 Mo de RAM, nous avons donc 23 Mo de m&eacute;moire libre.
+Ces 23 Mo de contiennent rien que le syst&egrave;me ne puisse
+r&eacute;clamer pour un quelconque usage. Le reste de m&eacute;moire
+libre est repr&eacute;sent&eacute; par la barre du haut de l'icon de
+Dock.
+</p>
+
+<p>
+Ceci nous indique que le Mac de l'exemple est en bonne forme au premier
+abord. C'est la m&eacute;moire r&eacute;elle dont les programmes ont
+besion. Or il y a une grande quantit&eacute;e de m&eacute;moire
+inactive disponible comme m&eacute;moire libre en effa&ccedil;ant les
+donn&eacute;es en &laquo;cache&raquo; du syst&egrave;me. Nous pouvons
+&eacute;galement obtenir plus d'informations d&eacute;taill&eacute;es
+au sujet de la &laquo;vm_stat&raquo; (virtual memory statistics ou
+statistiques de la m&eacute;moire virtuelle) par l'outil de ligne de
+commande.
+</p>
+
+<p>
+This tells us that the example Mac is in pretty good shape at first glance. There's real
+RAM available to programs that need it. And there is a very large amount of inactive memory
+that can be reclaimed or used in place of free memory, discarding the &laquo;cached&raquo;
+content the systems knows about. And we can get even more detailed information from the
+&laquo;vm_stat&raquo; (virtual memory statistics) command line tool:
+</p>
+
+<pre>[cube:~] bb% vm_stat
+Mach Virtual Memory Statistics: (page size of 4096 bytes)
+Pages free:                     1412.
+Pages active:                  51879.
+Pages inactive:                48646.
+Pages wired down:              12751.
+"Translation faults":       61836589.
+Pages copy-on-write:         2947749.
+Pages zero f<!--to avoid a ligature-->illed:          18373114.
+Pages reactivated:           2144395.
+Pageins:                      504520.
+Pageouts:                      95093.
+Object cache: 512547 hits of 2355002 lookups (21% hit rate)
+</pre>
+
+<p>
+Qu'est-ce que cela signifit&nbsp;? Plut&ocirc;t que de tout vous donner, voici le moyen de trouver par
+vous-m&ecirc;me : simplement tapez &laquo;man vm_stat&raquo; dans une
+fen&ecirc;tre du terminal. La commande Unix &laquo;man&raquo; affiche
+la page du manuel en ligne pour une commande, ici notre instruction.
+(Pour savoir utiliser &laquo;man&raquo;, essayez &laquo;man
+man&raquo;.)
+</p>
+
+<p>
+Toutefois, un terme de la sortie de vm_stat doit &ecirc;tre expliqu&eacute; ici. Qu'est-ce qu'une
+&laquo;page of memory&raquo; (page de m&eacute;moire) ? Unix
+d&eacute;coupe la m&eacute;moire en &laquo;pages&raquo;. Une page est
+l'unit&eacute; minimum de m&eacute;moire qui peut &ecirc;tre
+d&eacute;plac&eacute; par le gestionaire de m&eacute;moire virtuelle.
+Avec Mac OS X, une page fait 4 ko. Puisque les pages sont les plus
+petites unit&eacute;s de m&eacute;moire d&eacute;placable, le fait de
+transf&eacute;rer de la m&eacute;moire vive vers le disque est
+appel&eacute; &laquo;page out&raquo; (page de sortie), le rechargement
+d'une page du disque dans la m&eacute;moire est appel&eacute;
+&laquo;page in&raquo; (page d'entr&eacute;e).
+</p>
+
+<p>
+Une
+autre fa&ccedil;on interessante d'utiliser vm_stat est de l'avoir
+affich&eacute; en continue en sp&eacute;cifiant le nombre de seconde
+entre chaque affichage.
+</p>
+
+<pre>[cube:~] bb% vm_stat 1
+Mach Virtual Memory Statistics: (page size of 4096 bytes, cache hits 21%)
+  free active  inac  wire   faults     copy zerof<!--to avoid a ligature-->ill reactive  pageins  pageout
+  2537  51832 47518 12801 61816392  2947715 18369682  2144360   504233    95093
+  2537  51832 47518 12801       68        0        3        0        0        0
+  2537  51832 47518 12801       71        0        3        0        0        0
+  2537  51832 47518 12801       68        0        3        0        0        0
+  2537  51832 47518 12801       68        0        3        0        0        0
+  2537  51832 47518 12801       68        0        3        0        0        0
+^C
+</pre>
+
+<p>
+Dans notre cas, il affiche une ligne toutes les secondes. Il est
+arr&ecirc;t&eacute; en tapant ctrl+c, la commande stop d'Unix
+(&eacute;quivalent du commande+. de Mac OS).
+</p>
+
+<p>
+Avec vm_stat, nous pouvons ignorer la premi&egrave;re ligne pour le moment.
+elle est le r&eacute;sum&eacute; de l'activit&eacute;
+pr&eacute;c&eacute;dent la commande. C'est le reste des lignes qui est
+int&eacute;ressant.
+</p>
+
+<p>
+Notez les colonnes &laquo;pageins&raquo;
+et &laquo;pageout&raquo; (pages entrantes et sortantes). Elles montrent
+le nombre de pages m&eacute;moires entrantes depuis et sortantes vers
+le disque dur chaque seconde. Ce sont exactement ces deux valeurs qui
+sont repr&eacute;sent&eacute;es par les deux graphiques additionnels
+sur l'icon de Dock de Memory Monitor. (Tant qu'il n'y a pas de
+mouvement de pages, ces graphiques sont des lignes horizontales en haut
+et en bas de l'icon). En option, le nombre de pages entrantes et
+sortantes peut &ecirc;tre afficher dans l'icon &eacute;galement.
+</p>
+
+<p>
+Le chargement de pages peut se produire pour deux raison : un nouveau
+programme est lanc&eacute; et son code machine est charg&eacute; en
+m&eacute;moire depuis son fichier sur le disque ou bien un programme en
+cours d'execussion acc&egrave;de &agrave; de la m&eacute;moire qui est
+stock&eacute;e sur le disque. Du fait qu'Unix utilise le chargement de
+pages pour le d&eacute;marrage d'un programme (&eacute;galement
+appel&eacute; &laquo;demand paging&raquo; soit &laquo;demande de pages
+entrantes&raquo;), ce crit&egrave;re est in&eacute;vitable et ne peut
+&ecirc;tre utilis&eacute; comme indicateur d'insuffisance de
+m&eacute;moire physique.
+</p>
+
+<p>
+Le stockage de pages se produit quand vous &ecirc;tes &agrave; cours de
+m&eacute;moire physique. Souvenez-vous, quand un programme quitte, son
+code reste en m&eacute;moire, si il y a de la place, jusqu'&agrave; ce
+de la m&eacute;moire doivent &ecirc;tre lib&eacute;r&eacute;e pour
+autre chose ou que vous relanciez le programme.&nbsp; Donc, si le
+syst&egrave;me sort des pages, vous &ecirc;tes &agrave; cours de
+m&eacute;moire r&eacute;elle. Un petit nombre de pages sortantes est
+normal pour un sys&egrave;me Unix qui travaille dur. Par contre, si
+vous notez des sorties de pages permanentes (et par cons&eacute;quence,
+des pages entrantes en permanence) quand vous utilisez vos applications
+habituelles, rajouter de la m&eacute;moire physique &agrave; votre
+Macintosh augmentera de fa&ccedil;on significative ses performances.
+</p>
+
+<p>
+Vous &ecirc;tes r&eacute;ellement troubl&eacute; quand vous commencez
+&agrave; voir beaucoup de pages entrantes et sortantes chaque seconde.
+Cela signifie que vous utilis&eacute; plus de donn&eacute;es que vous
+avez de m&eacute;moire pour cela et vous faites
+&laquo;cr&eacute;piter&raquo; le disque dur (&eacute;couter le bruit
+qu'il fait) en stockant les donn&eacute;es dans la m&eacute;moire
+virtuelle. Il est tr&egrave;s difficile de nos jours de mettre un
+syst&egrave;me Unix moderne &agrave; cours de m&eacute;moire en usage
+courrant. Cela arriv&eacute; g&eacute;n&eacute;ralement quand un
+programme a une fuite de m&eacute;moire qui r&eacute;clame plus de
+m&eacute;moire sans en lib&eacute;rer. Normalement, les gens sont
+fatigu&eacute;s de faire cr&eacute;piter le disque et d'avoir la
+machine qui se traine comme une limace. &Agrave; ce point le
+syst&egrave;me n'est toutefois pas techniquement &agrave; cours de
+m&eacute;moire. Il passe juste le cap o&ugrave; la m&eacute;moire
+virtuelle est utile.
+</p>
+
+<p>
+Ceci est un tr&egrave;c court survole de la gestion de la m&eacute;moire
+virtuelle par Unix. En d&eacute;tail les choses sont beaucoup plus
+compliqu&eacute;es. Vous avez cependant assez d'informations pour
+utiliser Memory Monitor comme un indicateur de performance de votre
+syst&egrave;me Mac OS X. Vous pouvez toujours contacter les auteurs
+pour poser des questions (en anglais de pr&eacute;f&eacute;rence),
+l'adresse &eacute;lectronique est indiqu&eacute;e dans la fen&ecirc;tre
+&laquo;&Agrave; propos de Memory Monitor&raquo;.
+</p>
+
+
+</body>
+</html>

@@ -1,0 +1,224 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+<meta name="AppleTitle" content="Memory Monitor Hilfe">
+<meta name="AppleIcon" content="Help/MemoryMonitor.gif">
+<meta name="AppleFont" content="Lucida Grande,Helvetica">
+<meta name="AppleSearchResultsFont" content="Lucida Grande,Helvetica">
+<meta robots="ROBOTS" content="NOINDEX">
+<title>Memory Monitor Hilfe</title>
+<style type="text/css" media="screen">
+p {
+	font-family: "Lucida Grande", Arial, "Sans Serif";
+	font-size: 10pt;
+	text-decoration: none
+}
+pre {
+	font-family: Courier;
+	font-size: 10pt;
+	text-decoration: none
+}
+h4 {
+	font-family: "Lucida Grande", Arial, "Sans Serif";
+	font-size: 10pt;
+	text-decoration: bold
+}
+</style>
+</head>
+
+<body>
+
+<h4>Mac OS X Speicherverwaltung</h4>
+
+<p>
+Entsprechend dem Programm CPU-Monitor (bzw. Aktivit&auml;ts-Anzeige ab Mac OS X 10.3),
+das die CPU-Auslastung &uuml;ber die Zeit anzeigt, zeigt Memory Monitor die
+Speicherauslastung von Mac OS X an. Aber um den Graphen zu verstehen, den Memory Monitor
+in seinem Dock-Symbol darstellt, sind grundlegende Kenntnisse &uuml;ber die
+Speicherverwaltung von Mac OS X n&ouml;tig. Und da Mac OS X auf Darwin basiert, einem
+Betriebssystem aus der Unix-Familie, ist das hier eine kleine &Uuml;bersicht &uuml;ber die
+virtuelle Speicherverwaltung in Unix-Systemen. Aber keine Sorge, der durchschnittliche
+Mac-Anwender braucht sich damit nicht herumzuplagen; ein Mac-Experte wird es wissen wollen.
+Um die Prozesse (Programme und Systemdienste) anzuzeigen, die momentan auf einem Mac laufen,
+kann man das Programm Prozess-Monitor (bzw. Aktivit&auml;ts-Anzeige ab Mac OS X 10.3) verwenden.
+Das Gegenst&uuml;ck zu Prozess-Monitor auf der Unix-Ebene ist das Kommando &laquo;top&raquo;.
+Und wenn man &laquo;top&raquo; startet (einfach &laquo;top&raquo; in einem Terminal-Fenster
+eintippen), sieht man einen zus&auml;tzlichen Block, in dem eine Zeile mit Informationen
+&uuml;ber Speicher auftaucht, z. B.:
+</p>
+
+<pre>PhysMem: 50M wired, 194M active, 181M inactive, 425M used, 23M free</pre>
+
+<p>
+Diese Informationen, die ganz anders aussehen als die Speicher&uuml;bersicht, die man im
+Fenster &laquo;&Uuml;ber diesen Macintosh&raquo; bei Mac OS 9 erh&auml;lt, wird von Memory Monitor
+graphisch dargestellt. Aber was bedeuten die Zahlen denn nun genau?
+</p>
+
+<p>
+50 Megabyte des physischen Speichers sind &laquo;wired&raquo;, d. h. fest verankert. Darin
+befinden sich Dinge, die permanent im Hauptspeicher bleiben m&uuml;ssen und nicht zwischendurch
+von der Speicherverwaltung auf die Festplatte ausgelagert werden d&uuml;rfen. Die Gr&ouml;&szlig;e
+des fest verankerten Speichers wird vom untersten horizontalen Balken im Dock-Symbol von
+Memory Monitor angezeigt.
+</p>
+
+<p>
+194 Megabyte des physischen Speichers werden von Programmen oder dem System benutzt,
+k&ouml;nnen aber, falls n&ouml;tig, auf die Festplatte ausgelagert werden. Dieser Teil
+des Speichers wird &laquo;active&raquo; (aktiv) genannt und im Dock-Symbol von Memory Monitor im
+zweituntersten Balken angezeigt.
+</p>
+
+<p>
+181 Megabyte des physischen Speichers enthalten Dinge, die gerade nicht benutzt werden.
+Unix ist &laquo;faul&raquo; wenn es darum geht, Speicher freizugeben. Es markiert ihn lieber
+als &laquo;inactive&raquo; (nicht aktiv), aber k&uuml;mmert sich um die Freigabe erst, wenn
+wieder Platz ben&ouml;tigt wird. Manchmal kann auch inaktiver Speicher wieder reaktiviert
+werden, z. B. wenn er den Code eines Programms enth&auml;lt, das vor kurzem beendet wurde
+und das jetzt erneut gestartet wird. Dadurch wird der Programmstart deutlich schneller.
+Man kann das ganz einfach selbst ausprobieren: das erstmalige &Ouml;ffnen eines Programms
+dauert merklich l&auml;nger als das zweite oder dritte &Ouml;ffnen unmittelbar danach.
+Der inaktive Bereich des Speichers wirkt wie ein dynamisch seine Gr&ouml;&szlig;e anpassender
+Pufferspeicher f&uuml;r die Festplatte. Er wird im dritten Balken von unten im Dock-Symbol
+von Memory Monitor dargestellt. 
+</p>
+
+<p>
+425 Megabyte ist die Summe des festen, aktiven und inaktiven Speichers. Der Rest des
+physischen Speichers ist frei. Das Beispiel stammt von einem Mac mit 448 MB RAM, also
+sind 23 Megabyte Speicher frei. Diese 23 Megabyte enthalten nichts, was das System zu
+irgendeinem Zweck wiederverwenden kann. Die Gr&ouml;&szlig;e des freien Speichers wird
+im obersten Balken im Dock-Symbol von Memory Monitor angezeigt.
+</p>
+
+<p>
+Auf den ersten Blick erkennt man also, da&szlig; der Beispiel-Mac rund l&auml;uft. Es ist
+echter Speicher frei f&uuml;r Programme, die danach verlangen. Und es ist ein ziemlich
+gro&szlig;er Bereich mit inaktivem Speicher vorhanden, der leicht wiederverwendet oder
+an Stelle von freiem Speicher benutzt werden kann, indem der gepufferte Inhalt verworfen
+wird. Man kann noch mehr Detailinformationen &uuml;ber die Speicherverwaltung mit dem
+Kommandozeilenbefehl &laquo;vm_stat&raquo; (virtual memory statistics) erhalten:
+</p>
+
+<pre>
+[cube:~] bb% vm_stat
+Mach Virtual Memory Statistics: (page size of 4096 bytes)
+Pages free:                     1412.
+Pages active:                  51879.
+Pages inactive:                48646.
+Pages wired down:              12751.
+"Translation faults":       61836589.
+Pages copy-on-write:         2947749.
+Pages zero f<!--to avoid a ligature-->illed:          18373114.
+Pages reactivated:           2144395.
+Pageins:                      504520.
+Pageouts:                      95093.
+Object cache: 512547 hits of 2355002 lookups (21% hit rate)
+</pre>
+
+<p>
+Aber was bedeuten all die Zahlen? Statt das alles hier zu erkl&auml;ren, sei nur der Hinweis
+gegeben, wo man die Erkl&auml;rung selbst finden kann: man tippe einfach &laquo;man vm_stat&raquo;
+in einem Terminal-Fenster ein. Das Unix-Kommando &laquo;man&raquo; zeigt die Handbuchseite zu
+einem Kommando an, d. h. die Anleitung. (Um mehr dar&uuml;ber herauszufinden, wie &laquo;man&raquo;
+funktioniert, benutze man den Befehl &laquo;man man&raquo;.) 
+</p>
+
+<p>
+Ein Begriff aus der Ausgabe von vm_statt mu&szlig; dennoch hier erl&auml;utert werden: was
+ist eine Speicherseite (page of memory)? Das ist die kleinste Einheit, die vom
+Speicherverwaltungssystem hin- und herbewegt oder ein- und ausgelagert werden kann. Bei
+Mac OS X hat eine Seite die Gr&ouml;&szlig;e von vier Kilobyte. Und weil Seiten die kleinste
+Einheit bei der Speicherverwaltung des Betriebssystems sind, nennt man den Einlagerungsvorgang
+(von der Festplatte in den echten Speicher) auch &laquo;page in&raquo; und das Auslagern
+(vom Hauptspeicher auf die Festplatte) &laquo;page out&raquo;.
+</p>
+
+<p>
+Eine andere interessante Anwendung von vm_stat ist die Anzeige einer kontinuierlichen Statistik.
+Dazu gibt man in der Kommandozeile zus&auml;tzlich die Anzahl von Sekunden an, die vergehen
+sollen, bevor eine neue Ausgabezeile erzeugt wird:
+</p>
+
+<pre>
+[cube:~] bb% vm_stat 1
+Mach Virtual Memory Statistics: (page size of 4096 bytes, cache hits 21%)
+  free active  inac  wire   faults     copy zerof<!--to avoid a ligature-->ill reactive  pageins  pageout
+  2537  51832 47518 12801 61816392  2947715 18369682  2144360   504233    95093
+  2537  51832 47518 12801       68        0        3        0        0        0
+  2537  51832 47518 12801       71        0        3        0        0        0
+  2537  51832 47518 12801       68        0        3        0        0        0
+  2537  51832 47518 12801       68        0        3        0        0        0
+  2537  51832 47518 12801       68        0        3        0        0        0
+^C
+</pre>
+
+<p>
+In diesem Fall erscheint pro Sekunde eine neue Zeile. Die Ausgabe kann man mit der
+Tastenkombination Control-C beenden. (Bei der Unix-Kommandozeile wirkt Control-C so wie
+Befehl-Punkt bei Macintosh-Programmen: es beendet den gerade laufenden Vorgang.)
+</p>
+
+<p>
+Bei der Ausgabe von vm_stat kann man die erste Zeile vorerst ignorieren. Sie enth&auml;lt
+die Zusammenfassung f&uuml;r die vergangene Zeit. Die n&auml;chsten Zeilen sind interessanter.
+</p>
+
+<p>
+Man beachte die Spalten &laquo;pageins&raquo; und &laquo;pageout&raquo;. Sie zeigen, wie viele
+Speicherseiten von der Festplatte in den Hauptspeicher eingelagert oder vom Hauptspeicher auf
+die Festplatte ausgelagert wurden. Und genau diese Zahlen werden durch die beiden
+zus&auml;tzlichen Kurven angezeigt, die im Dock-Symbol von Memory Monitor dargestellt werden.
+(Solange keine Ein- oder Auslagerungsvorg&auml;nge stattfinden, sind diese Kurven einfach
+horizontale Linien am oberen und unteren Rand des Dock-Symbols.) Wahlweise kann zus&auml;tzlich
+die Anzahl der Ein- und Auslagerungsvorg&auml;nge im Dock-Symbol angezeigt werden.
+</p>
+
+<p>
+Einlagerungen (pageins) finden aus zwei Gr&uuml;nden statt: ein neues Programm wird gestartet
+und der Programmcode wird aus der Programmdatei von der Festplatte eingelesen, oder ein bereits
+laufendes Programm greift auf Speicherbereiche zu, die zuvor auf die Festplatte ausgelagert
+worden sind, um Platz zu schaffen. Weil Unix-Systeme das Einlagern der virtuellen
+Speicherverwaltung f&uuml;r das Laden neu gestarteter Programme nutzen (sog. &laquo;demand
+paging&raquo;), sind Einlagerungen unvermeidbar, und eine Einlagerungsrate ist kein Hinweis
+auf nicht ausreichenden Hauptspeicher.
+</p>
+
+<p>
+Auslagerungen (pageouts) finden dann statt, wenn es mit dem Hauptspeicher wirklich knapp wird.
+Wie gesagt, wenn ein Programm beendet wird, bleibt der Programmcode nach M&ouml;glichkeit im
+Speicher, bis dieser f&uuml;r andere Zwecke wiederverwendet werden mu&szlig;. Erst wenn auf
+diese Weise kein freier Platz mehr zu gewinnen ist, beginnt das System, noch ben&ouml;tigte
+Speicherbereiche auf die Festplatte auszulagen. Also herrscht bei auftretenden Auslagerungen
+ein Engpa&szlig; an physischem Speicher. Auf einem gut beanspruchten Unix-System ist es normal,
+da&szlig; eine kleine Zahl von Auslagerungsvorg&auml;ngen stattfindet. Aber wenn man permanente
+Auslagerungen bei der ganz normalen und &uuml;blichen Benutzung des Computers beobachtet
+(und demzufolge auch permanent Einlagerungen erfolgen), dann wird eine Speichererweiterung
+die Arbeitsgeschwindigkeit des Macintosh merklich erh&ouml;hen.
+</p>
+
+<p>
+In Bedr&auml;ngnis kommt man, wenn sehr vielen Ein- und Auslagerungen pro Sekunde stattfinden.
+Das hei&szlig;t dann, da&szlig; sehr viel mehr Dinge auf dem Mac laufen, als mit dem
+vorhandenen RAM bequem zu bew&auml;ltigen sind. Dann wird die Festplatte beim Zugriff
+auf den virtuellen Speicherplatz &laquo;gedroschen&raquo; (thrashing) (es h&ouml;rt sich
+auch so an). Das passiert beispielsweise, wenn ein Programm ein &laquo;Speicherleck&raquo;
+hat und permanent neuen Speicher anfordert, ohne irgendetwas davon wieder freizugeben.
+Dann wird es schnell langweilig, der ratternden Festplatte zuzuh&ouml;ren und den Rechner
+fast zum Stillstand kommen zu lassen. Aber aus technischer Sicht ist selbst dann noch nicht
+die Grenze des verf&uuml;gbaren Speichers erreicht. Es ist nur der Punkt &uuml;berschritten,
+bis zu dem virtueller Speicher n&uuml;tzlich ist.
+</p>
+
+<p>
+Dies hier ist eine sehr knappe &Uuml;bersicht &uuml;ber die virtuelle Speicherverwaltung in
+Unix-Systemen. Im Detail sind die Dinge viel komplizierter. Aber hoffentlich reichen die
+gegebenen Informationen aus, um Memory Monitor als &Uuml;berwachungswerkzeug f&uuml;r
+Mac OS X nutzen zu k&ouml;nnen. F&uuml;r weiteren Fragen oder Anregungen wende man sich gern
+an den Autor des Programms; die E-Mail-Adresse ist im Fenster &laquo;&Uuml;ber Memory
+Monitor&raquo; zu finden.
+</p>
+
+</body>
+</html>

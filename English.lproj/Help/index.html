@@ -1,0 +1,199 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+<meta name="AppleTitle" content="Memory Monitor Help">
+<meta name="AppleIcon" content="Help/MemoryMonitor.gif">
+<meta name="AppleFont" content="Lucida Grande,Helvetica">
+<meta name="AppleSearchResultsFont" content="Lucida Grande,Helvetica">
+<meta robots="ROBOTS" content="NOINDEX">
+<title>Memory Monitor Help</title>
+<style type="text/css" media="screen">
+p {
+	font-family: "Lucida Grande", Arial, "Sans Serif";
+	font-size: 10pt;
+	text-decoration: none
+}
+pre {
+	font-family: Courier;
+	font-size: 10pt;
+	text-decoration: none
+}
+h4 {
+	font-family: "Lucida Grande", Arial, "Sans Serif";
+	font-size: 10pt;
+	text-decoration: bold
+}
+</style>
+</head>
+
+<body>
+
+<h4>Mac OS X Memory Management</h4>
+
+<p>
+As the CPU Monitor application (Activity Monitor with Mac OS X 10.3 and later)
+displays the usage of the CPU over time, Memory Monitor displays the memory usage of a
+Mac OS X system. But to understand the graph that Memory Monitor draws in its Dock icon,
+you need some basic understanding of the memory management of Mac OS X. And because
+Mac OS X is based on Darwin, a Unix like operating systems, this is a little tutorial about
+Unix virtual memory management. Don't worry, the average Mac user won't need to know this,
+but the Mac power user will want to know it anyway. When you want to monitor the processes
+(applications and system task) currently running on your Mac, you utilize the Process Viewer
+application (Activity Monitor with Mac OS X 10.3 and later). The Unix counterpart of
+Process Viewer is the command line tool &laquo;top&raquo;. And when you run &laquo;top&raquo;
+(simply by typing &laquo;top&raquo; in a Terminal window), you additionally see a header
+block that contains one line with information about memory, for example:
+</p>
+
+<pre>PhysMem: 50M wired, 194M active, 181M inactive, 425M used, 23M free</pre>
+
+<p>
+This information, looking very strange compared to the memory usage information in the
+&laquo;About this Macintosh&raquo; dialog box of Mac OS 9, is visualized by Memory Monitor.
+But what does it actually mean?
+</p>
+
+<p>
+50 megabytes of physical memory are &laquo;wired in place&raquo;. This is stuff that has to
+stay in real RAM and can't be sent to disk by the virtual memory manager. The size of wired
+memory is shown with the most bottom bar of Memory Monitors Dock icon.
+</p>
+
+<p>
+194 megabytes of physical memory are in use by applications or system software, but can be
+swapped out to disk if necessary. This part of memory is called &laquo;active&raquo; and is
+shown in the second bottom bar of Memory Monitors Dock icon.
+</p>
+
+<p>
+181 megabytes of physical memory have stuff in it, but it's stuff that isn't actually in use.
+Unix is &laquo;lazy&raquo; about cleaning up memory. It marks it &laquo;inactive&raquo; but
+doesn't bother cleaning it out until it's needed. In some cases, it can be
+&laquo;reactivated&raquo; into active use, for example, if it holds the code for an application
+that was quit recently and that is now relaunched. That makes the program start much quicker
+as you can try out at your own: the first start of an application takes longer than the
+second or third relaunch. The inactive portion of physical memory functions as a kind of
+dynamically growing or shrinking disk cache. Its size is shown in the third bottom bar of
+Memory Monitors Dock icon.
+</p>
+
+<p>
+425 megabytes are the sum of the wired, active and inactive memory. The rest of physical
+memory is free. The example comes from a Mac with 448 MB of RAM, so we have 23 megabytes
+of free memory. These 23 megabytes contain nothing the system can reclaim for any purpose.
+The amount of free memory is shown in the topmost bar in the Dock icon of Memory Monitor.
+</p>
+
+<p>
+This tells us that the example Mac is in pretty good shape at first glance. There's real
+RAM available to programs that need it. And there is a very large amount of inactive memory
+that can be reclaimed or used in place of free memory, discarding the &laquo;cached&raquo;
+content the systems knows about. And we can get even more detailed information from the
+&laquo;vm_stat&raquo; (virtual memory statistics) command line tool:
+</p>
+
+<pre>[cube:~] bb% vm_stat
+Mach Virtual Memory Statistics: (page size of 4096 bytes)
+Pages free:                     1412.
+Pages active:                  51879.
+Pages inactive:                48646.
+Pages wired down:              12751.
+"Translation faults":       61836589.
+Pages copy-on-write:         2947749.
+Pages zero f<!--to avoid a ligature-->illed:          18373114.
+Pages reactivated:           2144395.
+Pageins:                      504520.
+Pageouts:                      95093.
+Object cache: 512547 hits of 2355002 lookups (21% hit rate)
+</pre>
+
+<p>
+What does all that mean? Rather than type it all out for you, here's how you can find out
+yourself: simply type &laquo;man vm_stat&raquo; in a Terminal window. The Unix
+&laquo;man&raquo; command shows you the manual page for a command, that is, the instructions.
+(To learn how to use &laquo;man&raquo;, try &laquo;man man&raquo;.)
+</p>
+
+<p>
+But one term of the vm_stat output must be explained here: what is a &laquo;page of
+memory&raquo;? Unix breaks memory down into &laquo;pages&raquo;. A page is the minimum unit
+of memory that can be moved around by the virtual memory manager. With Mac OS X, a page has
+the size of four kilobytes. And because pages are the smallest moveable unit of memory, the
+process of rolling out memory to the disk is called &laquo;page out&raquo;, retrieving pages
+from the disk into physical memory is called &laquo;page in&raquo;.
+</p>
+
+<p>
+Another interesting way to use vm_stat is to have it display a running count, by specifying
+the number of seconds you want it to wait between displays:
+</p>
+
+<pre>[cube:~] bb% vm_stat 1
+Mach Virtual Memory Statistics: (page size of 4096 bytes, cache hits 21%)
+  free active  inac  wire   faults     copy zerof<!--to avoid a ligature-->ill reactive  pageins  pageout
+  2537  51832 47518 12801 61816392  2947715 18369682  2144360   504233    95093
+  2537  51832 47518 12801       68        0        3        0        0        0
+  2537  51832 47518 12801       71        0        3        0        0        0
+  2537  51832 47518 12801       68        0        3        0        0        0
+  2537  51832 47518 12801       68        0        3        0        0        0
+  2537  51832 47518 12801       68        0        3        0        0        0
+^C
+</pre>
+
+<p>
+In this case, it outputs a line every second. It was stopped it by typing Control-C, the
+&laquo;break&raquo; command. (In the Unix command line, Control-C works like Command-Period
+works in the Mac GUI: it cancels the current activity.)
+</p>
+
+<p>
+With vm_stat, we can ignore the very first line of numbers for now. That first line is a
+summary over time. It's the rest of the lines that is interesting.
+</p>
+
+<p>
+Notice the &laquo;pageins&raquo; and &laquo;pageout&raquo; columns. Those show how many memory
+pages are being paged in from disk and out to the disk every second. And exactly these two
+numbers are visualized by the two additional graphs drawn in Memory Monitors Dock icon.
+(As long as there is no paging, these graphs are horizontal lines at the top and bottom of
+the icon.) Optionally, the number of pageins and pageouts can be shown in the Dock icon, too.
+</p>
+
+<p>
+Pageins occur for two reasons: A new program is being started and its code is being paged in
+from the program file on disk, or the already-running program is accessing memory that was
+shuffled out to disk to make room. Because Unix systems use pageins for initial program
+loading (so called &laquo;demand paging&raquo;), pageins are unavoidable and the pagein rate
+is no indicator for insufficient physical memory.
+</p>
+
+<p>
+Pageouts occur when you're out of physical memory. Remember, when a program quits, its code
+remains in memory if there is room until that memory needs to be freed for other purposes
+or you run the program again. So, if the system is paging out, you're running short on real
+memory. A small number of pageouts is normal for a Unix system that's working hard. But when
+you notice permanent pageouts (and consequently permanent pageins) when running your typical
+set of applications, adding more physical memory to your Macintosh will increase the systems
+performance significantly.
+</p>
+
+<p>
+You are in real trouble when you start seeing lots of pageouts and pageins every second.
+That means that you're running lots more stuff than you have RAM to accommodate, and you're
+&laquo;thrashing&raquo; the disk (listen to the noise it makes!) sending stuff to virtual
+memory. It is very hard to make a modern Unix system actually run out of memory in normal use.
+It usually happens when a program has a &laquo;memory leak&raquo; that perpetually consumes
+more memory without letting any go. Normally, people get tired of thrashing the disk and having
+the machine grind down to a slow crawl. But at that point, the system has not technically run
+out of memory. It just went past the point where virtual memory is useful.
+</p>
+
+<p>
+This is a very short overview over Unix virtual memory management. In detail, things are
+much more complicate. But hopefully you got enough information to use Memory Monitor as
+a performance indicator for your Mac OS X system. Feel free to contact the author to ask
+questions; the e-mail address you find in the About box of Memory Monitor.
+</p>
+
+</body>
+</html>

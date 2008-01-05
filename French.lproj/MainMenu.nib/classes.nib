@@ -1,0 +1,17 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {showHelp = id; }; 
+            CLASS = FirstResponder; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {showAboutBox = id; showPreferences = id; }; 
+            CLASS = MainController; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}

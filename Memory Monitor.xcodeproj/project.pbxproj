@@ -1,0 +1,489 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		21756FEC09FBAD77009CBAB7 /* MainController.h in Headers */ = {isa = PBXBuildFile; fileRef = 05B2197B0012D9E27F000001 /* MainController.h */; };
+		21756FED09FBAD77009CBAB7 /* MemInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = F5646DC601034B7801000001 /* MemInfo.h */; };
+		21756FEE09FBAD77009CBAB7 /* Preferences.h in Headers */ = {isa = PBXBuildFile; fileRef = F51FAB760108F99B01000001 /* Preferences.h */; };
+		21756FEF09FBAD77009CBAB7 /* TranslucentWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = F5B721AA02B379CE01000101 /* TranslucentWindow.h */; };
+		21756FF009FBAD77009CBAB7 /* TranslucentView.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DE4D1E02B3F74401000101 /* TranslucentView.h */; };
+		21756FF209FBAD77009CBAB7 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
+		21756FF309FBAD77009CBAB7 /* MemoryMonitor.icns in Resources */ = {isa = PBXBuildFile; fileRef = F59A5273010C69D001000001 /* MemoryMonitor.icns */; };
+		21756FF409FBAD77009CBAB7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F53312B70246253601000101 /* InfoPlist.strings */; };
+		21756FF509FBAD77009CBAB7 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F53312BA0246278401000101 /* Credits.rtf */; };
+		21756FF609FBAD77009CBAB7 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = F53312BD0246292F01000101 /* Credits.html */; };
+		21756FF709FBAD77009CBAB7 /* Preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = F53312C00246312401000101 /* Preferences.nib */; };
+		21756FF809FBAD77009CBAB7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F53EE783028EA9C2010D26FD /* Localizable.strings */; };
+		21756FF909FBAD77009CBAB7 /* Help in Resources */ = {isa = PBXBuildFile; fileRef = F586DECF03159FA101000102 /* Help */; };
+		21756FFB09FBAD77009CBAB7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		21756FFC09FBAD77009CBAB7 /* MemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F5646DC80103500801000001 /* MemInfo.m */; };
+		21756FFD09FBAD77009CBAB7 /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B2197C0012D9E27F000001 /* MainController.m */; };
+		21756FFE09FBAD77009CBAB7 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = F51FAB770108F99B01000001 /* Preferences.m */; };
+		21756FFF09FBAD77009CBAB7 /* TranslucentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B721AB02B379CE01000101 /* TranslucentWindow.m */; };
+		2175700009FBAD77009CBAB7 /* TranslucentView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DE4D1D02B3F74401000101 /* TranslucentView.m */; };
+		2175700209FBAD77009CBAB7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		05B2197B0012D9E27F000001 /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MainController.h; sourceTree = "<group>"; };
+		05B2197C0012D9E27F000001 /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MainController.m; sourceTree = "<group>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		2175700809FBAD77009CBAB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
+		2175700909FBAD77009CBAB7 /* Memory Monitor.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "Memory Monitor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2176C9F004025AEE0085C446 /* Japanese */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.html; name = Japanese; path = Japanese.lproj/Credits.html; sourceTree = "<group>"; };
+		2176C9F104025AFE0085C446 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Japanese; path = Japanese.lproj/Credits.rtf; sourceTree = "<group>"; };
+		2176C9F204025B1D0085C446 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2176C9F304025B230085C446 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Japanese; path = Japanese.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		2176C9F404025B310085C446 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Japanese; path = Japanese.lproj/Preferences.nib; sourceTree = "<group>"; };
+		2176CA0204025B7A0085C446 /* Japanese */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = Japanese; path = Japanese.lproj/Help; sourceTree = "<group>"; };
+		2176CA0A040261B60085C446 /* Japanese */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		21C369D60A792DA600F42D2F /* French */ = {isa = PBXFileReference; lastKnownFileType = folder; name = French; path = French.lproj/Help; sourceTree = "<group>"; };
+		21C369DC0A792DF900F42D2F /* French */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/Localizable.strings; sourceTree = "<group>"; };
+		21C369DD0A792E3300F42D2F /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		21C369DE0A792E5400F42D2F /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/Preferences.nib; sourceTree = "<group>"; };
+		21C369DF0A792E7400F42D2F /* French */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.html; name = French; path = French.lproj/Credits.html; sourceTree = "<group>"; };
+		21C369E00A792E8E00F42D2F /* French */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = French; path = French.lproj/Credits.rtf; sourceTree = "<group>"; };
+		21C369E10A792EAB00F42D2F /* French */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		F51FAB760108F99B01000001 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
+		F51FAB770108F99B01000001 /* Preferences.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
+		F53312B80246253601000101 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F53312BB0246278401000101 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
+		F53312BE0246292F01000101 /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.html; name = English; path = English.lproj/Credits.html; sourceTree = "<group>"; };
+		F53312C10246312401000101 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Preferences.nib; sourceTree = "<group>"; };
+		F53EE784028EA9C2010D26FD /* German */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F53EE786028EAA3D010D26FD /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F5500BDA027A0B1B01000102 /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		F5500BDB027A0B3701000102 /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/Preferences.nib; sourceTree = "<group>"; };
+		F5500BDC027A0B4201000102 /* German */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.html; name = German; path = German.lproj/Credits.html; sourceTree = "<group>"; };
+		F5500BDD027A0B5601000102 /* German */ = {isa = PBXFileReference; explicitFileType = text.rtf; name = German; path = German.lproj/Credits.rtf; sourceTree = "<group>"; };
+		F5500BDE027A0B6101000102 /* German */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F5646DC601034B7801000001 /* MemInfo.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MemInfo.h; sourceTree = "<group>"; };
+		F5646DC80103500801000001 /* MemInfo.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MemInfo.m; sourceTree = "<group>"; };
+		F586DED003159FA101000102 /* German */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = German; path = German.lproj/Help; sourceTree = "<group>"; };
+		F586DED60315A01C01000102 /* English */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = English; path = English.lproj/Help; sourceTree = "<group>"; };
+		F59A5273010C69D001000001 /* MemoryMonitor.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = MemoryMonitor.icns; sourceTree = "<group>"; };
+		F5B721AA02B379CE01000101 /* TranslucentWindow.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = TranslucentWindow.h; sourceTree = "<group>"; };
+		F5B721AB02B379CE01000101 /* TranslucentWindow.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TranslucentWindow.m; sourceTree = "<group>"; };
+		F5DE4D1D02B3F74401000101 /* TranslucentView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TranslucentView.m; sourceTree = "<group>"; };
+		F5DE4D1E02B3F74401000101 /* TranslucentView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = TranslucentView.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2175700109FBAD77009CBAB7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2175700209FBAD77009CBAB7 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				05B2197B0012D9E27F000001 /* MainController.h */,
+				05B2197C0012D9E27F000001 /* MainController.m */,
+				F5646DC601034B7801000001 /* MemInfo.h */,
+				F5646DC80103500801000001 /* MemInfo.m */,
+				F51FAB760108F99B01000001 /* Preferences.h */,
+				F51FAB770108F99B01000001 /* Preferences.m */,
+				F5DE4D1E02B3F74401000101 /* TranslucentView.h */,
+				F5DE4D1D02B3F74401000101 /* TranslucentView.m */,
+				F5B721AA02B379CE01000101 /* TranslucentWindow.h */,
+				F5B721AB02B379CE01000101 /* TranslucentWindow.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2175700909FBAD77009CBAB7 /* Memory Monitor.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* LoadInDock */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+				2175700809FBAD77009CBAB7 /* Info.plist */,
+			);
+			name = LoadInDock;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F586DECF03159FA101000102 /* Help */,
+				F53EE783028EA9C2010D26FD /* Localizable.strings */,
+				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
+				F53312C00246312401000101 /* Preferences.nib */,
+				F59A5273010C69D001000001 /* MemoryMonitor.icns */,
+				F53312BD0246292F01000101 /* Credits.html */,
+				F53312BA0246278401000101 /* Credits.rtf */,
+				F53312B70246253601000101 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		21756FEB09FBAD77009CBAB7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21756FEC09FBAD77009CBAB7 /* MainController.h in Headers */,
+				21756FED09FBAD77009CBAB7 /* MemInfo.h in Headers */,
+				21756FEE09FBAD77009CBAB7 /* Preferences.h in Headers */,
+				21756FEF09FBAD77009CBAB7 /* TranslucentWindow.h in Headers */,
+				21756FF009FBAD77009CBAB7 /* TranslucentView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		21756FEA09FBAD77009CBAB7 /* Memory Monitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2175700409FBAD77009CBAB7 /* Build configuration list for PBXNativeTarget "Memory Monitor" */;
+			buildPhases = (
+				21756FEB09FBAD77009CBAB7 /* Headers */,
+				21756FF109FBAD77009CBAB7 /* Resources */,
+				21756FFA09FBAD77009CBAB7 /* Sources */,
+				2175700109FBAD77009CBAB7 /* Frameworks */,
+				2175700309FBAD77009CBAB7 /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Memory Monitor";
+			productInstallPath = "$(HOME)/Applications";
+			productName = LoadInDock;
+			productReference = 2175700909FBAD77009CBAB7 /* Memory Monitor.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 21756FD109FBABAE009CBAB7 /* Build configuration list for PBXProject "Memory Monitor" */;
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* LoadInDock */;
+			projectDirPath = "";
+			targets = (
+				21756FEA09FBAD77009CBAB7 /* Memory Monitor */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		21756FF109FBAD77009CBAB7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21756FF209FBAD77009CBAB7 /* MainMenu.nib in Resources */,
+				21756FF309FBAD77009CBAB7 /* MemoryMonitor.icns in Resources */,
+				21756FF409FBAD77009CBAB7 /* InfoPlist.strings in Resources */,
+				21756FF509FBAD77009CBAB7 /* Credits.rtf in Resources */,
+				21756FF609FBAD77009CBAB7 /* Credits.html in Resources */,
+				21756FF709FBAD77009CBAB7 /* Preferences.nib in Resources */,
+				21756FF809FBAD77009CBAB7 /* Localizable.strings in Resources */,
+				21756FF909FBAD77009CBAB7 /* Help in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		2175700309FBAD77009CBAB7 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		21756FFA09FBAD77009CBAB7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21756FFB09FBAD77009CBAB7 /* main.m in Sources */,
+				21756FFC09FBAD77009CBAB7 /* MemInfo.m in Sources */,
+				21756FFD09FBAD77009CBAB7 /* MainController.m in Sources */,
+				21756FFE09FBAD77009CBAB7 /* Preferences.m in Sources */,
+				21756FFF09FBAD77009CBAB7 /* TranslucentWindow.m in Sources */,
+				2175700009FBAD77009CBAB7 /* TranslucentView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		29B97318FDCFA39411CA2CEA /* MainMenu.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29B97319FDCFA39411CA2CEA /* English */,
+				F5500BDA027A0B1B01000102 /* German */,
+				2176C9F304025B230085C446 /* Japanese */,
+				21C369DD0A792E3300F42D2F /* French */,
+			);
+			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+		F53312B70246253601000101 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F53312B80246253601000101 /* English */,
+				F5500BDE027A0B6101000102 /* German */,
+				2176CA0A040261B60085C446 /* Japanese */,
+				21C369E10A792EAB00F42D2F /* French */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F53312BA0246278401000101 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F53312BB0246278401000101 /* English */,
+				F5500BDD027A0B5601000102 /* German */,
+				2176C9F104025AFE0085C446 /* Japanese */,
+				21C369E00A792E8E00F42D2F /* French */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		F53312BD0246292F01000101 /* Credits.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F53312BE0246292F01000101 /* English */,
+				F5500BDC027A0B4201000102 /* German */,
+				2176C9F004025AEE0085C446 /* Japanese */,
+				21C369DF0A792E7400F42D2F /* French */,
+			);
+			name = Credits.html;
+			sourceTree = "<group>";
+		};
+		F53312C00246312401000101 /* Preferences.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F53312C10246312401000101 /* English */,
+				F5500BDB027A0B3701000102 /* German */,
+				2176C9F404025B310085C446 /* Japanese */,
+				21C369DE0A792E5400F42D2F /* French */,
+			);
+			name = Preferences.nib;
+			sourceTree = "<group>";
+		};
+		F53EE783028EA9C2010D26FD /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F53EE784028EA9C2010D26FD /* German */,
+				F53EE786028EAA3D010D26FD /* English */,
+				2176C9F204025B1D0085C446 /* Japanese */,
+				21C369DC0A792DF900F42D2F /* French */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		F586DECF03159FA101000102 /* Help */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F586DED003159FA101000102 /* German */,
+				F586DED60315A01C01000102 /* English */,
+				2176CA0204025B7A0085C446 /* Japanese */,
+				21C369D60A792DA600F42D2F /* French */,
+			);
+			name = Help;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		21756FD209FBABAE009CBAB7 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Development;
+		};
+		21756FD309FBABAE009CBAB7 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Deployment;
+		};
+		21756FD409FBABAE009CBAB7 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Default;
+		};
+		2175700509FBAD77009CBAB7 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = "Memory Monitor";
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		2175700609FBAD77009CBAB7 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = "Memory Monitor";
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		2175700709FBAD77009CBAB7 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = "Memory Monitor";
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		21756FD109FBABAE009CBAB7 /* Build configuration list for PBXProject "Memory Monitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21756FD209FBABAE009CBAB7 /* Development */,
+				21756FD309FBABAE009CBAB7 /* Deployment */,
+				21756FD409FBABAE009CBAB7 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		2175700409FBAD77009CBAB7 /* Build configuration list for PBXNativeTarget "Memory Monitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2175700509FBAD77009CBAB7 /* Development */,
+				2175700609FBAD77009CBAB7 /* Deployment */,
+				2175700709FBAD77009CBAB7 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

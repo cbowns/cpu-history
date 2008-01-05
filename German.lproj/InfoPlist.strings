@@ -1,0 +1,4 @@
+CFBundleName = "Memory Monitor";
+CFBundleDisplayName = "Memory Monitor";
+NSHumanReadableCopyright = "Copyright © 2001-2006 Bernhard Baehr";
+CFBundleHelpBookName = "Memory Monitor Hilfe";
