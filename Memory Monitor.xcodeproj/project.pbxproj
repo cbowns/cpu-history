@@ -34,7 +34,7 @@
 		05B2197C0012D9E27F000001 /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MainController.m; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		2175700809FBAD77009CBAB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
-		2175700909FBAD77009CBAB7 /* Memory Monitor.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "Memory Monitor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2175700909FBAD77009CBAB7 /* Memory Monitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Memory Monitor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2176C9F004025AEE0085C446 /* Japanese */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.html; name = Japanese; path = Japanese.lproj/Credits.html; sourceTree = "<group>"; };
 		2176C9F104025AFE0085C446 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Japanese; path = Japanese.lproj/Credits.rtf; sourceTree = "<group>"; };
 		2176C9F204025B1D0085C446 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -220,9 +220,11 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 21756FD109FBABAE009CBAB7 /* Build configuration list for PBXProject "Memory Monitor" */;
+			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* LoadInDock */;
 			projectDirPath = "";
+			projectRoot = "";
 			targets = (
 				21756FEA09FBAD77009CBAB7 /* Memory Monitor */,
 			);
