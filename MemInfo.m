@@ -39,6 +39,7 @@ static void getVMStat (vm_statistics_t vmstat)
 
 - (MemInfo *) initWithCapacity:(unsigned)numItems
 {
+	
 	self = [super init];
 	size = numItems;
 	vmdata = calloc(numItems, sizeof(VMData));
