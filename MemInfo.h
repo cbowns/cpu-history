@@ -25,18 +25,6 @@
 #import <mach/mach.h>
 #import <mach/mach_types.h>
 
-#include <mach/processor_info.h>
-#include <mach/mach_host.h>
-
-#include <sys/types.h>
-//sqrtf, ceilf
-#include <math.h>
-//sysctl and its parameters
-#include <sys/sysctl.h>
-//errno, strerror
-#include <sys/errno.h>
-#include <string.h>
-
 
 typedef struct vmdata {
 	double	wired;
@@ -47,18 +35,9 @@ typedef struct vmdata {
 	int	pageouts;
 }	VMData, *VMDataPtr;
 
-typedef struct cpudata {
-	
-}
 
 @interface MemInfo : NSObject
 {
-	processor_info_array_t lastProcessorInfo;
-	mach_msg_type_number_t numLastProcessorInfo;
-	unsigned numCPUs;
-	float *CPUUsage;
-	NSLock *CPUUsageLock, *deathLock;
-	
 	int			size;
 	int			inptr;
 	int			outptr;
