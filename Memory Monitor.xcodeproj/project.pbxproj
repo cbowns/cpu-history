@@ -27,6 +27,8 @@
 		21756FFF09FBAD77009CBAB7 /* TranslucentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B721AB02B379CE01000101 /* TranslucentWindow.m */; };
 		2175700009FBAD77009CBAB7 /* TranslucentView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DE4D1D02B3F74401000101 /* TranslucentView.m */; };
 		2175700209FBAD77009CBAB7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		E578B9A70D34363700ED84FE /* CPUUsageMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = E578B9A50D34363700ED84FE /* CPUUsageMonitor.h */; };
+		E578B9A80D34363700ED84FE /* CPUUsageMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = E578B9A60D34363700ED84FE /* CPUUsageMonitor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,8 @@
 		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		E578B9A50D34363700ED84FE /* CPUUsageMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPUUsageMonitor.h; sourceTree = "<group>"; };
+		E578B9A60D34363700ED84FE /* CPUUsageMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPUUsageMonitor.m; sourceTree = "<group>"; };
 		F51FAB760108F99B01000001 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
 		F51FAB770108F99B01000001 /* Preferences.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
 		F53312B80246253601000101 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -92,6 +96,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E578B9A50D34363700ED84FE /* CPUUsageMonitor.h */,
+				E578B9A60D34363700ED84FE /* CPUUsageMonitor.m */,
 				05B2197B0012D9E27F000001 /* MainController.h */,
 				05B2197C0012D9E27F000001 /* MainController.m */,
 				F5646DC601034B7801000001 /* MemInfo.h */,
@@ -188,6 +194,7 @@
 				21756FEE09FBAD77009CBAB7 /* Preferences.h in Headers */,
 				21756FEF09FBAD77009CBAB7 /* TranslucentWindow.h in Headers */,
 				21756FF009FBAD77009CBAB7 /* TranslucentView.h in Headers */,
+				E578B9A70D34363700ED84FE /* CPUUsageMonitor.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +277,7 @@
 				21756FFE09FBAD77009CBAB7 /* Preferences.m in Sources */,
 				21756FFF09FBAD77009CBAB7 /* TranslucentWindow.m in Sources */,
 				2175700009FBAD77009CBAB7 /* TranslucentView.m in Sources */,
+				E578B9A80D34363700ED84FE /* CPUUsageMonitor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

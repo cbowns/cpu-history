@@ -18,6 +18,9 @@
 		activeBuildConfigurationName = Development;
 		activeExecutable = E580F1290D30269D00C5732E /* Memory Monitor */;
 		activeTarget = 21756FEA09FBAD77009CBAB7 /* Memory Monitor */;
+		addToTargets = (
+			21756FEA09FBAD77009CBAB7 /* Memory Monitor */,
+		);
 		codeSenseManager = E580F1420D3026A200C5732E /* Code sense */;
 		executables = (
 			E580F1290D30269D00C5732E /* Memory Monitor */,
@@ -45,16 +48,14 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 221519327;
-			PBXWorkspaceStateSaveDate = 221519327;
+			PBXPerProjectTemplateStateSaveDate = 221523143;
+			PBXWorkspaceStateSaveDate = 221523143;
 		};
 		perUserProjectItems = {
 			E5FF1F2B0D33F28F001C3BBD = E5FF1F2B0D33F28F001C3BBD /* PBXTextBookmark */;
 			E5FF1F2C0D33F28F001C3BBD = E5FF1F2C0D33F28F001C3BBD /* PBXTextBookmark */;
-			E5FF1F2D0D33F28F001C3BBD = E5FF1F2D0D33F28F001C3BBD /* PBXBookmark */;
 			E5FF1F2E0D33F28F001C3BBD = E5FF1F2E0D33F28F001C3BBD /* PBXTextBookmark */;
 			E5FF1F2F0D33F28F001C3BBD = E5FF1F2F0D33F28F001C3BBD /* PBXTextBookmark */;
-			E5FF1F300D33F28F001C3BBD = E5FF1F300D33F28F001C3BBD /* PBXTextBookmark */;
 		};
 		sourceControlManager = E580F1410D3026A200C5732E /* Source Control */;
 		userBuildSettings = {
@@ -115,10 +116,6 @@
 		vrLen = 1099;
 		vrLoc = 0;
 	};
-	E5FF1F2D0D33F28F001C3BBD /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = 05B2197C0012D9E27F000001 /* MainController.m */;
-	};
 	E5FF1F2E0D33F28F001C3BBD /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = F5DE4D1D02B3F74401000101 /* TranslucentView.m */;
@@ -139,15 +136,19 @@
 		vrLen = 1099;
 		vrLoc = 0;
 	};
-	E5FF1F300D33F28F001C3BBD /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 05B2197C0012D9E27F000001 /* MainController.m */;
-		name = "MainController.m: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 1151;
-		vrLoc = 0;
+	F51FAB760108F99B01000001 /* Preferences.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {656, 1064}}";
+			sepNavSelRange = "{1636, 0}";
+			sepNavVisRange = "{1448, 980}";
+		};
+	};
+	F51FAB770108F99B01000001 /* Preferences.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {656, 3080}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 1374}";
+		};
 	};
 	F5B721AB02B379CE01000101 /* TranslucentWindow.m */ = {
 		uiCtxt = {
