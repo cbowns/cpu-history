@@ -17,19 +17,31 @@ typedef struct cpudata {
 	double sys;
 	double nice;
 	double idle;
-} CPUData, CPUDataPtr*;
+} CPUData, *CPUDataPtr;
 
 @interface CPUUsageMonitor : NSObject {
 	processor_info_array_t lastProcessorInfo;
 	mach_msg_type_number_t numLastProcessorInfo;
 	unsigned numCPUs;
 	float *CPUUsage;
-	NSLock *CPUUsageLock, *deathLock;
+	// NSLock *CPUUsageLock;
 	CPUDataPtr		cpudata;
+	int			size;
+	int			inptr;
+	int			outptr;
+	vm_statistics_data_t	lastvmstat;
 }
 
+
+
+- (CPUUsageMonitor *)initWithCapacity:(unsigned)numItems;
+- (void)refresh;
+- (void)startIterate;
+- (BOOL)getNext:(CPUDataPtr)ptr;
+- (void)getCurrent:(CPUDataPtr)ptr;
+- (void)getLast:(CPUDataPtr)ptr;
+- (int)getSize;
+
 - (cpudata)updateCPUUsage;
-
-
 
 @end

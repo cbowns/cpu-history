@@ -118,7 +118,10 @@
 		[[preferences objectForKey:FREE_COLOR_KEY] set];
 		NSRectFill (NSMakeRect(x - 1, y, x, GRAPH_SIZE));
 	}
-
+	
+/*
+	TODO paging curves: we don't these here anymore.
+*/
 	// draw the paging curves on top of the memory usage graph
 	[memInfo startIterate];
 	for (lastpageins = lastpageouts = x = 0; [memInfo getNext:&vmdata]; x++) {
@@ -361,6 +364,7 @@
 {
 	preferences = [[Preferences alloc] init];
 	memInfo = [[MemInfo alloc] initWithCapacity:GRAPH_SIZE];
+	cpuInfo = [[CPUUsageMonitor alloc] init];
 	
 	displayImage = [[NSImage allocWithZone:[self zone]] initWithSize:NSMakeSize(GRAPH_SIZE, GRAPH_SIZE)];
 	graphImage = [[NSImage allocWithZone:[self zone]] initWithSize:NSMakeSize(GRAPH_SIZE, GRAPH_SIZE)];
