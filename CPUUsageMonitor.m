@@ -62,7 +62,7 @@ static void getCPUStat (processor_info_array_t cpustat)
 	}
 }
 
-
+/*
 		{
 		vm_map_t target_task = mach_task_self();
 
@@ -112,13 +112,15 @@ static void getCPUStat (processor_info_array_t cpustat)
 	}
 	else {
 		NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-			NSLocalizedString(@"Could not get CPU load information", /*comment*/ nil), NSLocalizedDescriptionKey,
-			NSLocalizedString(@"Do you have a CPU in your computer? (Just kidding. I have no idea how to get a useful string from a kernel error code. --The Author)", /*comment*/ nil), NSLocalizedRecoverySuggestionErrorKey,
+			NSLocalizedString(@"Could not get CPU load information", // comment
+			nil), NSLocalizedDescriptionKey,
+			NSLocalizedString(@"Do you have a CPU in your computer? (Just kidding. I have no idea how to get a useful string from a kernel error code. --The Author)", // comment
+			 nil), NSLocalizedRecoverySuggestionErrorKey,
 			nil];
 		[NSApp presentError:[NSError errorWithDomain:NSMachErrorDomain code:err userInfo:dict]];
 		[NSApp terminate:nil];
 	}
-}
+} */
 
 - (CPUUsageMonitor *) initWithCapacity:(unsigned)numItems
 {
@@ -132,9 +134,8 @@ static void getCPUStat (processor_info_array_t cpustat)
 	inptr = 0;
 	outptr = -1;
 	getCPUStat ( &lastProcessorInfo);
-	// getVMStat (&lastvmstat);
 	/*
-		TODO initWithCapacity:numitems :: do we need to get the initial cpu data here?
+		TODO done: initWithCapacity:numitems :: do we need to get the initial cpu data here?
 	*/
 	return (self);
 }
