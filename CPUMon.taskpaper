@@ -1,10 +1,11 @@
 CPU Mon:
 - get it to build.
 - make another pass through the source to take out extraneous references to CPUUsage
+- check TODOs
 - switch the source of the graph from memory info to CPU info:
 	- first test data coming out of cpu info with logs (this might hurt. limit to one sample every 2 sec)
 	- then change graphing fct to pull from different data source
 - remove extraneous information for memory monitor:
 	- paging rate graph
 	- text overlay
-	- 
+	- preferences form
