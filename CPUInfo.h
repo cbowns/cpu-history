@@ -19,7 +19,7 @@ typedef struct cpudata {
 	double idle;
 } CPUData, *CPUDataPtr;
 
-@interface CPUUsageMonitor : NSObject {
+@interface CPUInfo : NSObject {
 	processor_info_array_t lastProcessorInfo;
 	mach_msg_type_number_t numLastProcessorInfo;
 	unsigned numCPUs;
@@ -34,7 +34,7 @@ typedef struct cpudata {
 
 
 
-- (CPUUsageMonitor *)initWithCapacity:(unsigned)numItems;
+- (CPUInfo *)initWithCapacity:(unsigned)numItems;
 - (void)refresh;
 - (void)startIterate;
 - (BOOL)getNext:(CPUDataPtr)ptr;

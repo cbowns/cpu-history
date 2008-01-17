@@ -364,7 +364,7 @@
 {
 	preferences = [[Preferences alloc] init];
 	memInfo = [[MemInfo alloc] initWithCapacity:GRAPH_SIZE];
-	cpuInfo = [[CPUUsageMonitor alloc] init];
+	cpuInfo = [[CPUInfo alloc] init];
 	
 	displayImage = [[NSImage allocWithZone:[self zone]] initWithSize:NSMakeSize(GRAPH_SIZE, GRAPH_SIZE)];
 	graphImage = [[NSImage allocWithZone:[self zone]] initWithSize:NSMakeSize(GRAPH_SIZE, GRAPH_SIZE)];

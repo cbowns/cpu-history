@@ -6,7 +6,7 @@
 //  Copyright 2006 Peter Hosey. All rights reserved.
 //
 
-#import "CPUUsageMonitor.h"
+#import "CPUInfo.h"
 
 
 #import "BZGridEnumerator.h"
@@ -20,7 +20,7 @@
 #include <sys/errno.h>
 #include <string.h>
 
-@implementation CPUUsageMonitor
+@implementation CPUInfo
 
 - (void)init {
 
@@ -122,7 +122,7 @@ static void getCPUStat (processor_info_array_t cpustat)
 	}
 } */
 
-- (CPUUsageMonitor *) initWithCapacity:(unsigned)numItems
+- (CPUInfo *) initWithCapacity:(unsigned)numItems
 {
 	self = [super init];
 	size = numItems;

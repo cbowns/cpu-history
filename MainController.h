@@ -32,7 +32,7 @@
 {
 	Preferences		*preferences;	// the preferences
 	MemInfo			*memInfo;	// memory usage data buffer
-	CPUUsageMonitor *cpuInfo; //cpu usage data buffer
+	CPUInfo *cpuInfo; //cpu usage data buffer
 	NSTimer			*timer;		// timer for icon refreshs
 	NSImage			*displayImage;	// image to be displayed (with text)
 	NSImage			*graphImage;	// image of the graph (w/o text) for updates
