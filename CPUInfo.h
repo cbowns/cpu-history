@@ -25,15 +25,12 @@ typedef struct cpudata {
 	mach_msg_type_number_t numLastProcessorInfo;
 	unsigned numCPUs;
 	float *CPUUsage;
-	// NSLock *CPUUsageLock;
 	CPUDataPtr		cpudata;
 	int			size;
 	int			inptr;
 	int			outptr;
 	vm_statistics_data_t	lastvmstat;
 }
-
-
 
 - (CPUInfo *)initWithCapacity:(unsigned)numItems;
 - (void)refresh;
@@ -43,6 +40,9 @@ typedef struct cpudata {
 - (void)getLast:(CPUDataPtr)ptr;
 - (int)getSize;
 
-- (cpudata)updateCPUUsage;
+// - (CPUData)updateCPUUsage;
+/*
+	TODO we're going to want this.
+*/
 
 @end

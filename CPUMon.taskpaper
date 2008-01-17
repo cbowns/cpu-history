@@ -1,5 +1,5 @@
 CPU Mon:
-- get it to build.
+- get it to build @done
 - make another pass through the source to take out extraneous references to CPUUsage
 - check TODOs
 - switch the source of the graph from memory info to CPU info:

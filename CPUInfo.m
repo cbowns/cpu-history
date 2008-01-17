@@ -34,15 +34,16 @@
 	if(status != 0)
 		numCPUs = 1; //XXX Should probably error out instead…
 
-
-	CPUUsageLock = [[NSLock alloc] init];
 	CPUUsage = NSZoneMalloc([self zone], numCPUs * sizeof(float));
 
 }
 
 - (void)dealloc {
 	NSZoneFree([self zone], CPUUsage);
-	[CPUUsageLock release];
+	[super dealloc];
+/*
+	TODO do we even need our own dealloc? look at the NSZone and figure that out.
+*/
 }
 
 //Main thread.
@@ -58,13 +59,12 @@ static void getCPUStat (processor_info_array_t cpustat)
 		cpustat = processorInfo;
 	}
 	else {
-		NSLog(@"%s failed to get cpu statistics", _cmd);
+		NSLog(@"getCPUStat: failed to get cpu statistics");
 	}
 }
 
 /*
 		{
-		vm_map_t target_task = mach_task_self();
 
 		// [CPUUsageLock lock];
 
@@ -145,7 +145,8 @@ static void getCPUStat (processor_info_array_t cpustat)
 {
 	// vm_statistics_data_t	vmstat;
 	processor_info_array_t cpustat;
-	double			total;
+
+	vm_map_t target_task = mach_task_self();
 	
 	getCPUStat (&cpustat);
 	// getVMStat (&vmstat);
@@ -155,31 +156,31 @@ static void getCPUStat (processor_info_array_t cpustat)
 	
 	// for(unsigned i = 0U; i < numCPUs; ++i) {
 		/*
-			TODO loop this when we have > 1 cpu core. test with dad and eric?
+			TODO loop this when we have > 1 cpu core. test with MBP
 		*/
 	unsigned i = 0U;
 	//We only want the last $REFRESH_TIME seconds' worth of data, not all time.
-	float inUse, total, user, sys, nice, idle;
+	double inUse, total, user, sys, nice, idle;
 	if(lastProcessorInfo) {
 		inUse = (
-		  (processorInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER]   - lastProcessorInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER])
-		+ (processorInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM] - lastProcessorInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM])
-		+ (processorInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE]   - lastProcessorInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE])
+		  (cpustat[(CPU_STATE_MAX * i) + CPU_STATE_USER]   - lastProcessorInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER])
+		+ (cpustat[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM] - lastProcessorInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM])
+		+ (cpustat[(CPU_STATE_MAX * i) + CPU_STATE_NICE]   - lastProcessorInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE])
 		);
-		total = inUse + (processorInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE] - lastProcessorInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE]);
-		user = (processorInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER] - lastProcessorInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER]);
-		sys = (processorInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM] - lastProcessorInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM]);
-		nice = (processorInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE] - lastProcessorInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE]);
-		idle = (processorInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE] - lastProcessorInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE]);
+		total = inUse + (cpustat[(CPU_STATE_MAX * i) + CPU_STATE_IDLE] - lastProcessorInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE]);
+		user = (cpustat[(CPU_STATE_MAX * i) + CPU_STATE_USER] - lastProcessorInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER]);
+		sys = (cpustat[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM] - lastProcessorInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM]);
+		nice = (cpustat[(CPU_STATE_MAX * i) + CPU_STATE_NICE] - lastProcessorInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE]);
+		idle = (cpustat[(CPU_STATE_MAX * i) + CPU_STATE_IDLE] - lastProcessorInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE]);
 	}
 	else {
-		user = processorInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER];
-		sys = processorInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM];
-		nice = processorInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE];
-		idle = processorInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE];
+		user = cpustat[(CPU_STATE_MAX * i) + CPU_STATE_USER];
+		sys = cpustat[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM];
+		nice = cpustat[(CPU_STATE_MAX * i) + CPU_STATE_NICE];
+		idle = cpustat[(CPU_STATE_MAX * i) + CPU_STATE_IDLE];
 		
-		inUse = processorInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER] + processorInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM] + processorInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE];
-		total = inUse + processorInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE];
+		inUse = cpustat[(CPU_STATE_MAX * i) + CPU_STATE_USER] + cpustat[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM] + cpustat[(CPU_STATE_MAX * i) + CPU_STATE_NICE];
+		total = inUse + cpustat[(CPU_STATE_MAX * i) + CPU_STATE_IDLE];
 	}
 	if (total - user - sys - nice - idle > 0.001 ) 
 	{
@@ -201,12 +202,11 @@ static void getCPUStat (processor_info_array_t cpustat)
 	
 	
 	
-	
 	// total = vmstat.wire_count + vmstat.active_count + vmstat.inactive_count + vmstat.free_count;
 	/*
 		TODO now that we have usage numbers, update cpudata[] with it, like they do here.
 	*/
-	vmdata[inptr].wired = vmstat.wire_count / total;
+/*	vmdata[inptr].wired = vmstat.wire_count / total;
 	vmdata[inptr].active = vmstat.active_count / total;
 	vmdata[inptr].inactive = vmstat.inactive_count / total;
 	vmdata[inptr].free = vmstat.free_count / total;
@@ -215,6 +215,10 @@ static void getCPUStat (processor_info_array_t cpustat)
 	lastvmstat = vmstat;
 	if (++inptr >= size)
 		inptr = 0;
+*/
+/*
+	TODO this goes over to the graph at some point, somehow.
+*/
 }
 
 
