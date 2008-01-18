@@ -4,6 +4,14 @@ CPU Mon:
 - check TODOs
 - how to do data update: make a large float array with my usage data in it, use a rolling pointer to update things. store new data from current cpu stats. @done
 	- is that how the current and last stuff is built? @done
+- memory leak: vm_deallocate the processorInfo array after use.
+ 		if(lastProcessorInfo) {
+			size_t lastProcessorInfoSize = sizeof(integer_t) * numLastProcessorInfo;
+			vm_deallocate(target_task, (vm_address_t)lastProcessorInfo, lastProcessorInfoSize);
+		}
+
+		lastProcessorInfo = processorInfo;
+		numLastProcessorInfo = numProcessorInfo;
 - switch the source of the graph from memory info to CPU info:
 	- first test data coming out of cpu info with logs (this might hurt. limit to one sample every 2 sec)
 	- test with xcode debugger to watch array data change.
@@ -17,4 +25,11 @@ CPU Mon:
 - future upgrades:
 	- CPU usage across processors:
 		- get # of processors with http://www.cocoadev.com/index.pl?NSProcessInfo
-		- add another graph or average across both cores?
+		- add another graph or average across both cores?\
+
+- ok.
+- so.
+- we need a CPUStat array, with [num items].
+	- allocate at init.
+- then update the applicable entry at update time
+	- then increment and sanity check the pointer

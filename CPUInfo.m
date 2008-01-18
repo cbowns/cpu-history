@@ -24,19 +24,32 @@
 
 @implementation CPUInfo
 
-static void getCPUStat (processor_info_array_t cpustat)
+static processor_info_array_t getCPUStat ()
 {
 	processor_info_array_t processorInfo;
 	natural_t numProcessors_nobodyCares = 0U;
 	mach_msg_type_number_t numProcessorInfo;
 
 	kern_return_t err = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, &numProcessors_nobodyCares, &processorInfo, &numProcessorInfo);
-	if(err == KERN_SUCCESS) {
-		cpustat = processorInfo;
-	}
-	else {
+	if(err != KERN_SUCCESS) {
 		NSLog(@"getCPUStat: failed to get cpu statistics");
 	}
+
+	unsigned int inUse, total, user, sys, nice, idle;
+	user = processorInfo[CPU_STATE_USER];
+	sys  = processorInfo[CPU_STATE_SYSTEM];
+	nice = processorInfo[CPU_STATE_NICE];
+	idle = processorInfo[CPU_STATE_IDLE];
+	
+	inUse = user + sys + nice;
+	total = inUse + idle;
+		
+	double dbluser = (double)user / (double)total;
+	double dblsys = (double)sys / (double)total;
+	double dblnice = (double)nice / (double)total;
+	double dblidle = (double)idle / (double)total;
+	
+	return processorInfo;
 }
 
 - (CPUInfo *) initWithCapacity:(unsigned)numItems
@@ -68,7 +81,7 @@ static void getCPUStat (processor_info_array_t cpustat)
 	}
 	inptr = 0;
 	outptr = -1;
-	getCPUStat (lastcpustat);
+	lastcpustat = getCPUStat();
 
 	return (self);
 }
@@ -77,14 +90,13 @@ static void getCPUStat (processor_info_array_t cpustat)
 {
 	processor_info_array_t cpustat;
 		
-	getCPUStat (cpustat);
+	cpustat = getCPUStat();
 	/*
 		TODO make this multicore. First, we're gonna need a multicore machine to test it on.
 	*/
 	// for(unsigned i = 0U; i < numCPUs; ++i) {
-	unsigned i = 0U;
-	
-	double inUse, total, user, sys, nice, idle;
+
+	unsigned int inUse, total, user, sys, nice, idle;
 	user = cpustat[CPU_STATE_USER];
 	sys  = cpustat[CPU_STATE_SYSTEM];
 	nice = cpustat[CPU_STATE_NICE];
@@ -92,15 +104,11 @@ static void getCPUStat (processor_info_array_t cpustat)
 	
 	inUse = user + sys + nice;
 	total = inUse + idle;
-	
-	#ifdef NSLOG_DEBUG
-	NSLog(@"%s in use: %f   idle: %f", _cmd, inUse, idle);
-	#endif
-	
-	cpudata[inptr].user = (double)user;
-	cpudata[inptr].sys = (double)sys;
-	cpudata[inptr].nice = (double)nice;
-	cpudata[inptr].idle = (double)idle;
+		
+	cpudata[inptr].user = (double)user / (double)total;
+	cpudata[inptr].sys = (double)sys / (double)total;
+	cpudata[inptr].nice = (double)nice / (double)total;
+	cpudata[inptr].idle = (double)idle / (double)total;
 	lastcpustat = cpustat;
 	if (++inptr >= size) // advance our data ptr
 		inptr = 0;
