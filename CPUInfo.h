@@ -25,10 +25,10 @@ typedef struct cpudata {
 	mach_msg_type_number_t numLastProcessorInfo;
 	unsigned numCPUs;
 	float *CPUUsage;
-	CPUDataPtr		cpudata;
-	int			size;
-	int			inptr;
-	int			outptr;
+	CPUDataPtr cpudata;
+	int size;
+	int inptr;
+	int outptr;
 }
 
 - (CPUInfo *)initWithCapacity:(unsigned)numItems;

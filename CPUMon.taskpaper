@@ -2,10 +2,11 @@ CPU Mon:
 - get it to build @done
 - make another pass through the source to take out extraneous references to CPUUsage @done
 - check TODOs
-- how to do data update: make a large float array with my usage data in it, use a rolling pointer to update things. store new data from current cpu stats.
-	- is that how the current and last stuff is built?
+- how to do data update: make a large float array with my usage data in it, use a rolling pointer to update things. store new data from current cpu stats. @done
+	- is that how the current and last stuff is built? @done
 - switch the source of the graph from memory info to CPU info:
 	- first test data coming out of cpu info with logs (this might hurt. limit to one sample every 2 sec)
+	- test with xcode debugger to watch array data change.
 	- then change graphing fct to pull from different data source
 
 

@@ -22,9 +22,17 @@
 
 
 #import <AppKit/AppKit.h>
-
+#import "CPUInfo.h"
 
 int main (int argc, const char *argv[])
 {
-	return (NSApplicationMain(argc, argv));
+	// return (NSApplicationMain(argc, argv));
+	CPUInfo			*cpuInfo;	//cpu usage data buffer
+	cpuInfo = [[CPUInfo alloc] initWithCapacity:128];
+	int i;
+	for (i = 0 ; i < 300; i ++)
+	{
+		[cpuInfo refresh];
+	}
+	return 0;
 }
