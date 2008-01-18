@@ -68,7 +68,7 @@ static void getCPUStat (processor_info_array_t cpustat)
 	}
 	inptr = 0;
 	outptr = -1;
-	getCPUStat ( &lastProcessorInfo);
+	getCPUStat (lastcpustat);
 
 	return (self);
 }
@@ -77,7 +77,7 @@ static void getCPUStat (processor_info_array_t cpustat)
 {
 	processor_info_array_t cpustat;
 		
-	getCPUStat (&cpustat);
+	getCPUStat (cpustat);
 	/*
 		TODO make this multicore. First, we're gonna need a multicore machine to test it on.
 	*/
