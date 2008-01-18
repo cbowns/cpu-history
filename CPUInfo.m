@@ -26,10 +26,11 @@
 
 static void getCPUStat (processor_info_array_t cpustat)
 {
+	processor_info_array_t processorInfo;
 	natural_t numProcessors_nobodyCares = 0U;
 	mach_msg_type_number_t numProcessorInfo;
 
-	kern_return_t err = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, &numProcessors_nobodyCares, &cpustat, &numProcessorInfo);
+	kern_return_t err = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, &numProcessors_nobodyCares, &processorInfo, &numProcessorInfo);
 	if(err == KERN_SUCCESS) {
 		cpustat = processorInfo;
 	}

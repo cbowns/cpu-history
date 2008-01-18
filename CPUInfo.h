@@ -21,7 +21,7 @@ typedef struct cpudata {
 } CPUData, *CPUDataPtr;
 
 @interface CPUInfo : NSObject {
-	processor_info_array_t lastcpustat;
+	processor_info_array_t lastProcessorInfo;
 	mach_msg_type_number_t numLastProcessorInfo;
 	unsigned numCPUs;
 	float *CPUUsage;
