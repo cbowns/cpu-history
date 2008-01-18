@@ -7,6 +7,10 @@
 //
 //  Modified by Christopher Bowns, starting 2007-1-1.
 
+#ifndef NSLOG_DEBUG
+#define NSLOG_DEBUG
+#endif
+
 #import "CPUInfo.h"
 
 #include <sys/types.h>
@@ -20,24 +24,18 @@
 
 @implementation CPUInfo
 
-static double getCPUStat (processor_info_array_t *cpustat)
+static void getCPUStat (processor_info_array_t cpustat)
 {
-
-	int infoSize;
-	double CPUload;
-	static unsigned int	kern_old=0, user_old=0, nice_old=0, idle_old=0;
-	
-	
-	processor_info_array_t processorInfo;
 	natural_t numProcessors_nobodyCares = 0U;
 	mach_msg_type_number_t numProcessorInfo;
 
-	kern_return_t err = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, &numProcessors_nobodyCares, &processorInfo, &numProcessorInfo);
-	if(err != KERN_SUCCESS) {
-		mach_error("host_processor_info error", err);
+	kern_return_t err = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, &numProcessors_nobodyCares, &cpustat, &numProcessorInfo);
+	if(err == KERN_SUCCESS) {
+		cpustat = processorInfo;
 	}
-	*cpustat = processorInfo;
-	
+	else {
+		NSLog(@"getCPUStat: failed to get cpu statistics");
+	}
 }
 
 - (CPUInfo *) initWithCapacity:(unsigned)numItems
@@ -69,7 +67,7 @@ static double getCPUStat (processor_info_array_t *cpustat)
 	}
 	inptr = 0;
 	outptr = -1;
-	getCPUStat (&lastcpustat);
+	getCPUStat ( &lastProcessorInfo);
 
 	return (self);
 }
@@ -86,35 +84,22 @@ static double getCPUStat (processor_info_array_t *cpustat)
 	unsigned i = 0U;
 	
 	double inUse, total, user, sys, nice, idle;
-	user = cpustat[(CPU_STATE_MAX * i) + CPU_STATE_USER];
-	sys  = cpustat[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM];
-	nice = cpustat[(CPU_STATE_MAX * i) + CPU_STATE_NICE];
-	idle = cpustat[(CPU_STATE_MAX * i) + CPU_STATE_IDLE];
+	user = cpustat[CPU_STATE_USER];
+	sys  = cpustat[CPU_STATE_SYSTEM];
+	nice = cpustat[CPU_STATE_NICE];
+	idle = cpustat[CPU_STATE_IDLE];
 	
 	inUse = user + sys + nice;
 	total = inUse + idle;
 	
+	#ifdef NSLOG_DEBUG
 	NSLog(@"%s in use: %f   idle: %f", _cmd, inUse, idle);
+	#endif
 	
-	cpudata[inptr].user = user;
-	cpudata[inptr].sys = sys;
-	cpudata[inptr].nice = nice;
-	cpudata[inptr].idle = idle;
-	
-	unsigned int				kern, user, nice, idle, total;
-	kern = processorInfo[ CPU_STATE_SYSTEM];//-kern_old;
-	user = processorInfo[ CPU_STATE_USER];//-user_old;
-	nice = processorInfo[ CPU_STATE_NICE];//-nice_old;
-	idle = processorInfo[ CPU_STATE_IDLE];//-idle_old;
-	CPUload=((double)kern+(double)user+(double)nice)/(double)total;
-	return CPUload;
-		// kern_old=processorInfo[ CPU_STATE_SYSTEM];
-		// user_old=processorInfo[ CPU_STATE_USER];
-		// nice_old=processorInfo[ CPU_STATE_NICE];
-		// idle_old=processorInfo[ CPU_STATE_IDLE];
-
-	
-	
+	cpudata[inptr].user = (double)user;
+	cpudata[inptr].sys = (double)sys;
+	cpudata[inptr].nice = (double)nice;
+	cpudata[inptr].idle = (double)idle;
 	lastcpustat = cpustat;
 	if (++inptr >= size) // advance our data ptr
 		inptr = 0;
