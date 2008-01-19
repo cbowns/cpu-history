@@ -46,10 +46,10 @@ typedef struct cpudata {
 
 int main (int argc, const char *argv[])
 {
-	// return (NSApplicationMain(argc, argv));
+	return (NSApplicationMain(argc, argv));
 	
 	
-	
+/*	
 	processor_info_array_t processorInfo, processorInfoTwo;
 	natural_t numProcessors_nobodyCares = 0U;
 	mach_msg_type_number_t numProcessorInfo, numProcessorInfoTwo;
@@ -96,5 +96,5 @@ int main (int argc, const char *argv[])
 	testData.idle = (double)idle / (double)total;
 	
 	
-	return 0;
+	return 0;*/
 }

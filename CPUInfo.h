@@ -21,10 +21,9 @@ typedef struct cpudata {
 } CPUData, *CPUDataPtr;
 
 @interface CPUInfo : NSObject {
-	processor_info_array_t lastcpustat;
-	mach_msg_type_number_t numlastcpustat;
+	processor_info_array_t lastProcessorInfo;
+	mach_msg_type_number_t numLastProcessorInfo;
 	unsigned numCPUs;
-	float *CPUUsage;
 	CPUDataPtr cpudata;
 	int size;
 	int inptr;
@@ -38,10 +37,5 @@ typedef struct cpudata {
 - (void)getCurrent:(CPUDataPtr)ptr;
 - (void)getLast:(CPUDataPtr)ptr;
 - (int)getSize;
-
-// - (CPUData)updateCPUUsage;
-/*
-	TODO we're going to want this.
-*/
 
 @end

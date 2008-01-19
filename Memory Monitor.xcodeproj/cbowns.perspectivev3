@@ -326,10 +326,6 @@
 										<string>E55793210D40543D0025C9B4</string>
 										<key>PBXProjectModuleLabel</key>
 										<string>main.m</string>
-										<key>_historyCapacity</key>
-										<integer>40</integer>
-										<key>bookmark</key>
-										<string>E55793C30D427ED90025C9B4</string>
 										<key>history</key>
 										<array>
 											<string>E557934B0D41433D0025C9B4</string>
@@ -379,7 +375,9 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {377, -27}}</string>
+										<string>{{10, 27}, {872, 139}}</string>
+										<key>RubberWindowFrame</key>
+										<string>61 246 1079 668 0 0 1280 1002 </string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -434,8 +432,6 @@
 									<dict>
 										<key>Frame</key>
 										<string>{{10, 27}, {872, 139}}</string>
-										<key>RubberWindowFrame</key>
-										<string>61 246 1079 668 0 0 1280 1002 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXBuildResultsModule</string>
@@ -463,11 +459,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>E55793AA0D42651F0025C9B4</string>
+				<string>E55793CE0D42830A0025C9B4</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>E55793AB0D42651F0025C9B4</string>
+				<string>E55793CF0D42830A0025C9B4</string>
 				<string>E55793200D40543D0025C9B4</string>
-				<string>E55793AC0D42651F0025C9B4</string>
+				<string>E55793D00D42830A0025C9B4</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
@@ -649,9 +645,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>E55793B60D4265E80025C9B4</string>
-		<string>E55793B70D4265E80025C9B4</string>
-		<string>E55793B80D4265E80025C9B4</string>
 		<string>/Users/cbowns/Desktop/Memory Monitor src/Memory Monitor.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
