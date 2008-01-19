@@ -1,7 +1,7 @@
 CPU Mon:
 - get it to build @done
 - make another pass through the source to take out extraneous references to CPUUsage @done
-- check TODOs
+- check TODOs @done
 - how to do data update: make a large float array with my usage data in it, use a rolling pointer to update things. store new data from current cpu stats. @done
 	- is that how the current and last stuff is built? @done
 - memory leak: vm_deallocate the processorInfo array after use.

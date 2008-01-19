@@ -50,15 +50,14 @@ int main (int argc, const char *argv[])
 	
 	
 	
-	processor_info_array_t processorInfo;
+	processor_info_array_t processorInfo, processorInfoTwo;
 	natural_t numProcessors_nobodyCares = 0U;
-	mach_msg_type_number_t numProcessorInfo;
+	mach_msg_type_number_t numProcessorInfo, numProcessorInfoTwo;
 
 	kern_return_t err = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, (natural_t *)&numProcessors_nobodyCares, (processor_info_array_t *)&processorInfo, (mach_msg_type_number_t *)&numProcessorInfo);
 	if(err != KERN_SUCCESS) {
 		NSLog(@"getCPUStat: failed to get cpu statistics");
 	}
-	
 	
 	unsigned int inUse, total, user, sys, nice, idle;
 	user = processorInfo[CPU_STATE_USER];
@@ -68,12 +67,33 @@ int main (int argc, const char *argv[])
 	
 	inUse = user + sys + nice;
 	total = inUse + idle;
-		
-	double dbluser = (double)user / (double)total;
-	double dblsys = (double)sys / (double)total;
-	double dblnice = (double)nice / (double)total;
-	double dblidle = (double)idle / (double)total;
 	
+	CPUData testData;	
+	testData.user = (double)user / (double)total;
+	testData.sys = (double)sys / (double)total;
+	testData.nice = (double)nice / (double)total;
+	testData.idle = (double)idle / (double)total;
+	
+	
+	
+	
+	kern_return_t err2 = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, (natural_t *)&numProcessors_nobodyCares, (processor_info_array_t *)&processorInfoTwo, (mach_msg_type_number_t *)&numProcessorInfoTwo);
+	if(err2 != KERN_SUCCESS) {
+		NSLog(@"getCPUStat: failed to get cpu statistics");
+	}
+	
+	user = processorInfoTwo[CPU_STATE_USER] - processorInfo[CPU_STATE_USER];
+	sys = processorInfoTwo[CPU_STATE_SYSTEM] - processorInfo[CPU_STATE_SYSTEM];
+	nice = processorInfoTwo[CPU_STATE_NICE] - processorInfo[CPU_STATE_NICE];
+	idle = processorInfoTwo[CPU_STATE_IDLE] - processorInfo[CPU_STATE_IDLE];
+	
+	inUse = user + sys + nice;
+	total = inUse + idle;
+		
+	testData.user = (double)user / (double)total;
+	testData.sys = (double)sys / (double)total;
+	testData.nice = (double)nice / (double)total;
+	testData.idle = (double)idle / (double)total;
 	
 	
 	return 0;
