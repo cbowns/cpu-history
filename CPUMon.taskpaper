@@ -1,10 +1,7 @@
 CPU Mon:
 - switch the source of the graph from memory info to CPU info:
-	- first test data coming out of cpu info with logs (this might hurt. limit to one sample every 2 sec) @done
-	- test with xcode debugger to watch array data change. @done
 	- then change graphing fct to pull from different data source
 - remove extraneous information for memory monitor:
-	- paging rate graph
 	- text overlay
 	- preferences form
 - future upgrades:
@@ -71,3 +68,6 @@ Archive:
 
 		lastProcessorInfo = processorInfo;
 		numLastProcessorInfo = numProcessorInfo;
+	- first test data coming out of cpu info with logs (this might hurt. limit to one sample every 2 sec) @done @project(CPU Mon)
+	- test with xcode debugger to watch array data change. @done @project(CPU Mon)
+	- paging rate graph @done @project(CPU Mon)

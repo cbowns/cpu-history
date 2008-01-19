@@ -53,51 +53,14 @@
 }
 
 
-- (void)drawPageins:(int)pageins pageouts:(int)pageouts
-{
-	int			paging;
-	NSString		*string;
-	NSMutableDictionary	*fontAttrs;
-	
-	// draw paging rate into the icon image
-	if ([[preferences objectForKey:SHOW_PAGING_RATE_KEY] boolValue]) {
-		paging = (pageins + pageouts) / (0.1 * [[preferences objectForKey:UPDATE_FREQUENCY_KEY] floatValue]);
-		if (paging != 0) {
-			if (pageins == 0)
-				string = NSLocalizedString(@"out", @"");
-			else if (pageouts == 0)
-				string = NSLocalizedString(@"in", @"");
-			else
-				string = NSLocalizedString(@"i/o", @"");
-			fontAttrs = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-				[NSFont boldSystemFontOfSize:48.0], NSFontAttributeName,
-				[NSColor blackColor], NSForegroundColorAttributeName,
-				nil];
-			[string drawAtPoint:NSMakePoint(4.0, 60.0) withAttributes:fontAttrs];
-			[fontAttrs setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
-			[string drawAtPoint:NSMakePoint(2.0, 62.0) withAttributes:fontAttrs];
-			string = [NSString stringWithFormat:@"%d", paging];
-			[fontAttrs setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
-			[string drawAtPoint:NSMakePoint(4.0, 12.0) withAttributes:fontAttrs];
-			[fontAttrs setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
-			[string drawAtPoint:NSMakePoint(2.0, 14.0) withAttributes:fontAttrs];
-			[fontAttrs release];
-		}
-	}
-}
-
-
 - (void)drawComplete
-// completely redraw graphImage, put graph and pageing rate into displayImage
+// completely redraw graphImage, put graph into displayImage
 {	
 	VMData			vmdata;
-	int			lastpageins, lastpageouts, x;
+	int				x;
 	float			y, yy;
 	
-	BOOL pageinAtopPageout = [[preferences objectForKey:PAGEIN_ATOP_PAGEOUT_KEY] boolValue];
-	double pagingmax = [[preferences objectForKey:PAGING_SCALE_MAX_KEY] doubleValue];
 	double interval = 0.1 * [[preferences objectForKey:UPDATE_FREQUENCY_KEY] floatValue];
-	double pgfactor = 1.0 / (pagingmax * interval);
 	
 	[graphImage lockFocus];
 
@@ -119,56 +82,22 @@
 		NSRectFill (NSMakeRect(x - 1, y, x, GRAPH_SIZE));
 	}
 	
-/*
-	TODO paging curves: we don't need these here anymore.
-*/
-	// draw the paging curves on top of the memory usage graph
-	[memInfo startIterate];
-	for (lastpageins = lastpageouts = x = 0; [memInfo getNext:&vmdata]; x++) {
-		if (pageinAtopPageout) {
-			y = GRAPH_SIZE * (1.0 - vmdata.pageins * pgfactor);
-			yy = GRAPH_SIZE * (1.0 - lastpageins * pgfactor);
-		} else {
-			y = GRAPH_SIZE * vmdata.pageins * pgfactor;
-			yy = GRAPH_SIZE * lastpageins * pgfactor;
-		}
-		[[preferences objectForKey:PAGEIN_COLOR_KEY] set];
-		[NSBezierPath strokeLineFromPoint:NSMakePoint(x, yy) toPoint:NSMakePoint(x+1, y)];	
-		if (pageinAtopPageout) {
-			y = GRAPH_SIZE * vmdata.pageouts * pgfactor;
-			yy = GRAPH_SIZE * lastpageouts * pgfactor;
-		} else {
-			y = GRAPH_SIZE * (1.0 - vmdata.pageouts * pgfactor);
-			yy = GRAPH_SIZE * (1.0 - lastpageouts * pgfactor);
-		}
-		[[preferences objectForKey:PAGEOUT_COLOR_KEY] set];
-		[NSBezierPath strokeLineFromPoint:NSMakePoint(x, yy) toPoint:NSMakePoint(x+1, y)];			
-		lastpageins = vmdata.pageins;
-		lastpageouts = vmdata.pageouts;
-	}
-	
 	// transfer graph image to icon image
 	[graphImage unlockFocus];
 	[displayImage lockFocus];	
 	[graphImage compositeToPoint:NSMakePoint(0.0, 0.0) operation:NSCompositeCopy];
-	
-	// draw paging rate into the icon image
-	[self drawPageins:vmdata.pageins pageouts:vmdata.pageouts];
-	
+		
 	[displayImage unlockFocus];
 }
 
 
 - (void)drawDelta
-// update graphImage (based on previous graphImage), put graph and pageing rate into displayImage
+// update graphImage (based on previous graphImage), put graph into displayImage
 {	
 	VMData			vmdata, vmdata0;
 	float			y, yy;
 	
-	BOOL pageinAtopPageout = [[preferences objectForKey:PAGEIN_ATOP_PAGEOUT_KEY] boolValue];
-	double pagingmax = [[preferences objectForKey:PAGING_SCALE_MAX_KEY] doubleValue];
 	double interval = 0.1 * [[preferences objectForKey:UPDATE_FREQUENCY_KEY] floatValue];
-	double pgfactor = 1.0 / (pagingmax * interval);
 	
 	[graphImage lockFocus];
 
@@ -193,33 +122,11 @@
 	[[preferences objectForKey:FREE_COLOR_KEY] set];
 	NSRectFill (NSMakeRect(GRAPH_SIZE - 1, y, GRAPH_SIZE - 1, GRAPH_SIZE));
 
-	if (pageinAtopPageout) {
-		y = GRAPH_SIZE * (1.0 - vmdata.pageins * pgfactor);
-		yy = GRAPH_SIZE * (1.0 - vmdata0.pageins * pgfactor);
-	} else {
-		y = GRAPH_SIZE * vmdata.pageins * pgfactor;
-		yy = GRAPH_SIZE * vmdata0.pageins * pgfactor;
-	}
-	[[preferences objectForKey:PAGEIN_COLOR_KEY] set];
-	[NSBezierPath strokeLineFromPoint:NSMakePoint(GRAPH_SIZE - 1, yy) toPoint:NSMakePoint(GRAPH_SIZE, y)];
-
-	if (pageinAtopPageout) {
-		y = GRAPH_SIZE * vmdata.pageouts * pgfactor;
-		yy = GRAPH_SIZE * vmdata0.pageouts * pgfactor;
-	} else {
-		y = GRAPH_SIZE * (1.0 - vmdata.pageouts * pgfactor);
-		yy = GRAPH_SIZE * (1.0 - vmdata0.pageouts * pgfactor);
-	}
-	[[preferences objectForKey:PAGEOUT_COLOR_KEY] set];
-	[NSBezierPath strokeLineFromPoint:NSMakePoint(GRAPH_SIZE - 1, yy) toPoint:NSMakePoint(GRAPH_SIZE, y)];			
 
 	// transfer graph image to icon image
 	[graphImage unlockFocus];
 	[displayImage lockFocus];
 	[graphImage compositeToPoint:NSMakePoint(0.0, 0.0) operation:NSCompositeCopy];
-
-	// draw paging rate into the icon image
-	[self drawPageins:vmdata.pageins pageouts:vmdata.pageouts];
 
 	[displayImage unlockFocus];
 }
