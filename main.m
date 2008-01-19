@@ -27,26 +27,5 @@
 
 int main (int argc, const char *argv[])
 {
-	// return (NSApplicationMain(argc, argv));
-	int size = 24, i, j;
-	CPUInfo *cpuInfo = [[CPUInfo alloc] initWithCapacity:size];
-	CPUData cpuData;
-	
-	[cpuInfo refresh];
-	for (j = 0; j < 48; j++) {
-		for (i = 0; i < 1000000; ) {
-			i++;
-		}
-		[cpuInfo refresh];
-	}
-
-	[cpuInfo startIterate];
-	for (i = 0; [cpuInfo getNext:&cpuData]; i++) {
-		NSLog(@"user: %e\n", cpuData.user);
-		NSLog(@"sys: %e\n", cpuData.sys);
-		NSLog(@"nice: %e\n", cpuData.nice);
-		NSLog(@"idle: %e\n", cpuData.idle);
-	}
-	
-	return 0;
+	return (NSApplicationMain(argc, argv));
 }
