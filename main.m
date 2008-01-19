@@ -47,6 +47,34 @@ typedef struct cpudata {
 int main (int argc, const char *argv[])
 {
 	// return (NSApplicationMain(argc, argv));
+	
+	
+	
+	processor_info_array_t processorInfo;
+	natural_t numProcessors_nobodyCares = 0U;
+	mach_msg_type_number_t numProcessorInfo;
 
+	kern_return_t err = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, (natural_t *)&numProcessors_nobodyCares, (processor_info_array_t *)&processorInfo, (mach_msg_type_number_t *)&numProcessorInfo);
+	if(err != KERN_SUCCESS) {
+		NSLog(@"getCPUStat: failed to get cpu statistics");
+	}
+	
+	
+	unsigned int inUse, total, user, sys, nice, idle;
+	user = processorInfo[CPU_STATE_USER];
+	sys  = processorInfo[CPU_STATE_SYSTEM];
+	nice = processorInfo[CPU_STATE_NICE];
+	idle = processorInfo[CPU_STATE_IDLE];
+	
+	inUse = user + sys + nice;
+	total = inUse + idle;
+		
+	double dbluser = (double)user / (double)total;
+	double dblsys = (double)sys / (double)total;
+	double dblnice = (double)nice / (double)total;
+	double dblidle = (double)idle / (double)total;
+	
+	
+	
 	return 0;
 }
