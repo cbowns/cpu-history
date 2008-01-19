@@ -21,15 +21,14 @@ typedef struct cpudata {
 } CPUData, *CPUDataPtr;
 
 @interface CPUInfo : NSObject {
-	processor_info_array_t lastProcessorInfo;
-	mach_msg_type_number_t numLastProcessorInfo;
+	processor_info_array_t lastcpustat;
+	mach_msg_type_number_t numlastcpustat;
 	unsigned numCPUs;
 	float *CPUUsage;
-	CPUDataPtr		cpudata;
-	int			size;
-	int			inptr;
-	int			outptr;
-	vm_statistics_data_t	lastvmstat;
+	CPUDataPtr cpudata;
+	int size;
+	int inptr;
+	int outptr;
 }
 
 - (CPUInfo *)initWithCapacity:(unsigned)numItems;

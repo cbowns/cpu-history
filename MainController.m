@@ -120,7 +120,7 @@
 	}
 	
 /*
-	TODO paging curves: we don't these here anymore.
+	TODO paging curves: we don't need these here anymore.
 */
 	// draw the paging curves on top of the memory usage graph
 	[memInfo startIterate];
