@@ -1,13 +1,4 @@
 CPU Mon:
-- memory leak: vm_deallocate the processorInfo array after use:
- 		if(lastProcessorInfo) {
-			size_t lastProcessorInfoSize = sizeof(integer_t) * numLastProcessorInfo;
-			vm_deallocate(target_task, (vm_address_t)lastProcessorInfo, lastProcessorInfoSize);
-		}
-
-		lastProcessorInfo = processorInfo;
-		numLastProcessorInfo = numProcessorInfo;
-
 - switch the source of the graph from memory info to CPU info:
 	- first test data coming out of cpu info with logs (this might hurt. limit to one sample every 2 sec)
 	- test with xcode debugger to watch array data change.
@@ -24,29 +15,6 @@ CPU Mon:
 
 
 
-
-
-- methods needed:
-	- updateCPUStat: what do we want to accomplish here?
-		- get current data @done
-		- retrieve data at last refresh @done
-		- subtract last from current @done
-	- init: init the processor usage data: set the first "lastProcessorInfo" array so update is all good to go.
-	- getCurrentData
-		- return last data
-	- getNext:
-		- run update
-		- set ptr new data
-		- update internal ptrs
-		- 
-	- getPrev
-		- return one before last?
-- variables needed:
-	- CPUData array
-	- lastProcessorInfo (for diffs)
-	- numLastProcessorInfo (to deallocate it)
-	- two variables to track size, location in array
-- notes: need TWO refreshes at init to get current info!
 Archive:
 - get it to build @done @project(CPU Mon)
 - make another pass through the source to take out extraneous references to CPUUsage @done @project(CPU Mon)
@@ -54,3 +22,31 @@ Archive:
 - how to do data update: make a large float array with my usage data in it, use a rolling pointer to update things. store new data from current cpu stats. @done @project(CPU Mon)
 	- is that how the current and last stuff is built? @done @project(CPU Mon)
 - in other words, I need to pass the pointer by reference so I can modify its value (ie the memory it points to). keep in mind, someone has to clean up after the old memory. @done @project(CPU Mon)
+- memory leak: vm_deallocate the processorInfo array after use: @done @project(CPU Mon)
+- methods needed: @done @project(CPU Mon)
+	- updateCPUStat: what do we want to accomplish here? @done @project(CPU Mon)
+		- get current data @done @project(CPU Mon)
+		- retrieve data at last refresh @done @project(CPU Mon)
+		- subtract last from current @done @project(CPU Mon)
+	- init: init the processor usage data: set the first "lastProcessorInfo" array so update is all good to go. @done @project(CPU Mon)
+	- getCurrentData @done @project(CPU Mon)
+		- return last data @done @project(CPU Mon)
+	- getNext: @done @project(CPU Mon)
+		- run update @done @project(CPU Mon)
+		- set ptr new data @done @project(CPU Mon)
+		- update internal ptrs @done @project(CPU Mon)
+	- getPrev @done @project(CPU Mon)
+		- return one before last? @done @project(CPU Mon)
+- variables needed: @done @project(CPU Mon)
+	- CPUData array @done @project(CPU Mon)
+	- lastProcessorInfo (for diffs) @done @project(CPU Mon)
+	- numLastProcessorInfo (to deallocate it) @done @project(CPU Mon)
+	- two variables to track size, location in array @done @project(CPU Mon)
+- notes: need TWO refreshes at init to get current info! @done @project(CPU Mon)
+ 		if(lastProcessorInfo) {
+			size_t lastProcessorInfoSize = sizeof(integer_t) * numLastProcessorInfo;
+			vm_deallocate(target_task, (vm_address_t)lastProcessorInfo, lastProcessorInfoSize);
+		}
+
+		lastProcessorInfo = processorInfo;
+		numLastProcessorInfo = numProcessorInfo;

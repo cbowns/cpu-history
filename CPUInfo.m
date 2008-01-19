@@ -67,6 +67,7 @@
 	outptr = -1;
 	
 	// set the lastProcessorInfo array so we can get to work when we call refresh:
+	natural_t numProcessors_nobodyCares = 0U;
 	kern_return_t err = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, (natural_t *)&numProcessors_nobodyCares, (processor_info_array_t *)&lastProcessorInfo, (mach_msg_type_number_t *)&numLastProcessorInfo);
 	if(err != KERN_SUCCESS) {
 		NSLog(@"%s failed to get cpu statistics", _cmd);
