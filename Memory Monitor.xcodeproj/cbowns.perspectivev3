@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>ActivePerspectiveName</key>
-	<string>Debug</string>
+	<string>Project</string>
 	<key>AllowedModules</key>
 	<array>
 		<dict>
@@ -233,6 +233,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -298,6 +300,8 @@
 							<string>MainColumn</string>
 							<real>185</real>
 						</array>
+						<key>RubberWindowFrame</key>
+						<string>61 246 1079 668 0 0 1280 1002 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -325,12 +329,12 @@
 										<key>_historyCapacity</key>
 										<integer>40</integer>
 										<key>bookmark</key>
-										<string>E55793BC0D427DD00025C9B4</string>
+										<string>E55793C30D427ED90025C9B4</string>
 										<key>history</key>
 										<array>
 											<string>E557934B0D41433D0025C9B4</string>
 											<string>E557938D0D415E2A0025C9B4</string>
-											<string>E55793A80D42651F0025C9B4</string>
+											<string>E55793C20D427ED80025C9B4</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -351,6 +355,8 @@
 							<dict>
 								<key>Frame</key>
 								<string>{{0, 0}, {872, 456}}</string>
+								<key>RubberWindowFrame</key>
+								<string>61 246 1079 668 0 0 1280 1002 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -428,6 +434,8 @@
 									<dict>
 										<key>Frame</key>
 										<string>{{10, 27}, {872, 139}}</string>
+										<key>RubberWindowFrame</key>
+										<string>61 246 1079 668 0 0 1280 1002 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXBuildResultsModule</string>
@@ -507,8 +515,6 @@
 					<dict>
 						<key>Frame</key>
 						<string>{{0, 0}, {1079, 0}}</string>
-						<key>RubberWindowFrame</key>
-						<string>72 263 1079 668 0 0 1280 1002 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXDebugCLIModule</string>
@@ -583,11 +589,7 @@
 							</array>
 							<key>Frame</key>
 							<string>{{0, 310}, {540, 312}}</string>
-							<key>RubberWindowFrame</key>
-							<string>72 263 1079 668 0 0 1280 1002 </string>
 						</dict>
-						<key>RubberWindowFrame</key>
-						<string>72 263 1079 668 0 0 1280 1002 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXDebugSessionModule</string>
@@ -653,7 +655,7 @@
 		<string>/Users/cbowns/Desktop/Memory Monitor src/Memory Monitor.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>72 263 1079 668 0 0 1280 1002 </string>
+	<string>61 246 1079 668 0 0 1280 1002 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>

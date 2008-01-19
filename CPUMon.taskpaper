@@ -4,7 +4,8 @@ CPU Mon:
 - check TODOs @done
 - how to do data update: make a large float array with my usage data in it, use a rolling pointer to update things. store new data from current cpu stats. @done
 	- is that how the current and last stuff is built? @done
-- memory leak: vm_deallocate the processorInfo array after use.
+- in other words, I need to pass the pointer by reference so I can modify its value (ie the memory it points to). keep in mind, someone has to clean up after the old memory. @done
+- memory leak: vm_deallocate the processorInfo array after use:
  		if(lastProcessorInfo) {
 			size_t lastProcessorInfoSize = sizeof(integer_t) * numLastProcessorInfo;
 			vm_deallocate(target_task, (vm_address_t)lastProcessorInfo, lastProcessorInfoSize);
@@ -12,8 +13,7 @@ CPU Mon:
 
 		lastProcessorInfo = processorInfo;
 		numLastProcessorInfo = numProcessorInfo;
-
-- in other words, I need to pass the pointer by reference so I can modify its value (ie the memory it points to). keep in mind, someone has to clean up after the old memory.
+	
 
 
 - switch the source of the graph from memory info to CPU info:
