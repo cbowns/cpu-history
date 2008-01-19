@@ -24,7 +24,7 @@
 
 @implementation CPUInfo
 
-static processor_info_array_t getCPUStat (processor_info_array_t *cpustat, mach_msg_type_number_t *numcpustat)
+static void getCPUStat (processor_info_array_t *cpustat, mach_msg_type_number_t *numcpustat)
 {
 	processor_info_array_t processorInfo;
 	natural_t numProcessors_nobodyCares = 0U;
@@ -49,8 +49,11 @@ static processor_info_array_t getCPUStat (processor_info_array_t *cpustat, mach_
 	double dblsys = (double)sys / (double)total;
 	double dblnice = (double)nice / (double)total;
 	double dblidle = (double)idle / (double)total;
-	
-	return processorInfo;
+	dbluser++;
+	dblsys++;
+	dblnice++;
+	dblidle++;
+	// return processorInfo;
 }
 
 - (CPUInfo *) initWithCapacity:(unsigned)numItems
@@ -83,7 +86,7 @@ static processor_info_array_t getCPUStat (processor_info_array_t *cpustat, mach_
 	inptr = 0;
 	outptr = -1;
 	
-	getCPUStat(lastcpustat, numlastcpustat);
+	getCPUStat(&lastcpustat, &numlastcpustat);
 
 	return (self);
 }
@@ -91,8 +94,8 @@ static processor_info_array_t getCPUStat (processor_info_array_t *cpustat, mach_
 - (void)refresh
 {
 	processor_info_array_t cpustat;
-		
-	cpustat = getCPUStat();
+	mach_msg_type_number_t numcpustat;
+	getCPUStat(&cpustat, &numcpustat);
 	/*
 		TODO make this multicore. First, we're gonna need a multicore machine to test it on.
 	*/
@@ -111,14 +114,15 @@ static processor_info_array_t getCPUStat (processor_info_array_t *cpustat, mach_
 	cpudata[inptr].sys = (double)sys / (double)total;
 	cpudata[inptr].nice = (double)nice / (double)total;
 	cpudata[inptr].idle = (double)idle / (double)total;
+	
 	if(lastcpustat) {
-				size_t lastcpustatSize = sizeof(integer_t) * numLastProcessorInfo;
-				vm_deallocate(target_task, (vm_address_t)lastProcessorInfo, lastProcessorInfoSize);
-			}
+		size_t lastcpustatSize = sizeof(integer_t) * numlastcpustat;
+		vm_deallocate(mach_task_self(), (vm_address_t)lastcpustat, lastcpustatSize);
+	}
 
-			lastProcessorInfo = processorInfo;
-			numLastProcessorInfo = numProcessorInfo;
 	lastcpustat = cpustat;
+	numlastcpustat = numcpustat;
+	
 	if (++inptr >= size) // advance our data ptr
 		inptr = 0;
 }
