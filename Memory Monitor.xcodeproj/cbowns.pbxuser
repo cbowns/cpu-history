@@ -110,6 +110,15 @@
 			E55793830D414E7C0025C9B4 /* PBXTextBookmark */ = E55793830D414E7C0025C9B4 /* PBXTextBookmark */;
 			E55793840D414E960025C9B4 /* PBXTextBookmark */ = E55793840D414E960025C9B4 /* PBXTextBookmark */;
 			E55793860D4152E70025C9B4 /* PBXTextBookmark */ = E55793860D4152E70025C9B4 /* PBXTextBookmark */;
+			E55793880D415DBD0025C9B4 /* PBXTextBookmark */ = E55793880D415DBD0025C9B4 /* PBXTextBookmark */;
+			E55793890D415E2A0025C9B4 /* PBXTextBookmark */ = E55793890D415E2A0025C9B4 /* PBXTextBookmark */;
+			E557938A0D415E2A0025C9B4 /* PBXTextBookmark */ = E557938A0D415E2A0025C9B4 /* PBXTextBookmark */;
+			E557938B0D415E2A0025C9B4 /* PBXTextBookmark */ = E557938B0D415E2A0025C9B4 /* PBXTextBookmark */;
+			E557938C0D415E2A0025C9B4 /* PBXTextBookmark */ = E557938C0D415E2A0025C9B4 /* PBXTextBookmark */;
+			E557938D0D415E2A0025C9B4 /* PBXTextBookmark */ = E557938D0D415E2A0025C9B4 /* PBXTextBookmark */;
+			E557938E0D415E3A0025C9B4 /* PBXTextBookmark */ = E557938E0D415E3A0025C9B4 /* PBXTextBookmark */;
+			E557938F0D4168430025C9B4 /* PBXTextBookmark */ = E557938F0D4168430025C9B4 /* PBXTextBookmark */;
+			E55793900D416DF10025C9B4 /* PBXTextBookmark */ = E55793900D416DF10025C9B4 /* PBXTextBookmark */;
 			E578B9A90D38800C00ED84FE = E578B9A90D38800C00ED84FE /* PBXTextBookmark */;
 			E578B9AA0D38800C00ED84FE = E578B9AA0D38800C00ED84FE /* PBXTextBookmark */;
 			E578B9AE0D38800C00ED84FE = E578B9AE0D38800C00ED84FE /* PBXTextBookmark */;
@@ -621,6 +630,93 @@
 		vrLen = 446;
 		vrLoc = 1725;
 	};
+	E55793880D415DBD0025C9B4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = E578B9A60D34363700ED84FE /* CPUInfo.m */;
+		name = "CPUInfo.m: 155";
+		rLen = 0;
+		rLoc = 3391;
+		rType = 0;
+		vrLen = 576;
+		vrLoc = 1578;
+	};
+	E55793890D415E2A0025C9B4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 29B97316FDCFA39411CA2CEA /* main.m */;
+		name = "main.m: 33";
+		rLen = 0;
+		rLoc = 1063;
+		rType = 0;
+		vrLen = 1132;
+		vrLoc = 0;
+	};
+	E557938A0D415E2A0025C9B4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = E578B9A60D34363700ED84FE /* CPUInfo.m */;
+		rLen = 0;
+		rLoc = 92;
+		rType = 1;
+	};
+	E557938B0D415E2A0025C9B4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = E578B9A60D34363700ED84FE /* CPUInfo.m */;
+		name = "CPUInfo.m: 155";
+		rLen = 0;
+		rLoc = 3397;
+		rType = 0;
+		vrLen = 1052;
+		vrLoc = 1578;
+	};
+	E557938C0D415E2A0025C9B4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 29B97316FDCFA39411CA2CEA /* main.m */;
+		name = "main.m: 33";
+		rLen = 0;
+		rLoc = 1063;
+		rType = 0;
+		vrLen = 1132;
+		vrLoc = 0;
+	};
+	E557938D0D415E2A0025C9B4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = E578B9A60D34363700ED84FE /* CPUInfo.m */;
+		name = "CPUInfo.m: 155";
+		rLen = 0;
+		rLoc = 3391;
+		rType = 0;
+		vrLen = 1012;
+		vrLoc = 681;
+	};
+	E557938E0D415E3A0025C9B4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = E578B9A60D34363700ED84FE /* CPUInfo.m */;
+		name = "CPUInfo.m: 155";
+		rLen = 0;
+		rLoc = 3391;
+		rType = 0;
+		vrLen = 431;
+		vrLoc = 1262;
+	};
+	E557938F0D4168430025C9B4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = E578B9A60D34363700ED84FE /* CPUInfo.m */;
+		name = "CPUInfo.m: 166";
+		rLen = 0;
+		rLoc = 3754;
+		rType = 0;
+		vrLen = 633;
+		vrLoc = 1014;
+	};
+	E55793900D416DF10025C9B4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = E578B9A60D34363700ED84FE /* CPUInfo.m */;
+		name = "CPUInfo.m: 164";
+		rLen = 0;
+		rLoc = 3807;
+		rType = 0;
+		vrLen = 709;
+		vrLoc = 814;
+	};
 	E578B9A50D34363700ED84FE /* CPUInfo.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {811, 672}}";
@@ -630,9 +726,9 @@
 	};
 	E578B9A60D34363700ED84FE /* CPUInfo.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {811, 2338}}";
-			sepNavSelRange = "{3397, 0}";
-			sepNavVisRange = "{1725, 446}";
+			sepNavIntBoundsRect = "{{0, 0}, {811, 2506}}";
+			sepNavSelRange = "{3807, 0}";
+			sepNavVisRange = "{814, 709}";
 		};
 	};
 	E578B9A90D38800C00ED84FE /* PBXTextBookmark */ = {

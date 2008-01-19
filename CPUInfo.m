@@ -24,17 +24,18 @@
 
 @implementation CPUInfo
 
-static processor_info_array_t getCPUStat ()
+static processor_info_array_t getCPUStat (processor_info_array_t *cpustat, mach_msg_type_number_t *numcpustat)
 {
 	processor_info_array_t processorInfo;
 	natural_t numProcessors_nobodyCares = 0U;
 	mach_msg_type_number_t numProcessorInfo;
 
-	kern_return_t err = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, &numProcessors_nobodyCares, &processorInfo, &numProcessorInfo);
+	kern_return_t err = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, (natural_t *)&numProcessors_nobodyCares, (processor_info_array_t *)&processorInfo, (mach_msg_type_number_t *)&numProcessorInfo);
 	if(err != KERN_SUCCESS) {
 		NSLog(@"getCPUStat: failed to get cpu statistics");
 	}
-
+	
+	
 	unsigned int inUse, total, user, sys, nice, idle;
 	user = processorInfo[CPU_STATE_USER];
 	sys  = processorInfo[CPU_STATE_SYSTEM];
@@ -81,7 +82,8 @@ static processor_info_array_t getCPUStat ()
 	}
 	inptr = 0;
 	outptr = -1;
-	lastcpustat = getCPUStat();
+	
+	getCPUStat(lastcpustat, numlastcpustat);
 
 	return (self);
 }
@@ -109,6 +111,13 @@ static processor_info_array_t getCPUStat ()
 	cpudata[inptr].sys = (double)sys / (double)total;
 	cpudata[inptr].nice = (double)nice / (double)total;
 	cpudata[inptr].idle = (double)idle / (double)total;
+	if(lastcpustat) {
+				size_t lastcpustatSize = sizeof(integer_t) * numLastProcessorInfo;
+				vm_deallocate(target_task, (vm_address_t)lastProcessorInfo, lastProcessorInfoSize);
+			}
+
+			lastProcessorInfo = processorInfo;
+			numLastProcessorInfo = numProcessorInfo;
 	lastcpustat = cpustat;
 	if (++inptr >= size) // advance our data ptr
 		inptr = 0;

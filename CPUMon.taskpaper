@@ -12,6 +12,10 @@ CPU Mon:
 
 		lastProcessorInfo = processorInfo;
 		numLastProcessorInfo = numProcessorInfo;
+
+- in other words, I need to pass the pointer by reference so I can modify its value (ie the memory it points to). keep in mind, someone has to clean up after the old memory.
+
+
 - switch the source of the graph from memory info to CPU info:
 	- first test data coming out of cpu info with logs (this might hurt. limit to one sample every 2 sec)
 	- test with xcode debugger to watch array data change.
