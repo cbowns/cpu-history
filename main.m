@@ -23,8 +23,33 @@
 
 #import <AppKit/AppKit.h>
 
+#include <sys/types.h>
+//sqrtf, ceilf
+#include <math.h>
+//sysctl and its parameters
+#include <sys/sysctl.h>
+//errno, strerror
+#include <sys/errno.h>
+#include <string.h>
+
+#include <mach/mach.h>
+#include <mach/processor_info.h>
+#include <mach/mach_host.h>
+
+
+typedef struct cpudata {
+	double user;
+	double sys;
+	double nice;
+	double idle;
+} CPUData, *CPUDataPtr;
 
 int main (int argc, const char *argv[])
 {
-	return (NSApplicationMain(argc, argv));
+	// return (NSApplicationMain(argc, argv));
+	
+	
+	
+	
+	return 0;
 }
