@@ -56,7 +56,10 @@
 - (void)drawComplete
 // completely redraw graphImage, put graph into displayImage
 {	
-	VMData			vmdata;
+	// VMData			vmdata;
+	CPUData			cpudata;
+	
+	
 	int				x;
 	float			y, yy;
 	
@@ -65,19 +68,27 @@
 	[graphImage lockFocus];
 
 	// draw the memory usage graph
-	[memInfo startIterate];
-	for (x = 0; [memInfo getNext:&vmdata]; x++) {
-		y = vmdata.wired * GRAPH_SIZE;
+	// [memInfo startIterate];
+	[cpuInfo startIterate];
+	// for (x = 0; [memInfo getNext:&vmdata]; x++) {
+	for (x = 0; [cpuInfo getNext:&cpudata]; x++) {
+		
+		// y = vmdata.wired * GRAPH_SIZE;
+		y = cpudata.user * GRAPH_SIZE;
 		[[preferences objectForKey:WIRED_COLOR_KEY] set];
 		NSRectFill (NSMakeRect(x - 1, 0.0, x, y));
 		yy = y;
-		y += vmdata.active * GRAPH_SIZE;
+		// y += vmdata.active * GRAPH_SIZE;
+		y += cpudata.sys * GRAPH_SIZE;
 		[[preferences objectForKey:ACTIVE_COLOR_KEY] set];
 		NSRectFill (NSMakeRect(x - 1, yy, x, y));
 		yy = y;
-		y += vmdata.inactive * GRAPH_SIZE;
+		// y += vmdata.inactive * GRAPH_SIZE;
+		y += cpudata.nice * GRAPH_SIZE;
 		[[preferences objectForKey:INACTIVE_COLOR_KEY] set];
 		NSRectFill (NSMakeRect(x - 1, yy, x, y));
+		
+		// free data here
 		[[preferences objectForKey:FREE_COLOR_KEY] set];
 		NSRectFill (NSMakeRect(x - 1, y, x, GRAPH_SIZE));
 	}
@@ -94,7 +105,8 @@
 - (void)drawDelta
 // update graphImage (based on previous graphImage), put graph into displayImage
 {	
-	VMData			vmdata, vmdata0;
+	// VMData			vmdata, vmdata0;
+	CPUData			cpudata, cpudata0;
 	float			y, yy;
 	
 	double interval = 0.1 * [[preferences objectForKey:UPDATE_FREQUENCY_KEY] floatValue];
@@ -104,21 +116,30 @@
 	// offset the old graph image
 	[graphImage compositeToPoint:NSMakePoint(-1, 0) operation:NSCompositeCopy];
 		
-	[memInfo getLast:&vmdata0];
-	[memInfo getCurrent:&vmdata];
+	// [memInfo getLast:&vmdata0];
+	[cpuInfo getLast:&cpudata0];
+	// [memInfo getCurrent:&vmdata];
+	[cpuInfo getCurrent:&cpudata];
 	
 	// draw chronological graph into graph image
-	y = vmdata.wired * GRAPH_SIZE;
+	// y = vmdata.wired * GRAPH_SIZE;
+	y = cpudata.user * GRAPH_SIZE;
 	[[preferences objectForKey:WIRED_COLOR_KEY] set];
 	NSRectFill (NSMakeRect(GRAPH_SIZE - 1, 0.0, GRAPH_SIZE - 1, y));
 	yy = y;
-	y += vmdata.active * GRAPH_SIZE;
+	
+	// y += vmdata.active * GRAPH_SIZE;
+	y += cpudata.sys * GRAPH_SIZE;
 	[[preferences objectForKey:ACTIVE_COLOR_KEY] set];
 	NSRectFill (NSMakeRect(GRAPH_SIZE - 1, yy, GRAPH_SIZE - 1, y));
 	yy = y;
-	y += vmdata.inactive * GRAPH_SIZE;
+	
+	// y += vmdata.inactive * GRAPH_SIZE;
+	y += cpudata.nice * GRAPH_SIZE;
 	[[preferences objectForKey:INACTIVE_COLOR_KEY] set];
 	NSRectFill (NSMakeRect(GRAPH_SIZE - 1, yy, GRAPH_SIZE - 1, y));
+	
+	// free data here
 	[[preferences objectForKey:FREE_COLOR_KEY] set];
 	NSRectFill (NSMakeRect(GRAPH_SIZE - 1, y, GRAPH_SIZE - 1, GRAPH_SIZE));
 
@@ -146,7 +167,8 @@
 - (void)refreshGraph
 // get a new sample and refresh the graph
 {
-	[memInfo refresh];
+	// [memInfo refresh];
+	[cpuInfo refresh];
 	[self drawDelta];
 	[self setApplicationIcon];
 	
@@ -270,8 +292,8 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
 	preferences = [[Preferences alloc] init];
-	memInfo = [[MemInfo alloc] initWithCapacity:GRAPH_SIZE];
-	cpuInfo = [[CPUInfo alloc] init];
+	// memInfo = [[MemInfo alloc] initWithCapacity:GRAPH_SIZE];
+	cpuInfo = [[CPUInfo alloc] initWithCapacity:GRAPH_SIZE];
 	
 	displayImage = [[NSImage allocWithZone:[self zone]] initWithSize:NSMakeSize(GRAPH_SIZE, GRAPH_SIZE)];
 	graphImage = [[NSImage allocWithZone:[self zone]] initWithSize:NSMakeSize(GRAPH_SIZE, GRAPH_SIZE)];

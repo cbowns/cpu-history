@@ -22,7 +22,7 @@
 
 
 #import <Cocoa/Cocoa.h>
-#import "MemInfo.h"
+// import "MemInfo.h"
 #import "CPUInfo.h"
 #import "Preferences.h"
 #import "TranslucentView.h"
@@ -32,7 +32,7 @@
 @interface MainController : NSObject
 {
 	Preferences		*preferences;	// the preferences
-	MemInfo			*memInfo;	// memory usage data buffer
+	// MemInfo			*memInfo;	// memory usage data buffer
 	CPUInfo			*cpuInfo; //cpu usage data buffer
 	NSTimer			*timer;		// timer for icon refreshs
 	NSImage			*displayImage;	// image to be displayed (with text)
