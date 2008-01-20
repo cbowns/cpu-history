@@ -20,6 +20,20 @@
 			E580F1290D30269D00C5732E /* CPU History */,
 		);
 	};
+	2176CA0A040261B60085C446 /* Japanese */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {703, 487}}";
+			sepNavSelRange = "{165, 0}";
+			sepNavVisRange = "{0, 209}";
+		};
+	};
+	21C369E10A792EAB00F42D2F /* French */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {703, 487}}";
+			sepNavSelRange = "{133, 34}";
+			sepNavVisRange = "{0, 217}";
+		};
+	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeArchitecture = ppc;
 		activeBuildConfigurationName = Development;
@@ -81,6 +95,20 @@
 					PBXBreakpointsDataSource_ConditionID,
 					PBXBreakpointsDataSource_IgnoreCountID,
 					PBXBreakpointsDataSource_ContinueID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXExecutablesDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXExecutablesDataSource_NameID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					22,
+					300,
+					413,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXExecutablesDataSource_ActiveFlagID,
+					PBXExecutablesDataSource_NameID,
+					PBXExecutablesDataSource_CommentsID,
 				);
 			};
 			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
@@ -434,6 +462,27 @@
 			sepNavIntBoundsRect = "{{0, 0}, {656, 3080}}";
 			sepNavSelRange = "{0, 0}";
 			sepNavVisRange = "{0, 1374}";
+		};
+	};
+	F53312B80246253601000101 /* English */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {703, 487}}";
+			sepNavSelRange = "{203, 0}";
+			sepNavVisRange = "{0, 211}";
+		};
+	};
+	F53EE786028EAA3D010D26FD /* English */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {703, 487}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 125}";
+		};
+	};
+	F5500BDE027A0B6101000102 /* German */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {703, 487}}";
+			sepNavSelRange = "{131, 34}";
+			sepNavVisRange = "{0, 211}";
 		};
 	};
 	F5646DC601034B7801000001 /* MemInfo.h */ = {

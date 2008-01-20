@@ -4,6 +4,7 @@ CPU Mon:
 - remove extraneous information for memory monitor:
 	- preferences form
 - if we can't make CPUInfo object, exit app gracefully
+- tidy up release notes, remove localizations if they're not accurate.
 - future upgrades:
 	- CPU usage across processors:
 		- get # of processors with http://www.cocoadev.com/index.pl?NSProcessInfo
