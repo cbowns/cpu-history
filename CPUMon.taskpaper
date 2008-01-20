@@ -7,7 +7,7 @@ CPU Mon:
 - future upgrades:
 	- CPU usage across processors:
 		- get # of processors with http://www.cocoadev.com/index.pl?NSProcessInfo
-		- add another graph or average across both cores?\
+		- add another graph or average across both cores?
 
 	int size = 24, i, j;
 	CPUInfo *cpuInfo = [[CPUInfo alloc] initWithCapacity:size];
