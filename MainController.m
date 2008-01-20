@@ -235,12 +235,12 @@
 {
 	id	obj;
 	
-	NSString *memoryMonitorPath = [[NSBundle mainBundle] bundlePath];
+	NSString *cpuHistoryPath = [[NSBundle mainBundle] bundlePath];
 	NSDictionary *loginItemDict = [NSDictionary dictionaryWithContentsOfFile:[NSString stringWithFormat:@"%@/Library/Preferences/loginwindow.plist", NSHomeDirectory()]];
 	NSEnumerator *loginItemEnumerator = [[loginItemDict objectForKey:@"AutoLaunchedApplicationDictionary"] objectEnumerator];
 
 	while ((obj = [loginItemEnumerator nextObject])) {
-		if ([[obj objectForKey:@"Path"] isEqualTo:memoryMonitorPath])
+		if ([[obj objectForKey:@"Path"] isEqualTo:cpuHistoryPath])
 			return (YES);
 	}
 	return (NO);
@@ -273,7 +273,7 @@
 	NSScreen	*screen;
 	BOOL		nameDidChange;
 	
-	NSString *string = @"MMWL";	// MemoryMonitorWindowLocation
+	NSString *string = @"CHWL";	// CPUHistoryWindowLocation
 	NSEnumerator *enumerator = [[NSScreen screens] objectEnumerator];
 
 	while ((screen = [enumerator nextObject])) {
@@ -316,8 +316,8 @@
 	[self updateFrameName];
 	if (! [window setFrameUsingName:frameName]) {
 		// for compatibility with version 1.1 preferences file
-		[window setFrameUsingName:@"MemoryMonitorWindowLocation"];
-		[NSWindow removeFrameUsingName:@"MemoryMonitorWindowLocation"];
+		[window setFrameUsingName:@"CPUHistoryWindowLocation"];
+		[NSWindow removeFrameUsingName:@"CPUHistoryWindowLocation"];
 		[window saveFrameUsingName:frameName];
 	}
 	[window setDelegate:self];
@@ -326,7 +326,7 @@
 	[window setContentView:view];
 	[view setContentDrawer:self method:@selector(drawImageOnWindow)];
 	[view setAutoresizingMask:(NSViewHeightSizable | NSViewWidthSizable)];
-	[view setToolTip:@"Memory Monitor"];
+	[view setToolTip:@"CPU History"];
 	
 	
 	[self showHideWindow];

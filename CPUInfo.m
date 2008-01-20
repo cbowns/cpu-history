@@ -27,6 +27,7 @@
 
 @implementation CPUInfo
 
+
 /*
 	Accomplishes:
 		inits cpudata, inptr, outptr
@@ -38,7 +39,7 @@
 {
 	
 	/*
-		from CPU usage
+		from Hosey's CPU Usage.app:
 	*/	
 	//We could get the number of processors the same way that we get the CPU usage info, but that allocates memory.
 /*	enum { miblen = 2U };

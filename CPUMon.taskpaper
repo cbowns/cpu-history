@@ -3,6 +3,7 @@ CPU Mon:
 - test prefs: change in Memory Monitor, see if app picks them up
 - remove extraneous information for memory monitor:
 	- preferences form
+- if can't make CPUInfo object, exit app gracefully
 - future upgrades:
 	- CPU usage across processors:
 		- get # of processors with http://www.cocoadev.com/index.pl?NSProcessInfo
