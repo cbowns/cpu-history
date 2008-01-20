@@ -4,7 +4,7 @@
  *	
  *	Formerly: Memory Monitor, by Bernhard Baehr
  *
- *	Copyright © 2001-2003 Bernhard Baehr
+ *	Copyright Â© 2001-2003 Bernhard Baehr
  *
  *	MainController.m - Main Application Controller Class
  *
