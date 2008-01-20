@@ -350,7 +350,7 @@
 		timer = nil;
 	}
 	[preferences savePreferences];
-	[NSApp setApplicationIconImage:[NSImage imageNamed:@"MemoryMonitor.icns"]];	
+	[NSApp setApplicationIconImage:[NSImage imageNamed:@"CPUHistory.icns"]];	
 }
 
 
