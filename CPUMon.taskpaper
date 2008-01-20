@@ -1,5 +1,4 @@
 CPU Mon:
-- change app name to CPU History
 - change preferences file, all other applicable info.
 - test prefs: change in Memory Monitor, see if app picks them up
 - remove extraneous information for memory monitor:
@@ -80,3 +79,4 @@ Archive:
 - switch the source of the graph from memory info to CPU info: @done @project(CPU Mon)
 	- then change graphing fct to pull from different data source @done @project(CPU Mon)
 	- text overlay @done @project(CPU Mon)
+- change app name to CPU History @done @project(CPU Mon)
