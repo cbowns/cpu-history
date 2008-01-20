@@ -2,7 +2,7 @@ CPU Mon:
 before any polish:
 - change preferences file, all other applicable info.
 - test prefs: change in Memory Monitor, see if app picks them up
-- add an option for bar width: 1-20 px
+- add an option for bar width: from 1 to 20 px per bar
 before 1.0 release:
 - properly set Dock icon
 - fix Dock menu display

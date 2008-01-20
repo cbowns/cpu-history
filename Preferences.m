@@ -37,12 +37,20 @@
 		[[NSColor magentaColor] colorWithAlphaComponent:0.8], ACTIVE_COLOR_KEY,
 		[[NSColor cyanColor] colorWithAlphaComponent:0.8], INACTIVE_COLOR_KEY,
 		[[NSColor blueColor] colorWithAlphaComponent:0.8], FREE_COLOR_KEY,
+		
 		[NSColor whiteColor], PAGEIN_COLOR_KEY,
 		[NSColor blackColor], PAGEOUT_COLOR_KEY,
-		[NSNumber numberWithInt:10], UPDATE_FREQUENCY_KEY,	/* unit is 1/10 second */
 		[NSNumber numberWithInt:250], PAGING_SCALE_MAX_KEY,
 		[NSNumber numberWithBool:YES], PAGEIN_ATOP_PAGEOUT_KEY,
 		[NSNumber numberWithBool:YES], SHOW_PAGING_RATE_KEY,
+		
+		[[NSColor yellowColor] colorWithAlphaComponent:0.8], USER_COLOR_KEY,
+		[[NSColor magentaColor] colorWithAlphaComponent:0.8], SYS_COLOR_KEY,
+		[[NSColor cyanColor] colorWithAlphaComponent:0.8], NICE_COLOR_KEY,
+		[[NSColor blueColor] colorWithAlphaComponent:0.8], IDLE_COLOR_KEY,
+		
+		
+		[NSNumber numberWithInt:10], UPDATE_FREQUENCY_KEY,	/* unit is 1/10 second */
 		[NSNumber numberWithBool:NO], SHOW_GRAPH_WINDOW_KEY,
 		[NSNumber numberWithBool:NO], GRAPH_WINDOW_ON_TOP_KEY,
 		[NSNumber numberWithInt:128], GRAPH_WINDOW_SIZE_KEY,
@@ -71,19 +79,24 @@
 	
 	self = [super init];
         currentSettings = [Preferences defaultPreferences];
-	GETNUMBER (OLD_TRANSPARENCY_KEY);
-	transparency = obj ? [obj floatValue] : 0.8;	/* global transparency setting of version 1.1 */
 	SCANCOLOR (WIRED_COLOR_KEY);
 	SCANCOLOR (ACTIVE_COLOR_KEY);
 	SCANCOLOR (INACTIVE_COLOR_KEY);
 	SCANCOLOR (FREE_COLOR_KEY);
-	transparency = 1.0;			/* paging was drawn without transparency in version 1.1 */
 	SCANCOLOR (PAGEIN_COLOR_KEY);
 	SCANCOLOR (PAGEOUT_COLOR_KEY);
-	GETNUMBER (UPDATE_FREQUENCY_KEY);
 	GETNUMBER (PAGING_SCALE_MAX_KEY);
 	GETNUMBER (PAGEIN_ATOP_PAGEOUT_KEY);
 	GETNUMBER (SHOW_PAGING_RATE_KEY);
+
+	GETNUMBER (OLD_TRANSPARENCY_KEY);
+	transparency = obj ? [obj floatValue] : 0.8;	/* global transparency setting of version 1.1 */
+	SCANCOLOR (USER_COLOR_KEY);
+	SCANCOLOR (SYS_COLOR_KEY);
+	SCANCOLOR (NICE_COLOR_KEY);
+	SCANCOLOR (IDLE_COLOR_KEY);
+	transparency = 1.0;			/* paging was drawn without transparency in version 1.1 */
+	GETNUMBER (UPDATE_FREQUENCY_KEY);
 	GETNUMBER (SHOW_GRAPH_WINDOW_KEY);
 	GETNUMBER (GRAPH_WINDOW_ON_TOP_KEY);
 	GETNUMBER (GRAPH_WINDOW_SIZE_KEY);
@@ -129,19 +142,27 @@
 			return;
 		}
 	}
+	
 	[wiredColor setColor:[currentSettings objectForKey:WIRED_COLOR_KEY]];
 	[activeColor setColor:[currentSettings objectForKey:ACTIVE_COLOR_KEY]];
 	[inactiveColor setColor:[currentSettings objectForKey:INACTIVE_COLOR_KEY]];
 	[freeColor setColor:[currentSettings objectForKey:FREE_COLOR_KEY]];
 	[pageinColor setColor:[currentSettings objectForKey:PAGEIN_COLOR_KEY]];
 	[pageoutColor setColor:[currentSettings objectForKey:PAGEOUT_COLOR_KEY]];
-	freq = [[currentSettings objectForKey:UPDATE_FREQUENCY_KEY] floatValue];
-	[self showUpdateFrequency:(int)freq];
-	[updateFrequencySlider setFloatValue:1000.0 * log(freq)];
 	[pagingScale selectItemAtIndex:[pagingScale
 		indexOfItemWithTag:[[currentSettings objectForKey:PAGING_SCALE_MAX_KEY] intValue]]];
 	[pageinAtopPageout selectCellWithTag:[[currentSettings objectForKey:PAGEIN_ATOP_PAGEOUT_KEY] intValue]];
 	[showPagingRate setState:[[currentSettings objectForKey:SHOW_PAGING_RATE_KEY] boolValue]];
+
+
+	[userColor setColor:[currentSettings objectForKey:USER_COLOR_KEY]];
+	[sysColor setColor:[currentSettings objectForKey:SYS_COLOR_KEY]];
+	[niceColor setColor:[currentSettings objectForKey:NICE_COLOR_KEY]];
+	[idleColor setColor:[currentSettings objectForKey:IDLE_COLOR_KEY]];
+
+	freq = [[currentSettings objectForKey:UPDATE_FREQUENCY_KEY] floatValue];
+	[self showUpdateFrequency:(int)freq];
+	[updateFrequencySlider setFloatValue:1000.0 * log(freq)];
 	[showGraphWindow setState:[[currentSettings objectForKey:SHOW_GRAPH_WINDOW_KEY] boolValue]];
 	[graphWindowOnTop setState:[[currentSettings objectForKey:GRAPH_WINDOW_ON_TOP_KEY] boolValue]];
 	[graphWindowSize setFloatValue:[[currentSettings objectForKey:GRAPH_WINDOW_SIZE_KEY] floatValue]];
@@ -198,12 +219,21 @@
 	[currentSettings setObject:[freeColor color] forKey:FREE_COLOR_KEY];
 	[currentSettings setObject:[pageinColor color] forKey:PAGEIN_COLOR_KEY];
 	[currentSettings setObject:[pageoutColor color] forKey:PAGEOUT_COLOR_KEY];
-	freq = exp([updateFrequencySlider doubleValue] / 1000.0);	/* 1..600 == 0.1 sec. to 1 min. */
-	[self showUpdateFrequency:freq];
-	[currentSettings setObject:[NSNumber numberWithInt:freq] forKey:UPDATE_FREQUENCY_KEY];
 	[currentSettings setObject:[NSNumber numberWithInt:[[pagingScale selectedItem] tag]] forKey:PAGING_SCALE_MAX_KEY];
 	[currentSettings setObject:[NSNumber numberWithInt:[[pageinAtopPageout selectedCell] tag]] forKey:PAGEIN_ATOP_PAGEOUT_KEY];
 	[currentSettings setObject:[NSNumber numberWithInt:[showPagingRate state]] forKey:SHOW_PAGING_RATE_KEY];
+
+
+
+
+	[currentSettings setObject:[userColor color] forKey:USER_COLOR_KEY];
+	[currentSettings setObject:[sysColor color] forKey:SYS_COLOR_KEY];
+	[currentSettings setObject:[niceColor color] forKey:NICE_COLOR_KEY];
+	[currentSettings setObject:[idleColor color] forKey:IDLE_COLOR_KEY];
+
+	freq = exp([updateFrequencySlider doubleValue] / 1000.0);	/* 1..600 == 0.1 sec. to 1 min. */
+	[self showUpdateFrequency:freq];
+	[currentSettings setObject:[NSNumber numberWithInt:freq] forKey:UPDATE_FREQUENCY_KEY];
 	[currentSettings setObject:[NSNumber numberWithInt:[showGraphWindow state]] forKey:SHOW_GRAPH_WINDOW_KEY];
 	[currentSettings setObject:[NSNumber numberWithInt:[graphWindowOnTop state]] forKey:GRAPH_WINDOW_ON_TOP_KEY];
 	[currentSettings setObject:[NSNumber numberWithInt:[graphWindowSize intValue]] forKey:GRAPH_WINDOW_SIZE_KEY];
