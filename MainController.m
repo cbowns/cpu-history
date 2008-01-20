@@ -59,7 +59,6 @@
 - (void)drawComplete
 // completely redraw graphImage, put graph into displayImage
 {	
-	// VMData			vmdata;
 	CPUData			cpudata;
 	
 	
@@ -70,8 +69,7 @@
 	
 	[graphImage lockFocus];
 
-	// draw the memory usage graph
-	// [memInfo startIterate];
+	// draw the cpu usage graph
 	[cpuInfo startIterate];
 	// for (x = 0; [memInfo getNext:&vmdata]; x++) {
 	for (x = 0; [cpuInfo getNext:&cpudata]; x++) {
@@ -297,6 +295,13 @@
 	preferences = [[Preferences alloc] init];
 	// memInfo = [[MemInfo alloc] initWithCapacity:GRAPH_SIZE];
 	cpuInfo = [[CPUInfo alloc] initWithCapacity:GRAPH_SIZE];
+	if (nil == cpuInfo) //then we need to bomb out. We can't go anywhere from here.
+	{
+		NSLog(@"%s failed to create CPUInfo object! App will crash in a minute. This is unavoidable until we learn how to gracefully exit.", _cmd);
+		/*
+			TODO appDidFinishLaunching: error on creating cpuInfo obj: shut down the app gracefully. Display error message?
+		*/
+	}
 	
 	displayImage = [[NSImage allocWithZone:[self zone]] initWithSize:NSMakeSize(GRAPH_SIZE, GRAPH_SIZE)];
 	graphImage = [[NSImage allocWithZone:[self zone]] initWithSize:NSMakeSize(GRAPH_SIZE, GRAPH_SIZE)];
