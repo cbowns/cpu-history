@@ -1,5 +1,5 @@
 CPU Mon:
-- change app name to CPU Mon
+- change app name to CPU History
 - change preferences file, all other applicable info.
 - test prefs: change in Memory Monitor, see if app picks them up
 - remove extraneous information for memory monitor:
