@@ -1,5 +1,5 @@
 /*
- *	CPU Mon
+ *	CPU History
  *	Christopher Bowns, 2008
  */
 //

@@ -1,8 +1,5 @@
 /*
- *	CPU Mon
- *	Christopher Bowns, 2008
- *	
- *	Formerly: Memory Monitor, by Bernhard Baehr
+ *	Memory Monitor
  *
  *	Copyright © 2001-2002 Bernhard Baehr
  *
