@@ -1,8 +1,8 @@
 CPU Mon:
-- switch the source of the graph from memory info to CPU info:
-	- then change graphing fct to pull from different data source
+- change app name to CPU Mon
+- change preferences file, all other applicable info.
+- test prefs: change in Memory Monitor, see if app picks them up
 - remove extraneous information for memory monitor:
-	- text overlay
 	- preferences form
 - future upgrades:
 	- CPU usage across processors:
@@ -31,6 +31,12 @@ CPU Mon:
 	
 	return 0;
 
+
+key:
+- wired = user
+- active = sys
+- inactive = nice
+- free = idle
 
 
 Archive:
@@ -71,3 +77,6 @@ Archive:
 	- first test data coming out of cpu info with logs (this might hurt. limit to one sample every 2 sec) @done @project(CPU Mon)
 	- test with xcode debugger to watch array data change. @done @project(CPU Mon)
 	- paging rate graph @done @project(CPU Mon)
+- switch the source of the graph from memory info to CPU info: @done @project(CPU Mon)
+	- then change graphing fct to pull from different data source @done @project(CPU Mon)
+	- text overlay @done @project(CPU Mon)
