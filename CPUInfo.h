@@ -1,3 +1,7 @@
+/*
+ *	CPU Mon
+ *	Christopher Bowns, 2008
+ */
 //
 //  CPUInfo.h
 //  CPU Usage
