@@ -5,7 +5,7 @@
 //  Created by Peter Hosey on 2006-06-21.
 //  Copyright 2006 Peter Hosey. All rights reserved.
 //
-//  Modified by Christopher Bowns, starting 2007-1-1.
+//  Modified by Christopher Bowns, starting 2008-1-1.
 
 #import <Cocoa/Cocoa.h>
 
