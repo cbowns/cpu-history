@@ -65,7 +65,7 @@
 	int				x;
 	float			y, yy;
 	
-	double interval = 0.1 * [[preferences objectForKey:UPDATE_FREQUENCY_KEY] floatValue];
+	// double interval = 0.1 * [[preferences objectForKey:UPDATE_FREQUENCY_KEY] floatValue];
 	
 	[graphImage lockFocus];
 
@@ -110,7 +110,7 @@
 	CPUData			cpudata, cpudata0;
 	float			y, yy;
 	
-	double interval = 0.1 * [[preferences objectForKey:UPDATE_FREQUENCY_KEY] floatValue];
+	// double interval = 0.1 * [[preferences objectForKey:UPDATE_FREQUENCY_KEY] floatValue];
 	
 	[graphImage lockFocus];
 
