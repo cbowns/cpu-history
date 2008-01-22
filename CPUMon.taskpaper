@@ -1,8 +1,4 @@
 CPU Mon:
-before dinner:
-- properly set Dock icon
-- fix Dock menu display
-- if we can't make CPUInfo object, exit app gracefully
 before 1.0 release:
 - get rid of extraneous properties, and relink stuff in IB
 	- delete prefs file: start over.
@@ -68,3 +64,6 @@ Archive:
 - change app name to CPU History @done @project(CPU Mon)
 - reorder bars: sys, nice, user, idle @done @project(before any polish)
 - test prefs: change in Memory Monitor, see if app picks them up @done @project(before any polish)
+- properly set Dock icon @done @project(before dinner)
+- fix Dock menu display @done @project(before dinner)
+- if we can't make CPUInfo object, exit app gracefully @done @project(before dinner)

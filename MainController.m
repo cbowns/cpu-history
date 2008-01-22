@@ -299,12 +299,15 @@
 	preferences = [[Preferences alloc] init];
 	// memInfo = [[MemInfo alloc] initWithCapacity:GRAPH_SIZE];
 	cpuInfo = [[CPUInfo alloc] initWithCapacity:GRAPH_SIZE];
-	if (nil == cpuInfo) //then we need to bomb out. We can't go anywhere from here.
+	if (nil == cpuInfo) //then we need to bomb out. We can't do anything else.
 	{
-		NSLog(@"%s failed to create CPUInfo object! App will crash in a minute. This is unavoidable until we learn how to gracefully exit.", _cmd);
-		/*
-			TODO appDidFinishLaunching: error on creating cpuInfo obj: shut down the app gracefully. Display error message?
-		*/
+		NSLog(@"%s failed to create CPUInfo object!", _cmd);
+		NSString *errorStr = [[NSString alloc] initWithFormat:@"There's not enough memory to allocate the CPU data array. Sorry, but I have to quit now."];
+		/* now display error dialog and quit */
+		int choice = NSRunAlertPanel(@"Error", errorStr, @"OK", nil, nil);
+		[errorStr release];
+		[preferences release];
+		[NSApp terminate:nil];
 	}
 	
 	displayImage = [[NSImage allocWithZone:[self zone]] initWithSize:NSMakeSize(GRAPH_SIZE, GRAPH_SIZE)];
