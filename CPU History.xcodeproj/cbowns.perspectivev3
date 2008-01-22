@@ -272,7 +272,7 @@
 								<string>29B97314FDCFA39411CA2CEA</string>
 								<string>080E96DDFE201D6D7F000001</string>
 								<string>29B97315FDCFA39411CA2CEA</string>
-								<string>29B97323FDCFA39411CA2CEA</string>
+								<string>29B97317FDCFA39411CA2CEA</string>
 								<string>19C28FACFE9D520D11CA2CBB</string>
 								<string>1C37FBAC04509CD000000102</string>
 								<string>1C37FAAC04509CD000000102</string>
@@ -283,18 +283,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>2</integer>
-									<integer>1</integer>
-									<integer>0</integer>
-								</array>
-								<array>
-									<integer>4</integer>
-									<integer>1</integer>
-									<integer>0</integer>
-								</array>
-								<array>
-									<integer>8</integer>
-									<integer>1</integer>
+									<integer>28</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -316,7 +305,7 @@
 							<real>185</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>79 308 971 691 0 0 1280 1002 </string>
+						<string>82 308 971 691 0 0 1280 1002 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -334,7 +323,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>E55793200D40543D0025C9B4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>MainController.m</string>
+								<string>Info.plist</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -342,18 +331,20 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>E55793210D40543D0025C9B4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>MainController.m</string>
+										<string>Info.plist</string>
 										<key>_historyCapacity</key>
 										<integer>40</integer>
 										<key>bookmark</key>
-										<string>E512F0620D46735900BAB12B</string>
+										<string>E512F0870D46AD6A00BAB12B</string>
 										<key>history</key>
 										<array>
 											<string>E50FC8740D43FD7C008511D2</string>
 											<string>E50FC8890D440588008511D2</string>
-											<string>E512F0150D464BE900BAB12B</string>
 											<string>E512F0160D464BE900BAB12B</string>
 											<string>E512F05E0D46722B00BAB12B</string>
+											<string>E512F0720D46AC3F00BAB12B</string>
+											<string>E512F0830D46AD6A00BAB12B</string>
+											<string>E512F0840D46AD6A00BAB12B</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -362,7 +353,11 @@
 											<string>E557934E0D41433D0025C9B4</string>
 											<string>E50FC8C90D441B23008511D2</string>
 											<string>E512F0180D464BE900BAB12B</string>
-											<string>E512F0190D464BE900BAB12B</string>
+											<string>E512F0740D46AC3F00BAB12B</string>
+											<string>E512F0750D46AC3F00BAB12B</string>
+											<string>E512F0760D46AC3F00BAB12B</string>
+											<string>E512F0850D46AD6A00BAB12B</string>
+											<string>E512F0860D46AD6A00BAB12B</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -378,7 +373,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {764, 504}}</string>
 								<key>RubberWindowFrame</key>
-								<string>79 308 971 691 0 0 1280 1002 </string>
+								<string>82 308 971 691 0 0 1280 1002 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -403,7 +398,7 @@
 										<key>Frame</key>
 										<string>{{10, 27}, {764, 114}}</string>
 										<key>RubberWindowFrame</key>
-										<string>79 308 971 691 0 0 1280 1002 </string>
+										<string>82 308 971 691 0 0 1280 1002 </string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -485,11 +480,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>E512F01B0D464BE900BAB12B</string>
+				<string>E512F06A0D46A9BE00BAB12B</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>E512F01C0D464BE900BAB12B</string>
+				<string>E512F06B0D46A9BE00BAB12B</string>
 				<string>E55793200D40543D0025C9B4</string>
-				<string>E512F01D0D464BE900BAB12B</string>
+				<string>E512F06C0D46A9BE00BAB12B</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
@@ -634,14 +629,14 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>E512F0340D464EF100BAB12B</string>
+				<string>E512F0780D46AC3F00BAB12B</string>
 				<string>1CCC7628064C1048000F2A68</string>
 				<string>1CCC7629064C1048000F2A68</string>
-				<string>E512F0350D464EF100BAB12B</string>
-				<string>E512F0360D464EF100BAB12B</string>
-				<string>E512F0370D464EF100BAB12B</string>
-				<string>E512F0380D464EF100BAB12B</string>
-				<string>E55793200D40543D0025C9B4</string>
+				<string>E512F0790D46AC3F00BAB12B</string>
+				<string>E512F07A0D46AC3F00BAB12B</string>
+				<string>E512F07B0D46AC3F00BAB12B</string>
+				<string>E512F07C0D46AC3F00BAB12B</string>
+				<string>E512F07D0D46AC3F00BAB12B</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -671,13 +666,10 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>E512F03A0D464EF100BAB12B</string>
-		<string>E512F03B0D464EF100BAB12B</string>
-		<string>E512F03C0D464EF100BAB12B</string>
 		<string>/Users/cbowns/Desktop/CPU History src/CPU History.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>79 308 971 691 0 0 1280 1002 </string>
+	<string>82 308 971 691 0 0 1280 1002 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>

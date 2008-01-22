@@ -12,7 +12,7 @@ Copyright © 2008 Christopher Bowns</string>
 	<key>CFBundleHelpBookFolder</key>
 	<string>Help</string>
 	<key>CFBundleIconFile</key>
-	<string>CPU History</string>
+	<string>CPUHistory</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.mechanicalpants.CPUHistory</string>
 	<key>CFBundleInfoDictionaryVersion</key>

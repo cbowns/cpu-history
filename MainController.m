@@ -294,6 +294,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
+	[NSApp setApplicationIconImage:[NSImage imageNamed:@"CPUHistory.icns"]];
+	
 	preferences = [[Preferences alloc] init];
 	// memInfo = [[MemInfo alloc] initWithCapacity:GRAPH_SIZE];
 	cpuInfo = [[CPUInfo alloc] initWithCapacity:GRAPH_SIZE];
@@ -344,7 +346,7 @@
 }
 
 
-- (void)applicationWillTerminate:(NSNotification *)aNotification 
+- (void)applicationWillTerminate:(NSNotification *)aNotification
 {
 	if (timer) {
 		[timer invalidate];
