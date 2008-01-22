@@ -28,7 +28,7 @@
 
 
 #define GRAPH_SIZE	128
-
+#define GRAPH_WIDTH	8
 
 @implementation MainController
 
@@ -72,26 +72,27 @@
 	// draw the cpu usage graph
 	[cpuInfo startIterate];
 	// for (x = 0; [memInfo getNext:&vmdata]; x++) {
-	for (x = 0; [cpuInfo getNext:&cpudata]; x++) {
+	for (x = 0; [cpuInfo getNext:&cpudata]; x+=GRAPH_WIDTH) {
 		
-		// y = vmdata.wired * GRAPH_SIZE;
-		y = cpudata.user * GRAPH_SIZE;
-		[[preferences objectForKey:WIRED_COLOR_KEY] set];
-		NSRectFill (NSMakeRect(x - 1, 0.0, x, y));
-		yy = y;
 		// y += vmdata.active * GRAPH_SIZE;
-		y += cpudata.sys * GRAPH_SIZE;
+		y = cpudata.sys * GRAPH_SIZE;
 		[[preferences objectForKey:ACTIVE_COLOR_KEY] set];
-		NSRectFill (NSMakeRect(x - 1, yy, x, y));
+		NSRectFill (NSMakeRect(x - GRAPH_WIDTH, 0.0, x, y));
 		yy = y;
 		// y += vmdata.inactive * GRAPH_SIZE;
 		y += cpudata.nice * GRAPH_SIZE;
 		[[preferences objectForKey:INACTIVE_COLOR_KEY] set];
-		NSRectFill (NSMakeRect(x - 1, yy, x, y));
+		NSRectFill (NSMakeRect(x - GRAPH_WIDTH, yy, x, y));
+		// y = vmdata.wired * GRAPH_SIZE;
+		yy = y;
+		
+		y += cpudata.user * GRAPH_SIZE;
+		[[preferences objectForKey:WIRED_COLOR_KEY] set];
+		NSRectFill (NSMakeRect(x - GRAPH_WIDTH, yy, x, y));
 		
 		// free data here
 		[[preferences objectForKey:FREE_COLOR_KEY] set];
-		NSRectFill (NSMakeRect(x - 1, y, x, GRAPH_SIZE));
+		NSRectFill (NSMakeRect(x - GRAPH_WIDTH, y, x, GRAPH_SIZE));
 	}
 	
 	// transfer graph image to icon image
@@ -115,7 +116,7 @@
 	[graphImage lockFocus];
 
 	// offset the old graph image
-	[graphImage compositeToPoint:NSMakePoint(-1, 0) operation:NSCompositeCopy];
+	[graphImage compositeToPoint:NSMakePoint(-GRAPH_WIDTH, 0) operation:NSCompositeCopy];
 		
 	// [memInfo getLast:&vmdata0];
 	[cpuInfo getLast:&cpudata0];
@@ -123,26 +124,27 @@
 	[cpuInfo getCurrent:&cpudata];
 	
 	// draw chronological graph into graph image
-	// y = vmdata.wired * GRAPH_SIZE;
-	y = cpudata.user * GRAPH_SIZE;
-	[[preferences objectForKey:WIRED_COLOR_KEY] set];
-	NSRectFill (NSMakeRect(GRAPH_SIZE - 1, 0.0, GRAPH_SIZE - 1, y));
-	yy = y;
 	
 	// y += vmdata.active * GRAPH_SIZE;
-	y += cpudata.sys * GRAPH_SIZE;
+	y = cpudata.sys * GRAPH_SIZE;
 	[[preferences objectForKey:ACTIVE_COLOR_KEY] set];
-	NSRectFill (NSMakeRect(GRAPH_SIZE - 1, yy, GRAPH_SIZE - 1, y));
+	NSRectFill (NSMakeRect(GRAPH_SIZE - GRAPH_WIDTH, 0.0, GRAPH_SIZE - GRAPH_WIDTH, y));
 	yy = y;
 	
 	// y += vmdata.inactive * GRAPH_SIZE;
 	y += cpudata.nice * GRAPH_SIZE;
 	[[preferences objectForKey:INACTIVE_COLOR_KEY] set];
-	NSRectFill (NSMakeRect(GRAPH_SIZE - 1, yy, GRAPH_SIZE - 1, y));
+	NSRectFill (NSMakeRect(GRAPH_SIZE - GRAPH_WIDTH, yy, GRAPH_SIZE - GRAPH_WIDTH, y));
+	yy = y;
 	
+	// y = vmdata.wired * GRAPH_SIZE;
+	y += cpudata.user * GRAPH_SIZE;
+	[[preferences objectForKey:WIRED_COLOR_KEY] set];
+	NSRectFill (NSMakeRect(GRAPH_SIZE - GRAPH_WIDTH, yy, GRAPH_SIZE - GRAPH_WIDTH, y));
+
 	// free data here
 	[[preferences objectForKey:FREE_COLOR_KEY] set];
-	NSRectFill (NSMakeRect(GRAPH_SIZE - 1, y, GRAPH_SIZE - 1, GRAPH_SIZE));
+	NSRectFill (NSMakeRect(GRAPH_SIZE - GRAPH_WIDTH, y, GRAPH_SIZE - GRAPH_WIDTH, GRAPH_SIZE));
 
 
 	// transfer graph image to icon image
@@ -157,7 +159,7 @@
 - (void)setApplicationIcon
 // set the (scaled) application icon
 {
-	float inc = GRAPH_SIZE * (1.0 - [[preferences objectForKey:DOCK_ICON_SIZE_KEY] floatValue]);
+	float inc = GRAPH_SIZE * (1.0 - [[preferences objectForKey:DOCK_ICON_SIZE_KEY] floatValue]); // icon scaling
 	[iconImage lockFocus];
 	[displayImage drawInRect:NSMakeRect(inc, inc, GRAPH_SIZE - 2 * inc, GRAPH_SIZE - 2 * inc) fromRect:NSMakeRect(0, 0, GRAPH_SIZE, GRAPH_SIZE) operation:NSCompositeCopy fraction:1.0];
 	[iconImage unlockFocus];

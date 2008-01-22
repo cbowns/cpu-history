@@ -1,23 +1,21 @@
 CPU Mon:
-before any polish:
-- change preferences file, all other applicable info.
-- test prefs: change in Memory Monitor, see if app picks them up
-- add an option for bar width: from 1 to 20 px per bar
-before 1.0 release:
+before dinner:
 - properly set Dock icon
 - fix Dock menu display
-- remove extraneous information for memory monitor:
-	- preferences form
 - if we can't make CPUInfo object, exit app gracefully
+before 1.0 release:
+- get rid of extraneous properties, and relink stuff in IB
+	- delete prefs file: start over.
+- prefs: add an option for bar width: from 1 to 20 px per bar
 - tidy up release notes, remove localizations if they're not accurate.
 
 
 - future upgrades:
  	- make a color change backwards applicable: somehow redraw entire graph after prefs color change
-
+		- call redraw?
 	- CPU usage across processors:
 		- get # of processors with http://www.cocoadev.com/index.pl?NSProcessInfo
-		- add another graph or average across both cores?
+		- add another graph
 
 Mem -> CPU conversion key:
 - wired = user
@@ -68,3 +66,5 @@ Archive:
 	- then change graphing fct to pull from different data source @done @project(CPU Mon)
 	- text overlay @done @project(CPU Mon)
 - change app name to CPU History @done @project(CPU Mon)
+- reorder bars: sys, nice, user, idle @done @project(before any polish)
+- test prefs: change in Memory Monitor, see if app picks them up @done @project(before any polish)
