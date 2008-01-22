@@ -352,7 +352,7 @@
 		timer = nil;
 	}
 	[preferences savePreferences];
-	[NSApp setApplicationIconImage:[NSImage imageNamed:@"CPUHistory.icns"]];	
+	[NSApp setApplicationIconImage:[NSImage imageNamed:@"CPUHistory.icns"]];
 }
 
 

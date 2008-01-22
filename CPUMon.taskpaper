@@ -12,7 +12,7 @@ before 1.0 release:
 
 - future upgrades:
  	- make a color change backwards applicable: somehow redraw entire graph after prefs color change
-		- call redraw?
+		- call updateGraph after prefs change
 	- CPU usage across processors:
 		- get # of processors with http://www.cocoadev.com/index.pl?NSProcessInfo
 		- add another graph
