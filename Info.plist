@@ -13,10 +13,12 @@ Copyright © 2008 Christopher Bowns</string>
 	<string>Help</string>
 	<key>CFBundleIconFile</key>
 	<string>CPU History</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.mechanicalpants.CPUHistory</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Memory Monitor</string>
+	<string>CPU History</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
