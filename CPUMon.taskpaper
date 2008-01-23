@@ -3,12 +3,14 @@ before 1.0 release:
 - get rid of extraneous properties, and relink stuff in IB
 	- delete prefs file: start over.
 - prefs: add an option for bar width: from 1 to 20 px per bar
+	- preferred: 4-6
 - tidy up release notes, remove localizations if they're not accurate.
+- make a color change backwards applicable: somehow redraw entire graph after prefs color change
+	- call updateGraph after prefs change
+- write up app, release on blog and cbowns.com. need new domain? nah.
 
-
+future:
 - future upgrades:
- 	- make a color change backwards applicable: somehow redraw entire graph after prefs color change
-		- call updateGraph after prefs change
 	- CPU usage across processors:
 		- get # of processors with http://www.cocoadev.com/index.pl?NSProcessInfo
 		- add another graph
