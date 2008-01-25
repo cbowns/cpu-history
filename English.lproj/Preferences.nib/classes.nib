@@ -1,31 +1,81 @@
-{
-    IBClasses = (
-        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
-        {
-            ACTIONS = {preferencesChanged = id; revertToDefaults = id; showPreferences = id; }; 
-            CLASS = Preferences; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {
-                activeColor = id; 
-                dockIconSizeSlider = id; 
-                freeColor = id; 
-                graphWindowOnTop = id; 
-                graphWindowOptionsView = id; 
-                graphWindowSize = id; 
-                inactiveColor = id; 
-                pageinAtopPageout = id; 
-                pageinColor = id; 
-                pageoutColor = id; 
-                pagingScale = id; 
-                panel = id; 
-                showGraphWindow = id; 
-                showPagingRate = id; 
-                updateFrequency = id; 
-                updateFrequencySlider = id; 
-                wiredColor = id; 
-            }; 
-            SUPERCLASS = NSObject; 
-        }
-    ); 
-    IBVersion = 1; 
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IBClasses</key>
+	<array>
+		<dict>
+			<key>CLASS</key>
+			<string>FirstResponder</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>preferencesChanged</key>
+				<string>id</string>
+				<key>revertToDefaults</key>
+				<string>id</string>
+				<key>showPreferences</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>Preferences</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>activeColor</key>
+				<string>id</string>
+				<key>dockIconSizeSlider</key>
+				<string>id</string>
+				<key>freeColor</key>
+				<string>id</string>
+				<key>graphWindowOnTop</key>
+				<string>id</string>
+				<key>graphWindowOptionsView</key>
+				<string>id</string>
+				<key>graphWindowSize</key>
+				<string>id</string>
+				<key>idleColor</key>
+				<string>id</string>
+				<key>inactiveColor</key>
+				<string>id</string>
+				<key>niceColor</key>
+				<string>id</string>
+				<key>pageinAtopPageout</key>
+				<string>id</string>
+				<key>pageinColor</key>
+				<string>id</string>
+				<key>pageoutColor</key>
+				<string>id</string>
+				<key>pagingScale</key>
+				<string>id</string>
+				<key>panel</key>
+				<string>id</string>
+				<key>showGraphWindow</key>
+				<string>id</string>
+				<key>showPagingRate</key>
+				<string>id</string>
+				<key>sysColor</key>
+				<string>id</string>
+				<key>updateFrequency</key>
+				<string>id</string>
+				<key>updateFrequencySlider</key>
+				<string>id</string>
+				<key>userColor</key>
+				<string>id</string>
+				<key>wiredColor</key>
+				<string>id</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+	</array>
+	<key>IBVersion</key>
+	<string>1</string>
+</dict>
+</plist>

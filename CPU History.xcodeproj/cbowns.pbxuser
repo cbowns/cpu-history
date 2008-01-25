@@ -162,8 +162,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 222748889;
-			PBXWorkspaceStateSaveDate = 222748889;
+			PBXPerProjectTemplateStateSaveDate = 222968436;
+			PBXWorkspaceStateSaveDate = 222968436;
 		};
 		perUserProjectItems = {
 			E50FC8740D43FD7C008511D2 /* PBXTextBookmark */ = E50FC8740D43FD7C008511D2 /* PBXTextBookmark */;
@@ -176,11 +176,11 @@
 			E512F0760D46AC3F00BAB12B /* PBXTextBookmark */ = E512F0760D46AC3F00BAB12B /* PBXTextBookmark */;
 			E512F0830D46AD6A00BAB12B /* PBXBookmark */ = E512F0830D46AD6A00BAB12B /* PBXBookmark */;
 			E512F0840D46AD6A00BAB12B /* PBXTextBookmark */ = E512F0840D46AD6A00BAB12B /* PBXTextBookmark */;
-			E512F0A40D46E13A00BAB12B /* PBXTextBookmark */ = E512F0A40D46E13A00BAB12B /* PBXTextBookmark */;
 			E512F0A60D46E13B00BAB12B /* PBXTextBookmark */ = E512F0A60D46E13B00BAB12B /* PBXTextBookmark */;
 			E557932E0D406A460025C9B4 /* PBXTextBookmark */ = E557932E0D406A460025C9B4 /* PBXTextBookmark */;
 			E557932F0D406A460025C9B4 /* PBXTextBookmark */ = E557932F0D406A460025C9B4 /* PBXTextBookmark */;
 			E557934E0D41433D0025C9B4 /* PBXTextBookmark */ = E557934E0D41433D0025C9B4 /* PBXTextBookmark */;
+			E57E0DF20D4A40FC005A1997 /* PBXTextBookmark */ = E57E0DF20D4A40FC005A1997 /* PBXTextBookmark */;
 		};
 		sourceControlManager = E580F1410D3026A200C5732E /* Source Control */;
 		userBuildSettings = {
@@ -281,16 +281,6 @@
 		vrLen = 1096;
 		vrLoc = 0;
 	};
-	E512F0A40D46E13A00BAB12B /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 05B2197C0012D9E27F000001 /* MainController.m */;
-		name = "MainController.m: 366";
-		rLen = 0;
-		rLoc = 11456;
-		rType = 0;
-		vrLen = 1001;
-		vrLoc = 4739;
-	};
 	E512F0A60D46E13B00BAB12B /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 05B2197C0012D9E27F000001 /* MainController.m */;
@@ -344,6 +334,16 @@
 			sepNavSelRange = "{2440, 0}";
 			sepNavVisRange = "{1994, 1057}";
 		};
+	};
+	E57E0DF20D4A40FC005A1997 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = E578B9A50D34363700ED84FE /* CPUInfo.h */;
+		name = "CPUInfo.h: 46";
+		rLen = 0;
+		rLoc = 864;
+		rType = 0;
+		vrLen = 686;
+		vrLoc = 178;
 	};
 	E580F1290D30269D00C5732E /* CPU History */ = {
 		isa = PBXExecutable;

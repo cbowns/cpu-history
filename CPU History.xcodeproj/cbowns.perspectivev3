@@ -285,6 +285,17 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
+									<integer>2</integer>
+									<integer>1</integer>
+									<integer>0</integer>
+								</array>
+								<array>
+									<integer>4</integer>
+									<integer>1</integer>
+									<integer>0</integer>
+								</array>
+								<array>
+									<integer>8</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
@@ -323,7 +334,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>E55793200D40543D0025C9B4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>MainController.m</string>
+								<string>CPUInfo.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -331,20 +342,20 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>E55793210D40543D0025C9B4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>MainController.m</string>
+										<string>CPUInfo.h</string>
 										<key>_historyCapacity</key>
 										<integer>40</integer>
 										<key>bookmark</key>
-										<string>E512F0A60D46E13B00BAB12B</string>
+										<string>E57E0DF20D4A40FC005A1997</string>
 										<key>history</key>
 										<array>
 											<string>E50FC8740D43FD7C008511D2</string>
 											<string>E50FC8890D440588008511D2</string>
-											<string>E512F0160D464BE900BAB12B</string>
 											<string>E512F0720D46AC3F00BAB12B</string>
 											<string>E512F0830D46AD6A00BAB12B</string>
 											<string>E512F0840D46AD6A00BAB12B</string>
-											<string>E512F0A40D46E13A00BAB12B</string>
+											<string>E512F0A60D46E13B00BAB12B</string>
+											<string>E512F0160D464BE900BAB12B</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -477,11 +488,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>E512F0A00D46E0E300BAB12B</string>
+				<string>E57E0DEF0D4A3A81005A1997</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>E512F0A10D46E0E300BAB12B</string>
+				<string>E57E0DF00D4A3A81005A1997</string>
 				<string>E55793200D40543D0025C9B4</string>
-				<string>E512F0A20D46E0E300BAB12B</string>
+				<string>E57E0DF10D4A3A81005A1997</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>

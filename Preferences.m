@@ -33,7 +33,7 @@
 + (NSMutableDictionary *)defaultPreferences
 {
 	return ([[NSMutableDictionary alloc] initWithObjectsAndKeys:
-		[[NSColor yellowColor] colorWithAlphaComponent:0.8], WIRED_COLOR_KEY,
+/*		[[NSColor yellowColor] colorWithAlphaComponent:0.8], WIRED_COLOR_KEY,
 		[[NSColor magentaColor] colorWithAlphaComponent:0.8], ACTIVE_COLOR_KEY,
 		[[NSColor cyanColor] colorWithAlphaComponent:0.8], INACTIVE_COLOR_KEY,
 		[[NSColor blueColor] colorWithAlphaComponent:0.8], FREE_COLOR_KEY,
@@ -43,7 +43,7 @@
 		[NSNumber numberWithInt:250], PAGING_SCALE_MAX_KEY,
 		[NSNumber numberWithBool:YES], PAGEIN_ATOP_PAGEOUT_KEY,
 		[NSNumber numberWithBool:YES], SHOW_PAGING_RATE_KEY,
-		
+*/		
 		[[NSColor yellowColor] colorWithAlphaComponent:0.8], USER_COLOR_KEY,
 		[[NSColor magentaColor] colorWithAlphaComponent:0.8], SYS_COLOR_KEY,
 		[[NSColor cyanColor] colorWithAlphaComponent:0.8], NICE_COLOR_KEY,

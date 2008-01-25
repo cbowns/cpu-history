@@ -29,16 +29,16 @@
 /*
 	TODO define: delete MemMon #defines
 */
-#define WIRED_COLOR_KEY		@"WiredColor"
-#define ACTIVE_COLOR_KEY	@"ActiveColor"
-#define INACTIVE_COLOR_KEY	@"InactiveColor"
-#define FREE_COLOR_KEY		@"FreeColor"
-
-#define PAGEIN_COLOR_KEY	@"PageinColor"
-#define PAGEOUT_COLOR_KEY	@"PageoutColor"
-#define PAGING_SCALE_MAX_KEY	@"PagingScaleMax"
-#define PAGEIN_ATOP_PAGEOUT_KEY	@"PageinAtopPageout"
-#define SHOW_PAGING_RATE_KEY	@"ShowPagingRate"
+// define WIRED_COLOR_KEY		@"WiredColor"
+// define ACTIVE_COLOR_KEY	@"ActiveColor"
+// define INACTIVE_COLOR_KEY	@"InactiveColor"
+// define FREE_COLOR_KEY		@"FreeColor"
+// 
+// define PAGEIN_COLOR_KEY	@"PageinColor"
+// define PAGEOUT_COLOR_KEY	@"PageoutColor"
+// define PAGING_SCALE_MAX_KEY	@"PagingScaleMax"
+// define PAGEIN_ATOP_PAGEOUT_KEY	@"PageinAtopPageout"
+// define SHOW_PAGING_RATE_KEY	@"ShowPagingRate"
 
 /*
 	CPU History
@@ -63,7 +63,7 @@
 	/*
 		TODO interface: remove MemMon stuff
 	*/
-	IBOutlet id		wiredColor;
+/*	IBOutlet id		wiredColor;
 	IBOutlet id		activeColor;
 	IBOutlet id		inactiveColor;
 	IBOutlet id		freeColor;
@@ -73,7 +73,7 @@
 	IBOutlet id		pageinAtopPageout;
 	IBOutlet id		pagingScale;
 	IBOutlet id		showPagingRate;
-
+*/
 
 
 
