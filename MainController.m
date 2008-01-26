@@ -64,7 +64,7 @@
 	
 	int				x;
 	float			y, yy;
-	
+	int barWidth = (int)[[preferences objectForKey:BAR_WIDTH_SIZE_KEY] floatValue];
 	// double interval = 0.1 * [[preferences objectForKey:UPDATE_FREQUENCY_KEY] floatValue];
 	
 	[graphImage lockFocus];
@@ -72,27 +72,27 @@
 	// draw the cpu usage graph
 	[cpuInfo startIterate];
 	// for (x = 0; [memInfo getNext:&vmdata]; x++) {
-	for (x = 0; [cpuInfo getNext:&cpudata]; x+=GRAPH_WIDTH) {
+	for (x = 0; [cpuInfo getNext:&cpudata]; x+=barWidth) {
 		
 		// y += vmdata.active * GRAPH_SIZE;
 		y = cpudata.sys * GRAPH_SIZE;
 		[[preferences objectForKey:SYS_COLOR_KEY] set];
-		NSRectFill (NSMakeRect(x - GRAPH_WIDTH, 0.0, x, y));
+		NSRectFill (NSMakeRect(x - barWidth, 0.0, x, y));
 		yy = y;
 		// y += vmdata.inactive * GRAPH_SIZE;
 		y += cpudata.nice * GRAPH_SIZE;
 		[[preferences objectForKey:NICE_COLOR_KEY] set];
-		NSRectFill (NSMakeRect(x - GRAPH_WIDTH, yy, x, y));
+		NSRectFill (NSMakeRect(x - barWidth, yy, x, y));
 		// y = vmdata.wired * GRAPH_SIZE;
 		yy = y;
 		
 		y += cpudata.user * GRAPH_SIZE;
 		[[preferences objectForKey:USER_COLOR_KEY] set];
-		NSRectFill (NSMakeRect(x - GRAPH_WIDTH, yy, x, y));
+		NSRectFill (NSMakeRect(x - barWidth, yy, x, y));
 		
 		// free data here
 		[[preferences objectForKey:IDLE_COLOR_KEY] set];
-		NSRectFill (NSMakeRect(x - GRAPH_WIDTH, y, x, GRAPH_SIZE));
+		NSRectFill (NSMakeRect(x - barWidth, y, x, GRAPH_SIZE));
 	}
 	
 	// transfer graph image to icon image
@@ -109,6 +109,7 @@
 {	
 	// VMData			vmdata, vmdata0;
 	CPUData			cpudata, cpudata0;
+	int barWidth = (int)[[preferences objectForKey:BAR_WIDTH_SIZE_KEY] floatValue];
 	float			y, yy;
 	
 	// double interval = 0.1 * [[preferences objectForKey:UPDATE_FREQUENCY_KEY] floatValue];
@@ -116,7 +117,7 @@
 	[graphImage lockFocus];
 
 	// offset the old graph image
-	[graphImage compositeToPoint:NSMakePoint(-GRAPH_WIDTH, 0) operation:NSCompositeCopy];
+	[graphImage compositeToPoint:NSMakePoint(-barWidth, 0) operation:NSCompositeCopy];
 		
 	// [memInfo getLast:&vmdata0];
 	[cpuInfo getLast:&cpudata0];
@@ -128,23 +129,23 @@
 	// y += vmdata.active * GRAPH_SIZE;
 	y = cpudata.sys * GRAPH_SIZE;
 	[[preferences objectForKey:SYS_COLOR_KEY] set];
-	NSRectFill (NSMakeRect(GRAPH_SIZE - GRAPH_WIDTH, 0.0, GRAPH_SIZE - GRAPH_WIDTH, y));
+	NSRectFill (NSMakeRect(GRAPH_SIZE - barWidth, 0.0, GRAPH_SIZE - barWidth, y));
 	yy = y;
 	
 	// y += vmdata.inactive * GRAPH_SIZE;
 	y += cpudata.nice * GRAPH_SIZE;
 	[[preferences objectForKey:NICE_COLOR_KEY] set];
-	NSRectFill (NSMakeRect(GRAPH_SIZE - GRAPH_WIDTH, yy, GRAPH_SIZE - GRAPH_WIDTH, y));
+	NSRectFill (NSMakeRect(GRAPH_SIZE - barWidth, yy, GRAPH_SIZE - barWidth, y));
 	yy = y;
 	
 	// y = vmdata.wired * GRAPH_SIZE;
 	y += cpudata.user * GRAPH_SIZE;
 	[[preferences objectForKey:USER_COLOR_KEY] set];
-	NSRectFill (NSMakeRect(GRAPH_SIZE - GRAPH_WIDTH, yy, GRAPH_SIZE - GRAPH_WIDTH, y));
+	NSRectFill (NSMakeRect(GRAPH_SIZE - barWidth, yy, GRAPH_SIZE - barWidth, y));
 
 	// free data here
 	[[preferences objectForKey:IDLE_COLOR_KEY] set];
-	NSRectFill (NSMakeRect(GRAPH_SIZE - GRAPH_WIDTH, y, GRAPH_SIZE - GRAPH_WIDTH, GRAPH_SIZE));
+	NSRectFill (NSMakeRect(GRAPH_SIZE - barWidth, y, GRAPH_SIZE - barWidth, GRAPH_SIZE));
 
 
 	// transfer graph image to icon image
@@ -249,24 +250,6 @@
 }
 
 
-- (unsigned)systemVersion
-// returns the system version normally retrieved with Gestalt(gestaltSystemVersion, &systemVersion)
-{
-	const char	*p;
-	
-	unsigned version = 0;
-	
-	for (p = [[[NSDictionary dictionaryWithContentsOfFile:@"/System/Library/CoreServices/SystemVersion.plist"]
-		objectForKey:@"ProductVersion"] cString]; *p; p++) {
-		if (*p != '.')
-			version = (version << 4) | (*p - '0');
-	}
-	if (version < 0x1000)	// for 10.0, 10.1
-		version <<= 4;
-	return (version);
-}
-
-
 - (BOOL)updateFrameName
 // calculate the frameName used to save the window position; return TRUE iff the name changed,
 // i. e. the display configuration changed since last call of this method
@@ -322,12 +305,6 @@
 	[window setReleasedWhenClosed:NO];
 	[window setBackgroundColor:[NSColor clearColor]];
 	[self updateFrameName];
-	if (! [window setFrameUsingName:frameName]) {
-		// for compatibility with version 1.1 preferences file
-		[window setFrameUsingName:@"CPUHistoryWindowLocation"];
-		[NSWindow removeFrameUsingName:@"CPUHistoryWindowLocation"];
-		[window saveFrameUsingName:frameName];
-	}
 	[window setDelegate:self];
 
 	view = [[TranslucentView allocWithZone:[self zone]] initWithFrame:NSMakeRect(0.0, 0.0, GRAPH_SIZE, GRAPH_SIZE)];
