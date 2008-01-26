@@ -1,7 +1,10 @@
 CPU Mon:
 before 1.0 release:
 - get rid of extraneous properties, and relink stuff in IB
-	- finish commenting out variables and outlets in Prefs.h/m
+	- finish commenting out variables and outlets
+		- prefs.h @done
+		- prefs.m @done
+	- what is this transparency vestigal crap? @done
 	- relink nib to new variables
 	- initialize colors to different values than MemMonitor defaults
 	- try building it…

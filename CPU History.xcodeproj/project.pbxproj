@@ -100,8 +100,6 @@
 				E578B9A60D34363700ED84FE /* CPUInfo.m */,
 				05B2197B0012D9E27F000001 /* MainController.h */,
 				05B2197C0012D9E27F000001 /* MainController.m */,
-				F5646DC601034B7801000001 /* MemInfo.h */,
-				F5646DC80103500801000001 /* MemInfo.m */,
 				F51FAB760108F99B01000001 /* Preferences.h */,
 				F51FAB770108F99B01000001 /* Preferences.m */,
 				F5DE4D1E02B3F74401000101 /* TranslucentView.h */,
@@ -153,6 +151,8 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				F5646DC601034B7801000001 /* MemInfo.h */,
+				F5646DC80103500801000001 /* MemInfo.m */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
 			name = "Other Sources";

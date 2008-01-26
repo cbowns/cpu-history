@@ -79,7 +79,7 @@
 	
 	self = [super init];
         currentSettings = [Preferences defaultPreferences];
-	SCANCOLOR (WIRED_COLOR_KEY);
+/*	SCANCOLOR (WIRED_COLOR_KEY);
 	SCANCOLOR (ACTIVE_COLOR_KEY);
 	SCANCOLOR (INACTIVE_COLOR_KEY);
 	SCANCOLOR (FREE_COLOR_KEY);
@@ -88,14 +88,15 @@
 	GETNUMBER (PAGING_SCALE_MAX_KEY);
 	GETNUMBER (PAGEIN_ATOP_PAGEOUT_KEY);
 	GETNUMBER (SHOW_PAGING_RATE_KEY);
+*/
+	// transparency = 1.0;			/* paging was drawn without transparency in version 1.1 */
+	// GETNUMBER (OLD_TRANSPARENCY_KEY);
 
-	GETNUMBER (OLD_TRANSPARENCY_KEY);
 	transparency = obj ? [obj floatValue] : 0.8;	/* global transparency setting of version 1.1 */
 	SCANCOLOR (USER_COLOR_KEY);
 	SCANCOLOR (SYS_COLOR_KEY);
 	SCANCOLOR (NICE_COLOR_KEY);
 	SCANCOLOR (IDLE_COLOR_KEY);
-	transparency = 1.0;			/* paging was drawn without transparency in version 1.1 */
 	GETNUMBER (UPDATE_FREQUENCY_KEY);
 	GETNUMBER (SHOW_GRAPH_WINDOW_KEY);
 	GETNUMBER (GRAPH_WINDOW_ON_TOP_KEY);
@@ -143,7 +144,7 @@
 		}
 	}
 	
-	[wiredColor setColor:[currentSettings objectForKey:WIRED_COLOR_KEY]];
+/*	[wiredColor setColor:[currentSettings objectForKey:WIRED_COLOR_KEY]];
 	[activeColor setColor:[currentSettings objectForKey:ACTIVE_COLOR_KEY]];
 	[inactiveColor setColor:[currentSettings objectForKey:INACTIVE_COLOR_KEY]];
 	[freeColor setColor:[currentSettings objectForKey:FREE_COLOR_KEY]];
@@ -153,7 +154,7 @@
 		indexOfItemWithTag:[[currentSettings objectForKey:PAGING_SCALE_MAX_KEY] intValue]]];
 	[pageinAtopPageout selectCellWithTag:[[currentSettings objectForKey:PAGEIN_ATOP_PAGEOUT_KEY] intValue]];
 	[showPagingRate setState:[[currentSettings objectForKey:SHOW_PAGING_RATE_KEY] boolValue]];
-
+*/
 
 	[userColor setColor:[currentSettings objectForKey:USER_COLOR_KEY]];
 	[sysColor setColor:[currentSettings objectForKey:SYS_COLOR_KEY]];
@@ -213,7 +214,7 @@
 {
 	int	freq;
 	
-	[currentSettings setObject:[wiredColor color] forKey:WIRED_COLOR_KEY];
+/*	[currentSettings setObject:[wiredColor color] forKey:WIRED_COLOR_KEY];
 	[currentSettings setObject:[activeColor color] forKey:ACTIVE_COLOR_KEY];
 	[currentSettings setObject:[inactiveColor color] forKey:INACTIVE_COLOR_KEY];
 	[currentSettings setObject:[freeColor color] forKey:FREE_COLOR_KEY];
@@ -222,7 +223,7 @@
 	[currentSettings setObject:[NSNumber numberWithInt:[[pagingScale selectedItem] tag]] forKey:PAGING_SCALE_MAX_KEY];
 	[currentSettings setObject:[NSNumber numberWithInt:[[pageinAtopPageout selectedCell] tag]] forKey:PAGEIN_ATOP_PAGEOUT_KEY];
 	[currentSettings setObject:[NSNumber numberWithInt:[showPagingRate state]] forKey:SHOW_PAGING_RATE_KEY];
-
+*/
 
 
 
