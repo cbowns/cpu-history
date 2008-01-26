@@ -28,11 +28,7 @@
 			<string>ObjC</string>
 			<key>OUTLETS</key>
 			<dict>
-				<key>activeColor</key>
-				<string>id</string>
 				<key>dockIconSizeSlider</key>
-				<string>id</string>
-				<key>freeColor</key>
 				<string>id</string>
 				<key>graphWindowOnTop</key>
 				<string>id</string>
@@ -42,23 +38,11 @@
 				<string>id</string>
 				<key>idleColor</key>
 				<string>id</string>
-				<key>inactiveColor</key>
-				<string>id</string>
 				<key>niceColor</key>
-				<string>id</string>
-				<key>pageinAtopPageout</key>
-				<string>id</string>
-				<key>pageinColor</key>
-				<string>id</string>
-				<key>pageoutColor</key>
-				<string>id</string>
-				<key>pagingScale</key>
 				<string>id</string>
 				<key>panel</key>
 				<string>id</string>
 				<key>showGraphWindow</key>
-				<string>id</string>
-				<key>showPagingRate</key>
 				<string>id</string>
 				<key>sysColor</key>
 				<string>id</string>
@@ -67,8 +51,6 @@
 				<key>updateFrequencySlider</key>
 				<string>id</string>
 				<key>userColor</key>
-				<string>id</string>
-				<key>wiredColor</key>
 				<string>id</string>
 			</dict>
 			<key>SUPERCLASS</key>
