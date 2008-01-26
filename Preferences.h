@@ -48,12 +48,12 @@
 #define NICE_COLOR_KEY		@"NiceColor"
 #define IDLE_COLOR_KEY		@"IdleColor"
 
-#define OLD_TRANSPARENCY_KEY	@"Transparency"		/* for backward compatibility with 1.1 prefs file */
 #define UPDATE_FREQUENCY_KEY	@"UpdateFrequency"
 #define SHOW_GRAPH_WINDOW_KEY	@"ShowGraphWindow"
 #define GRAPH_WINDOW_ON_TOP_KEY	@"GraphWindowOnTop"
 #define GRAPH_WINDOW_SIZE_KEY	@"GraphWindowSize"
 #define DOCK_ICON_SIZE_KEY	@"DockIconSize"
+#define BAR_WIDTH_SIZE_KEY @"BarWidthSize"
 
 #define PREFERENCES_CHANGED	@"PrefsChanged"
 
@@ -91,6 +91,7 @@
 	IBOutlet id		graphWindowSize;
 	IBOutlet id		graphWindowOptionsView;
 	IBOutlet id		dockIconSizeSlider;
+	IBOutlet id		barWidthSlider;
 	NSMutableDictionary	*currentSettings;
 }
 

@@ -2,9 +2,9 @@
 {
 	05B2197B0012D9E27F000001 /* MainController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {703, 742}}";
-			sepNavSelRange = "{1649, 0}";
-			sepNavVisRange = "{589, 1140}";
+			sepNavIntBoundsRect = "{{0, 0}, {703, 756}}";
+			sepNavSelRange = "{1814, 0}";
+			sepNavVisRange = "{523, 1285}";
 		};
 	};
 	05B2197C0012D9E27F000001 /* MainController.m */ = {
@@ -43,7 +43,7 @@
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeArchitecture = ppc;
-		activeBuildConfigurationName = Deployment;
+		activeBuildConfigurationName = Development;
 		activeExecutable = E580F1290D30269D00C5732E /* CPU History */;
 		activeTarget = 21756FEA09FBAD77009CBAB7 /* CPU History */;
 		addToTargets = (
@@ -218,6 +218,9 @@
 			E58E203B0D4BD0FD003484D6 /* PBXTextBookmark */ = E58E203B0D4BD0FD003484D6 /* PBXTextBookmark */;
 			E58E203C0D4BD0FD003484D6 /* PBXTextBookmark */ = E58E203C0D4BD0FD003484D6 /* PBXTextBookmark */;
 			E58E203D0D4BD0FD003484D6 /* PBXTextBookmark */ = E58E203D0D4BD0FD003484D6 /* PBXTextBookmark */;
+			E58E203E0D4BD58D003484D6 /* PBXTextBookmark */ = E58E203E0D4BD58D003484D6 /* PBXTextBookmark */;
+			E58E203F0D4BD71D003484D6 /* PBXTextBookmark */ = E58E203F0D4BD71D003484D6 /* PBXTextBookmark */;
+			E58E20400D4BDCA0003484D6 /* PBXTextBookmark */ = E58E20400D4BDCA0003484D6 /* PBXTextBookmark */;
 		};
 		sourceControlManager = E580F1410D3026A200C5732E /* Source Control */;
 		userBuildSettings = {
@@ -789,6 +792,36 @@
 		rType = 0;
 		vrLen = 1140;
 		vrLoc = 589;
+	};
+	E58E203E0D4BD58D003484D6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 05B2197B0012D9E27F000001 /* MainController.h */;
+		name = "MainController.h: 54";
+		rLen = 0;
+		rLoc = 1814;
+		rType = 0;
+		vrLen = 1285;
+		vrLoc = 523;
+	};
+	E58E203F0D4BD71D003484D6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 05B2197B0012D9E27F000001 /* MainController.h */;
+		name = "MainController.h: 54";
+		rLen = 0;
+		rLoc = 1814;
+		rType = 0;
+		vrLen = 1285;
+		vrLoc = 523;
+	};
+	E58E20400D4BDCA0003484D6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 05B2197B0012D9E27F000001 /* MainController.h */;
+		name = "MainController.h: 54";
+		rLen = 0;
+		rLoc = 1814;
+		rType = 0;
+		vrLen = 1285;
+		vrLoc = 523;
 	};
 	F51FAB760108F99B01000001 /* Preferences.h */ = {
 		uiCtxt = {

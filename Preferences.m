@@ -57,6 +57,7 @@
 		[NSNumber numberWithBool:NO], GRAPH_WINDOW_ON_TOP_KEY,
 		[NSNumber numberWithInt:128], GRAPH_WINDOW_SIZE_KEY,
 		[NSNumber numberWithFloat:1.0], DOCK_ICON_SIZE_KEY,
+		[NSNumber numberWithInt:4], BAR_WIDTH_SIZE_KEY,
 		nil]);
 }
 
@@ -102,6 +103,7 @@
 	GETNUMBER (SHOW_GRAPH_WINDOW_KEY);
 	GETNUMBER (GRAPH_WINDOW_ON_TOP_KEY);
 	GETNUMBER (GRAPH_WINDOW_SIZE_KEY);
+	GETNUMBER (DOCK_ICON_SIZE_KEY);
 	GETNUMBER (DOCK_ICON_SIZE_KEY);
 	transparency = obj ? [obj floatValue] : 0.8;	/* global transparency setting of version 1.1 */
 	[[NSColorPanel sharedColorPanel] setShowsAlpha:YES];
@@ -170,6 +172,7 @@
 	[graphWindowOnTop setState:[[currentSettings objectForKey:GRAPH_WINDOW_ON_TOP_KEY] boolValue]];
 	[graphWindowSize setFloatValue:[[currentSettings objectForKey:GRAPH_WINDOW_SIZE_KEY] floatValue]];
 	[dockIconSizeSlider setFloatValue:[[currentSettings objectForKey:DOCK_ICON_SIZE_KEY] floatValue]];
+	[barWidthSlider setFloatValue:[[currentSettings objectForKey:BAR_WIDTH_SIZE_KEY] floatValue]];
 	[self adjustGraphWindowControls];
 	[panel makeKeyAndOrderFront:nil];
 }
@@ -241,6 +244,7 @@
 	[currentSettings setObject:[NSNumber numberWithInt:[graphWindowOnTop state]] forKey:GRAPH_WINDOW_ON_TOP_KEY];
 	[currentSettings setObject:[NSNumber numberWithInt:[graphWindowSize intValue]] forKey:GRAPH_WINDOW_SIZE_KEY];
 	[currentSettings setObject:[NSNumber numberWithFloat:[dockIconSizeSlider floatValue]] forKey:DOCK_ICON_SIZE_KEY];
+	[currentSettings setObject:[NSNumber numberWithInt:[barWidthSlider intValue]] forKey:BAR_WIDTH_SIZE_KEY];
 	[self adjustGraphWindowControls];
 	[[NSNotificationCenter defaultCenter] postNotificationName:PREFERENCES_CHANGED object:nil];
 }

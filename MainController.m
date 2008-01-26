@@ -28,7 +28,7 @@
 
 
 #define GRAPH_SIZE	128
-#define GRAPH_WIDTH	8
+// define GRAPH_WIDTH	8
 
 @implementation MainController
 
@@ -343,10 +343,11 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateGraph) name:PREFERENCES_CHANGED object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setTimer) name:PREFERENCES_CHANGED object:nil];
 
-	if ([self systemVersion] < 0x1010 && [self isLoginItem])
+/*	if ([self systemVersion] < 0x1010 && [self isLoginItem])
 		[NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(setTimer) userInfo:nil repeats:NO];
 	else
-		[self setTimer];
+*/ // We can stop supporting 10.1 now. Welcome to 2003, people.
+	[self setTimer];
 }
 
 

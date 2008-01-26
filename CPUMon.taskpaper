@@ -1,17 +1,18 @@
 CPU Mon:
 before 1.0 release:
-- bugs:
-	- 1. app blows away graph until you hit "restore defaults button", then behaves as expected
-	- 2. cmd-w doesn't close prefs window
 - prefs: add an option for bar width: from 1 to 20 px per bar
 	- preferred: 4-6
 - tidy up release notes, remove localizations if they're not accurate.
-- make a color change backwards applicable: somehow redraw entire graph after prefs color change
-	- call updateGraph after prefs change
 - before shipping: build a full deployment vers, and move prefs file beforehand: any last bugs/missing things
 - write up app, release on blog and cbowns.com. need new domain? nah.
 
 future:
+- bugs:
+- 1. app blows away graph
+	- happens until the CPU data buffer has been fully filled, and you hold down "restore defaults" through TWO timer firings, then it's fixed.
+	- diff CPU source against memory monitor:
+		- any changes with data source being reset?
+- 2. cmd-w doesn't close prefs window
 - future upgrades:
 	- CPU usage across processors:
 		- get # of processors with http://www.cocoadev.com/index.pl?NSProcessInfo
@@ -80,3 +81,5 @@ Archive:
 	- delete prefs file and start over: any errors reading new values? @done @project(before 1.0 release)
 	- try building it… @done @project(before 1.0 release)
 - get rid of extraneous properties, and relink stuff in IB @done @project(before 1.0 release)
+- make a color change backwards applicable: somehow redraw entire graph after prefs color change @done @project(before 1.0 release)
+	- call updateGraph after prefs change @done @project(before 1.0 release)

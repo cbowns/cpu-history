@@ -290,17 +290,7 @@
 									<integer>0</integer>
 								</array>
 								<array>
-									<integer>5</integer>
-									<integer>1</integer>
-									<integer>0</integer>
-								</array>
-								<array>
 									<integer>6</integer>
-									<integer>1</integer>
-									<integer>0</integer>
-								</array>
-								<array>
-									<integer>7</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
@@ -351,7 +341,7 @@
 										<key>_historyCapacity</key>
 										<integer>40</integer>
 										<key>bookmark</key>
-										<string>E58E203D0D4BD0FD003484D6</string>
+										<string>E58E20400D4BDCA0003484D6</string>
 										<key>history</key>
 										<array>
 											<string>E50FC8740D43FD7C008511D2</string>
