@@ -76,22 +76,22 @@
 		
 		// y += vmdata.active * GRAPH_SIZE;
 		y = cpudata.sys * GRAPH_SIZE;
-		[[preferences objectForKey:ACTIVE_COLOR_KEY] set];
+		[[preferences objectForKey:SYS_COLOR_KEY] set];
 		NSRectFill (NSMakeRect(x - GRAPH_WIDTH, 0.0, x, y));
 		yy = y;
 		// y += vmdata.inactive * GRAPH_SIZE;
 		y += cpudata.nice * GRAPH_SIZE;
-		[[preferences objectForKey:INACTIVE_COLOR_KEY] set];
+		[[preferences objectForKey:NICE_COLOR_KEY] set];
 		NSRectFill (NSMakeRect(x - GRAPH_WIDTH, yy, x, y));
 		// y = vmdata.wired * GRAPH_SIZE;
 		yy = y;
 		
 		y += cpudata.user * GRAPH_SIZE;
-		[[preferences objectForKey:WIRED_COLOR_KEY] set];
+		[[preferences objectForKey:USER_COLOR_KEY] set];
 		NSRectFill (NSMakeRect(x - GRAPH_WIDTH, yy, x, y));
 		
 		// free data here
-		[[preferences objectForKey:FREE_COLOR_KEY] set];
+		[[preferences objectForKey:IDLE_COLOR_KEY] set];
 		NSRectFill (NSMakeRect(x - GRAPH_WIDTH, y, x, GRAPH_SIZE));
 	}
 	
@@ -127,23 +127,23 @@
 	
 	// y += vmdata.active * GRAPH_SIZE;
 	y = cpudata.sys * GRAPH_SIZE;
-	[[preferences objectForKey:ACTIVE_COLOR_KEY] set];
+	[[preferences objectForKey:SYS_COLOR_KEY] set];
 	NSRectFill (NSMakeRect(GRAPH_SIZE - GRAPH_WIDTH, 0.0, GRAPH_SIZE - GRAPH_WIDTH, y));
 	yy = y;
 	
 	// y += vmdata.inactive * GRAPH_SIZE;
 	y += cpudata.nice * GRAPH_SIZE;
-	[[preferences objectForKey:INACTIVE_COLOR_KEY] set];
+	[[preferences objectForKey:NICE_COLOR_KEY] set];
 	NSRectFill (NSMakeRect(GRAPH_SIZE - GRAPH_WIDTH, yy, GRAPH_SIZE - GRAPH_WIDTH, y));
 	yy = y;
 	
 	// y = vmdata.wired * GRAPH_SIZE;
 	y += cpudata.user * GRAPH_SIZE;
-	[[preferences objectForKey:WIRED_COLOR_KEY] set];
+	[[preferences objectForKey:USER_COLOR_KEY] set];
 	NSRectFill (NSMakeRect(GRAPH_SIZE - GRAPH_WIDTH, yy, GRAPH_SIZE - GRAPH_WIDTH, y));
 
 	// free data here
-	[[preferences objectForKey:FREE_COLOR_KEY] set];
+	[[preferences objectForKey:IDLE_COLOR_KEY] set];
 	NSRectFill (NSMakeRect(GRAPH_SIZE - GRAPH_WIDTH, y, GRAPH_SIZE - GRAPH_WIDTH, GRAPH_SIZE));
 
 
