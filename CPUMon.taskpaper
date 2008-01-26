@@ -5,10 +5,10 @@ before 1.0 release:
 		- prefs.h @done
 		- prefs.m @done
 	- what is this transparency vestigal crap? @done
-	- relink nib to new variables
-	- initialize colors to different values than MemMonitor defaults
-	- try building it…
+	- relink nib to new variables @done
+	- initialize colors to different values than MemMonitor defaults @done
 	- delete prefs file and start over: any errors reading new values?
+	- try building it…
 - prefs: add an option for bar width: from 1 to 20 px per bar
 	- preferred: 4-6
 - tidy up release notes, remove localizations if they're not accurate.
