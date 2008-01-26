@@ -104,7 +104,7 @@
 	GETNUMBER (GRAPH_WINDOW_ON_TOP_KEY);
 	GETNUMBER (GRAPH_WINDOW_SIZE_KEY);
 	GETNUMBER (DOCK_ICON_SIZE_KEY);
-	GETNUMBER (DOCK_ICON_SIZE_KEY);
+	GETNUMBER (BAR_WIDTH_SIZE_KEY);
 	transparency = obj ? [obj floatValue] : 0.8;	/* global transparency setting of version 1.1 */
 	[[NSColorPanel sharedColorPanel] setShowsAlpha:YES];
 	return (self);

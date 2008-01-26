@@ -44,7 +44,6 @@
 	TranslucentView		*view;			// view for the graph window
 	TranslucentWindow	*window;		// window for the graph
 	NSString			*frameName;		// current name for saving the window position
-	int					barWidth;		// width of bars in pixels, scaled to window size
 }
 
 - (void)showPreferences:(id)sender;
