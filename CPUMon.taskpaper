@@ -1,14 +1,8 @@
 CPU Mon:
 before 1.0 release:
-- get rid of extraneous properties, and relink stuff in IB
-	- finish commenting out variables and outlets
-		- prefs.h @done
-		- prefs.m @done
-	- what is this transparency vestigal crap? @done
-	- relink nib to new variables @done
-	- initialize colors to different values than MemMonitor defaults @done
-	- delete prefs file and start over: any errors reading new values?
-	- try building it…
+- bugs:
+	- 1. app blows away graph until you hit "restore defaults button", then behaves as expected
+	- 2. cmd-w doesn't close prefs window
 - prefs: add an option for bar width: from 1 to 20 px per bar
 	- preferred: 4-6
 - tidy up release notes, remove localizations if they're not accurate.
@@ -77,3 +71,12 @@ Archive:
 - properly set Dock icon @done @project(before dinner)
 - fix Dock menu display @done @project(before dinner)
 - if we can't make CPUInfo object, exit app gracefully @done @project(before dinner)
+	- finish commenting out variables and outlets @done @project(before 1.0 release)
+		- prefs.h @done @project(before 1.0 release)
+		- prefs.m @done @project(before 1.0 release)
+	- what is this transparency vestigal crap? @done @project(before 1.0 release)
+	- relink nib to new variables @done @project(before 1.0 release)
+	- initialize colors to different values than MemMonitor defaults @done @project(before 1.0 release)
+	- delete prefs file and start over: any errors reading new values? @done @project(before 1.0 release)
+	- try building it… @done @project(before 1.0 release)
+- get rid of extraneous properties, and relink stuff in IB @done @project(before 1.0 release)

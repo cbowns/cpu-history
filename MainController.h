@@ -34,16 +34,17 @@
 
 @interface MainController : NSObject
 {
-	Preferences		*preferences;	// the preferences
-	// MemInfo			*memInfo;	// memory usage data buffer
-	CPUInfo			*cpuInfo; //cpu usage data buffer
-	NSTimer			*timer;		// timer for icon refreshs
-	NSImage			*displayImage;	// image to be displayed (with text)
-	NSImage			*graphImage;	// image of the graph (w/o text) for updates
-	NSImage			*iconImage;	// dock icon image
-	TranslucentView		*view;		// view for the graph window
-	TranslucentWindow	*window;	// window for the graph
-	NSString		*frameName;	// current name for saving the window position
+	Preferences			*preferences;	// the preferences
+	// MemInfo			*memInfo;		// memory usage data buffer
+	CPUInfo				*cpuInfo; 		//cpu usage data buffer
+	NSTimer				*timer;			// timer for icon refreshs
+	NSImage				*displayImage;	// image to be displayed (with text)
+	NSImage				*graphImage;	// image of the graph (w/o text) for updates
+	NSImage				*iconImage;		// dock icon image
+	TranslucentView		*view;			// view for the graph window
+	TranslucentWindow	*window;		// window for the graph
+	NSString			*frameName;		// current name for saving the window position
+	int					barWidth;		// width of bars in pixels, scaled to window size
 }
 
 - (void)showPreferences:(id)sender;

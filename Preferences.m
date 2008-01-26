@@ -46,9 +46,9 @@
 */		
 		
 		// Colors taken from samples of 10.5's Activity Monitor
-		[NSColor colorWithDeviceRed:0.304875 green:0.931411 blue:0.294072 alpha:1.0 ], USER_COLOR_KEY,
-		[NSColor colorWithDeviceRed:0.933211 green:0.219913 blue:0.200565 alpha:1.0 ], SYS_COLOR_KEY,
-		[NSColor colorWithDeviceRed:0.200638 green:0.000533 blue:1.0 alpha:1.0 ], NICE_COLOR_KEY,
+		[NSColor colorWithCalibratedRed:0.304875 green:0.931411 blue:0.294072 alpha:1.0 ], USER_COLOR_KEY,
+		[NSColor colorWithCalibratedRed:0.933211 green:0.219913 blue:0.200565 alpha:1.0 ], SYS_COLOR_KEY,
+		[NSColor colorWithCalibratedRed:0.200638 green:0.000533 blue:1.0 alpha:1.0 ], NICE_COLOR_KEY,
 		[[NSColor blackColor] colorWithAlphaComponent:1.0], IDLE_COLOR_KEY,
 		
 		
@@ -75,7 +75,7 @@
 		[currentSettings setObject:obj forKey:key];
 
 	id	obj;
-	float	r, g, b, a, transparency;
+	float	r, g, b, a, transparency = 0.0;
 
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
@@ -94,7 +94,6 @@
 	// transparency = 1.0;			/* paging was drawn without transparency in version 1.1 */
 	// GETNUMBER (OLD_TRANSPARENCY_KEY);
 
-	transparency = obj ? [obj floatValue] : 0.8;	/* global transparency setting of version 1.1 */
 	SCANCOLOR (USER_COLOR_KEY);
 	SCANCOLOR (SYS_COLOR_KEY);
 	SCANCOLOR (NICE_COLOR_KEY);
@@ -104,6 +103,7 @@
 	GETNUMBER (GRAPH_WINDOW_ON_TOP_KEY);
 	GETNUMBER (GRAPH_WINDOW_SIZE_KEY);
 	GETNUMBER (DOCK_ICON_SIZE_KEY);
+	transparency = obj ? [obj floatValue] : 0.8;	/* global transparency setting of version 1.1 */
 	[[NSColorPanel sharedColorPanel] setShowsAlpha:YES];
 	return (self);
 }

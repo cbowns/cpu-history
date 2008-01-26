@@ -304,7 +304,8 @@
 		NSLog(@"%s failed to create CPUInfo object!", _cmd);
 		NSString *errorStr = [[NSString alloc] initWithFormat:@"There's not enough memory to allocate the CPU data array. Sorry, but I have to quit now."];
 		/* now display error dialog and quit */
-		int choice = NSRunAlertPanel(@"Error", errorStr, @"OK", nil, nil);
+		NSRunAlertPanel(@"Error", errorStr, @"OK", nil, nil);
+		
 		[errorStr release];
 		[preferences release];
 		[NSApp terminate:nil];
