@@ -1,13 +1,13 @@
 CPU Mon:
 before 1.0 release:
 - tidy up release notes, remove localizations if they're not accurate. @done
-- before shipping: build a full deployment vers, and move prefs file beforehand: any last bugs/missing things
+- before shipping: build a full deployment vers, and move prefs file beforehand: any last bugs/missing things @done
 - write up app, release on blog and cbowns.com
 future:
 - bugs:
 - 1. app blows away graph
 	- happens until the CPU data buffer has been fully filled, and you hold down "restore defaults" through TWO timer firings, then it's fixed.
-		- can also be repro'd just by changing prefs, but having tough time getting this to work
+		- can also be repro'd just by changing prefs about showing separate graph or putting graph on top
 	- diff CPU source against memory monitor:
 		- any changes with data source being reset? shouldn't be…
 	- what about removing the notifications in favor of straight method callbacks? first, what's the underlying problem: don't solve what doesn't need solving
