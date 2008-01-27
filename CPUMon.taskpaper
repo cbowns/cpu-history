@@ -1,6 +1,6 @@
 CPU Mon:
 before 1.0 release:
-- tidy up release notes, remove localizations if they're not accurate.
+- tidy up release notes, remove localizations if they're not accurate. @done
 - before shipping: build a full deployment vers, and move prefs file beforehand: any last bugs/missing things
 - write up app, release on blog and cbowns.com
 future:
@@ -15,14 +15,11 @@ future:
 	- CPU usage across processors:
 		- get # of processors with http://www.cocoadev.com/index.pl?NSProcessInfo
 		- add another graph
-
 Mem -> CPU conversion key:
 - wired = user
 - active = sys
 - inactive = nice
 - free = idle
-
-
 Archive:
 - get it to build @done @project(CPU Mon)
 - make another pass through the source to take out extraneous references to CPUUsage @done @project(CPU Mon)
