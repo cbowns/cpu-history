@@ -1,0 +1,362 @@
+From 4d2001fee99e46d5dc2099dee89cec68430e7fa6 Mon Sep 17 00:00:00 2001
+From: Daniel Sandler <dsandler@river.cs.rice.edu>
+Date: Sun, 27 Jan 2008 00:00:32 -0600
+Subject: [PATCH] Implement multiple CPU support. Tested on MacBook (Core Duo) only.
+
+---
+ CPUInfo.h        |   11 +++--
+ CPUInfo.m        |   87 ++++++++++++++++++++++----------------
+ MainController.m |  123 +++++++++++++++++++++++++++++++-----------------------
+ 3 files changed, 127 insertions(+), 94 deletions(-)
+
+diff --git a/CPUInfo.h b/CPUInfo.h
+index a96f491..be3ae43 100644
+--- a/CPUInfo.h
++++ b/CPUInfo.h
+@@ -25,10 +25,10 @@ typedef struct cpudata {
+ } CPUData, *CPUDataPtr;
+ 
+ @interface CPUInfo : NSObject {
+-	processor_info_array_t lastProcessorInfo;
++	processor_cpu_load_info_t lastProcessorInfo;
+ 	mach_msg_type_number_t numLastProcessorInfo;
+ 	unsigned numCPUs;
+-	CPUDataPtr cpudata;
++	CPUDataPtr *allcpudata;
+ 	int size;
+ 	int inptr;
+ 	int outptr;
+@@ -36,10 +36,11 @@ typedef struct cpudata {
+ 
+ - (CPUInfo *)initWithCapacity:(unsigned)numItems;
+ - (void)refresh;
++- (unsigned)numCPUs;
+ - (void)startIterate;
+-- (BOOL)getNext:(CPUDataPtr)ptr;
+-- (void)getCurrent:(CPUDataPtr)ptr;
+-- (void)getLast:(CPUDataPtr)ptr;
++- (BOOL)getNext:(CPUDataPtr)ptr forCPU:(unsigned)cpu;
++- (void)getCurrent:(CPUDataPtr)ptr forCPU:(unsigned)cpu;
++- (void)getLast:(CPUDataPtr)ptr forCPU:(unsigned)cpu;
+ - (int)getSize;
+ 
+ @end
+diff --git a/CPUInfo.m b/CPUInfo.m
+index 77d935d..ad1a659 100644
+--- a/CPUInfo.m
++++ b/CPUInfo.m
+@@ -37,35 +37,34 @@
+ */
+ - (CPUInfo *) initWithCapacity:(unsigned)numItems
+ {
+-	
++	unsigned i;
++
+ 	/*
+ 		from Hosey's CPU Usage.app:
+ 	*/	
+ 	//We could get the number of processors the same way that we get the CPU usage info, but that allocates memory.
+-/*	enum { miblen = 2U };
++	enum { miblen = 2U };
+ 	int mib[miblen] = { CTL_HW, HW_NCPU };
+ 	size_t sizeOfNumCPUs = sizeof(numCPUs);
+ 	int status = sysctl(mib, miblen,
+ 		   &numCPUs, &sizeOfNumCPUs,
+-*/		   /*newp*/ // NULL, /*newlen*/ 0U);
+-//	if(status != 0) {
++		   NULL, /*newlen*/ 0U);
++	if(status != 0) {
+ 		numCPUs = 1; // TODO we're going to assume one CPU for the moment.
+-//		NSLog(@"%s error status, assuming one CPU", _cmd);
+-//	}
+-	
+-	
+-	
+-	
+-	
++		NSLog(@"%s error status, assuming one CPU", _cmd);
++	}
+ 	
+ 	self = [super init];
+ 	
+ 	size = numItems;
+-	cpudata = calloc(numItems, sizeof(CPUData));
+-	if (cpudata == NULL) {
++	allcpudata = calloc(numCPUs, sizeof(CPUDataPtr));
++	if (allcpudata == NULL) {
+ 		NSLog (@"%s Failed to allocate buffer for CPUInfo", _cmd);
+ 		return (nil);
+ 	}
++	for(i = 0; i < numCPUs; i++) {
++		allcpudata[i] = calloc(numItems, sizeof(CPUData));
++	}
+ 	// Set up our data structure ptrs
+ 	inptr = 0;
+ 	outptr = -1;
+@@ -96,11 +95,16 @@
+ */
+ - (void)refresh
+ {
+-	processor_info_array_t processorInfo;
+-	natural_t numProcessors_nobodyCares = 0U;
++	processor_cpu_load_info_t processorInfo;
++	natural_t numProcessors;
+ 	mach_msg_type_number_t numProcessorInfo;
++	unsigned i;
+ 
+-	kern_return_t err = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, (natural_t *)&numProcessors_nobodyCares, (processor_info_array_t *)&processorInfo, (mach_msg_type_number_t *)&numProcessorInfo);
++	kern_return_t err = host_processor_info(mach_host_self(), 
++											PROCESSOR_CPU_LOAD_INFO, 
++											(natural_t *)&numProcessors, 
++											(processor_info_array_t *)&processorInfo, 
++											(mach_msg_type_number_t *)&numProcessorInfo);
+ 	if(err != KERN_SUCCESS) {
+ 		NSLog(@"%s failed to get cpu statistics", _cmd);
+ 	}
+@@ -108,23 +112,30 @@
+ 	/*
+ 		TODO make this multicore. First, we're gonna need a multicore machine to test it on.
+ 	*/
+-	// for(unsigned i = 0U; i < numCPUs; ++i)
+-	
+-	unsigned int inUse, total, user, sys, nice, idle;
+-		
+-	user = processorInfo[CPU_STATE_USER] - lastProcessorInfo[CPU_STATE_USER];
+-	sys = processorInfo[CPU_STATE_SYSTEM] - lastProcessorInfo[CPU_STATE_SYSTEM];
+-	nice = processorInfo[CPU_STATE_NICE] - lastProcessorInfo[CPU_STATE_NICE];
+-	idle = processorInfo[CPU_STATE_IDLE] - lastProcessorInfo[CPU_STATE_IDLE];
+ 
+-	inUse = user + sys + nice;
+-	total = inUse + idle;
+-	
+-	cpudata[inptr].user = (double)user / (double)total;
+-	cpudata[inptr].sys = (double)sys / (double)total;
+-	cpudata[inptr].nice = (double)nice / (double)total;
+-	cpudata[inptr].idle = (double)idle / (double)total;
++	for(i = 0U; i < numCPUs; ++i) {
++		// NB: numCPUs ought to be the same as numProcessors -- otherwise ...?
++		assert(numCPUs == numProcessors);
++		assert(numProcessorInfo == numProcessors * CPU_STATE_MAX);
++		
++		CPUDataPtr cpudata = allcpudata[i];
+ 	
++		unsigned int inUse, total, user, sys, nice, idle;
++			
++		user = processorInfo[i].cpu_ticks[CPU_STATE_USER] - lastProcessorInfo[i].cpu_ticks[CPU_STATE_USER];
++		sys = processorInfo[i].cpu_ticks[CPU_STATE_SYSTEM] - lastProcessorInfo[i].cpu_ticks[CPU_STATE_SYSTEM];
++		nice = processorInfo[i].cpu_ticks[CPU_STATE_NICE] - lastProcessorInfo[i].cpu_ticks[CPU_STATE_NICE];
++		idle = processorInfo[i].cpu_ticks[CPU_STATE_IDLE] - lastProcessorInfo[i].cpu_ticks[CPU_STATE_IDLE];
++
++		inUse = user + sys + nice;
++		total = inUse + idle;
++		
++		cpudata[inptr].user = (double)user / (double)total;
++		cpudata[inptr].sys = (double)sys / (double)total;
++		cpudata[inptr].nice = (double)nice / (double)total;
++		cpudata[inptr].idle = (double)idle / (double)total;
++		NSLog(@"CPU %d: IDLE: %f\n", i, (double)idle / (double)total);
++	}
+ 	
+ 	// deallocate the last one, since we don't want memory leaks.
+ 	/*
+@@ -149,11 +160,11 @@
+ }
+ 
+ 
+-- (BOOL)getNext:(CPUDataPtr)ptr
++- (BOOL)getNext:(CPUDataPtr)ptr forCPU:(unsigned)cpu
+ {
+ 	if (outptr == -1)
+ 		return (FALSE);
+-	*ptr = cpudata[outptr++];
++	*ptr = allcpudata[cpu][outptr++];
+ 	if (outptr >= size)
+ 		outptr = 0;
+ 	if (outptr == inptr)
+@@ -162,15 +173,15 @@
+ }
+ 
+ 
+-- (void)getCurrent:(CPUDataPtr)ptr
++- (void)getCurrent:(CPUDataPtr)ptr forCPU:(unsigned)cpu
+ {
+-	*ptr = cpudata[inptr ? inptr - 1 : size - 1];
++	*ptr = allcpudata[cpu][inptr ? inptr - 1 : size - 1];
+ }
+ 
+ 
+-- (void)getLast:(CPUDataPtr)ptr
++- (void)getLast:(CPUDataPtr)ptr forCPU:(unsigned)cpu
+ {
+-	*ptr = cpudata[inptr > 1 ? inptr - 2 : size + inptr - 2];
++	*ptr = allcpudata[cpu][inptr > 1 ? inptr - 2 : size + inptr - 2];
+ }
+ 
+ 
+@@ -179,4 +190,6 @@
+ 	return (size);
+ }
+ 
++- (unsigned)numCPUs { return (numCPUs); }
++
+ @end
+diff --git a/MainController.m b/MainController.m
+index 403dbe5..5a5e911 100644
+--- a/MainController.m
++++ b/MainController.m
+@@ -61,38 +61,49 @@
+ {	
+ 	CPUData			cpudata;
+ 	
+-	
++	unsigned 		cpu;
++	float			height = GRAPH_SIZE / [cpuInfo numCPUs];
++	float			width = GRAPH_SIZE;
+ 	int				x;
+-	float			y, yy;
++	float			y, yy = 0;
+ 	int barWidth = (int)[[preferences objectForKey:BAR_WIDTH_SIZE_KEY] floatValue];
+ 	// double interval = 0.1 * [[preferences objectForKey:UPDATE_FREQUENCY_KEY] floatValue];
+ 	
+ 	[graphImage lockFocus];
+ 
+ 	// draw the cpu usage graph
++	
+ 	[cpuInfo startIterate];
+-	// for (x = 0; [memInfo getNext:&vmdata]; x++) {
+-	for (x = 0; [cpuInfo getNext:&cpudata]; x+=barWidth) {
+-		
+-		// y += vmdata.active * GRAPH_SIZE;
+-		y = cpudata.sys * GRAPH_SIZE;
+-		[[preferences objectForKey:SYS_COLOR_KEY] set];
+-		NSRectFill (NSMakeRect(x - barWidth, 0.0, x, y));
+-		yy = y;
+-		// y += vmdata.inactive * GRAPH_SIZE;
+-		y += cpudata.nice * GRAPH_SIZE;
+-		[[preferences objectForKey:NICE_COLOR_KEY] set];
+-		NSRectFill (NSMakeRect(x - barWidth, yy, x, y));
+-		// y = vmdata.wired * GRAPH_SIZE;
+-		yy = y;
+-		
+-		y += cpudata.user * GRAPH_SIZE;
+-		[[preferences objectForKey:USER_COLOR_KEY] set];
+-		NSRectFill (NSMakeRect(x - barWidth, yy, x, y));
+-		
+-		// free data here
++	for (cpu = 0; cpu < [cpuInfo numCPUs]; cpu++ ) {
++		yy = cpu * height;
++
+ 		[[preferences objectForKey:IDLE_COLOR_KEY] set];
+-		NSRectFill (NSMakeRect(x - barWidth, y, x, GRAPH_SIZE));
++		NSRectFill(NSMakeRect(0, yy, width, yy + height));
++
++		// for (x = 0; [memInfo getNext:&vmdata]; x++) {
++		for (x = 0; [cpuInfo getNext:&cpudata forCPU:cpu]; x+=barWidth) {
++			// y += vmdata.active * GRAPH_SIZE;
++			y = yy + cpudata.sys * height;
++			[[preferences objectForKey:SYS_COLOR_KEY] set];
++			NSRectFill (NSMakeRect(x - barWidth, yy, x, y));
++			yy = y;
++			// y += vmdata.inactive * GRAPH_SIZE;
++			y += cpudata.nice * height;
++			[[preferences objectForKey:NICE_COLOR_KEY] set];
++			NSRectFill (NSMakeRect(x - barWidth, yy, x, y));
++			// y = vmdata.wired * GRAPH_SIZE;
++			yy = y;
++			
++			y += cpudata.user * height;
++			[[preferences objectForKey:USER_COLOR_KEY] set];
++			NSRectFill (NSMakeRect(x - barWidth, yy, x, y));
++			yy = y;
++			
++			// free data here
++			y += cpudata.idle * height;
++			[[preferences objectForKey:IDLE_COLOR_KEY] set];
++			NSRectFill (NSMakeRect(x - barWidth, yy, x, y));
++		}
+ 	}
+ 	
+ 	// transfer graph image to icon image
+@@ -110,7 +121,10 @@
+ 	// VMData			vmdata, vmdata0;
+ 	CPUData			cpudata, cpudata0;
+ 	int barWidth = (int)[[preferences objectForKey:BAR_WIDTH_SIZE_KEY] floatValue];
+-	float			y, yy;
++	float			y, yy = 0;
++	unsigned 		cpu;
++	float			height = GRAPH_SIZE / [cpuInfo numCPUs];
++	float			width = GRAPH_SIZE;
+ 	
+ 	// double interval = 0.1 * [[preferences objectForKey:UPDATE_FREQUENCY_KEY] floatValue];
+ 	
+@@ -119,34 +133,39 @@
+ 	// offset the old graph image
+ 	[graphImage compositeToPoint:NSMakePoint(-barWidth, 0) operation:NSCompositeCopy];
+ 		
+-	// [memInfo getLast:&vmdata0];
+-	[cpuInfo getLast:&cpudata0];
+-	// [memInfo getCurrent:&vmdata];
+-	[cpuInfo getCurrent:&cpudata];
+-	
+-	// draw chronological graph into graph image
+-	
+-	// y += vmdata.active * GRAPH_SIZE;
+-	y = cpudata.sys * GRAPH_SIZE;
+-	[[preferences objectForKey:SYS_COLOR_KEY] set];
+-	NSRectFill (NSMakeRect(GRAPH_SIZE - barWidth, 0.0, GRAPH_SIZE - barWidth, y));
+-	yy = y;
+-	
+-	// y += vmdata.inactive * GRAPH_SIZE;
+-	y += cpudata.nice * GRAPH_SIZE;
+-	[[preferences objectForKey:NICE_COLOR_KEY] set];
+-	NSRectFill (NSMakeRect(GRAPH_SIZE - barWidth, yy, GRAPH_SIZE - barWidth, y));
+-	yy = y;
+-	
+-	// y = vmdata.wired * GRAPH_SIZE;
+-	y += cpudata.user * GRAPH_SIZE;
+-	[[preferences objectForKey:USER_COLOR_KEY] set];
+-	NSRectFill (NSMakeRect(GRAPH_SIZE - barWidth, yy, GRAPH_SIZE - barWidth, y));
+-
+-	// free data here
+-	[[preferences objectForKey:IDLE_COLOR_KEY] set];
+-	NSRectFill (NSMakeRect(GRAPH_SIZE - barWidth, y, GRAPH_SIZE - barWidth, GRAPH_SIZE));
+-
++	for (cpu = 0; cpu < [cpuInfo numCPUs]; cpu++ ) {
++		yy = cpu * height;
++		
++		// [memInfo getLast:&vmdata0];
++		[cpuInfo getLast:&cpudata0 forCPU:cpu];
++		// [memInfo getCurrent:&vmdata];
++		[cpuInfo getCurrent:&cpudata forCPU:cpu];
++		
++		// draw chronological graph into graph image
++		
++		// y += vmdata.active * GRAPH_SIZE;
++		y = yy;
++		[[preferences objectForKey:SYS_COLOR_KEY] set];
++		NSRectFill (NSMakeRect(width - barWidth, yy, width - barWidth, y));
++		yy = y;
++		
++		// y += vmdata.inactive * GRAPH_SIZE;
++		y += cpudata.nice * height;
++		[[preferences objectForKey:NICE_COLOR_KEY] set];
++		NSRectFill (NSMakeRect(width - barWidth, yy, width - barWidth, y));
++		yy = y;
++		
++		// y = vmdata.wired * GRAPH_SIZE;
++		y += cpudata.user * height;
++		[[preferences objectForKey:USER_COLOR_KEY] set];
++		NSRectFill (NSMakeRect(width - barWidth, yy, width - barWidth, y));
++		yy = y;
++		
++		// free data here
++		y += cpudata.idle * height;
++		[[preferences objectForKey:IDLE_COLOR_KEY] set];
++		NSRectFill (NSMakeRect(width - barWidth, yy, width - barWidth, y));
++	}
+ 
+ 	// transfer graph image to icon image
+ 	[graphImage unlockFocus];
+-- 
+1.5.2.4
+

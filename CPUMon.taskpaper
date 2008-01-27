@@ -1,17 +1,15 @@
-CPU Mon:
-before 1.0 release:
-- tidy up release notes, remove localizations if they're not accurate. @done
-- before shipping: build a full deployment vers, and move prefs file beforehand: any last bugs/missing things @done
-- write up app, release on blog and cbowns.com
+CPU History:
 future:
+- look at dsandler's multicore patch
+- a system to keep release notes synced and build a disk image with what I need?
 - bugs:
-- 1. app blows away graph
-	- happens until the CPU data buffer has been fully filled, and you hold down "restore defaults" through TWO timer firings, then it's fixed.
-		- can also be repro'd just by changing prefs about showing separate graph or putting graph on top
-	- diff CPU source against memory monitor:
-		- any changes with data source being reset? shouldn't be…
-	- what about removing the notifications in favor of straight method callbacks? first, what's the underlying problem: don't solve what doesn't need solving
-- 2. cmd-w doesn't close prefs window
+	- 1. app blows away graph
+		- happens until the CPU data buffer has been fully filled, and you hold down "restore defaults" through TWO timer firings, then it's fixed.
+			- can also be repro'd just by changing prefs about showing separate graph or putting graph on top
+		- diff CPU source against memory monitor:
+			- any changes with data source being reset? shouldn't be…
+		- what about removing the notifications in favor of straight method callbacks? first, what's the underlying problem: don't solve what doesn't need solving
+	- 2. cmd-w doesn't close prefs window or about window
 - future upgrades:
 	- CPU usage across processors:
 		- get # of processors with http://www.cocoadev.com/index.pl?NSProcessInfo
@@ -81,3 +79,7 @@ Archive:
 	- call updateGraph after prefs change @done @project(before 1.0 release)
 - prefs: add an option for bar width: from 1 to 20 px per bar @done @project(before 1.0 release)
 	- preferred: 4-6 @done @project(before 1.0 release)
+- tidy up release notes, remove localizations if they're not accurate. @done @project(before 1.0 release)
+- before shipping: build a full deployment vers, and move prefs file beforehand: any last bugs/missing things @done @project(before 1.0 release)
+- write up app, release on cbowns.com @done @project(before 1.0 release)
+	- also on blog @done @project(before 1.0 release)
