@@ -1,4 +1,0 @@
-CFBundleName = "CPU History";
-CFBundleDisplayName = "CPU History";
-NSHumanReadableCopyright = "Copyright © 2001-2006 Bernhard Baehr; Copyright 2008 Christopher Bowns";
-CFBundleHelpBookName = "CPU History Hilfe";

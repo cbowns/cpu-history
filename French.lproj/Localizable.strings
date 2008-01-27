@@ -1,7 +1,0 @@
-/* Preferences panel */
-"every\n%.1f sec." = "chaque\n%.1f s";
-
-/* Dock icon */
-"in" = "Entre";
-"out" = "Sort";
-"i/o" = "E/S";
