@@ -61,38 +61,49 @@
 {	
 	CPUData			cpudata;
 	
-	
+	unsigned 		cpu;
+	float			height = GRAPH_SIZE / [cpuInfo numCPUs];
+	float			width = GRAPH_SIZE;
 	int				x;
-	float			y, yy;
+	float			y, yy = 0;
 	int barWidth = (int)[[preferences objectForKey:BAR_WIDTH_SIZE_KEY] floatValue];
 	// double interval = 0.1 * [[preferences objectForKey:UPDATE_FREQUENCY_KEY] floatValue];
 	
 	[graphImage lockFocus];
 
 	// draw the cpu usage graph
+	
 	[cpuInfo startIterate];
-	// for (x = 0; [memInfo getNext:&vmdata]; x++) {
-	for (x = 0; [cpuInfo getNext:&cpudata]; x+=barWidth) {
-		
-		// y += vmdata.active * GRAPH_SIZE;
-		y = cpudata.sys * GRAPH_SIZE;
-		[[preferences objectForKey:SYS_COLOR_KEY] set];
-		NSRectFill (NSMakeRect(x - barWidth, 0.0, x, y));
-		yy = y;
-		// y += vmdata.inactive * GRAPH_SIZE;
-		y += cpudata.nice * GRAPH_SIZE;
-		[[preferences objectForKey:NICE_COLOR_KEY] set];
-		NSRectFill (NSMakeRect(x - barWidth, yy, x, y));
-		// y = vmdata.wired * GRAPH_SIZE;
-		yy = y;
-		
-		y += cpudata.user * GRAPH_SIZE;
-		[[preferences objectForKey:USER_COLOR_KEY] set];
-		NSRectFill (NSMakeRect(x - barWidth, yy, x, y));
-		
-		// free data here
+	for (cpu = 0; cpu < [cpuInfo numCPUs]; cpu++ ) {
+		yy = cpu * height;
+
 		[[preferences objectForKey:IDLE_COLOR_KEY] set];
-		NSRectFill (NSMakeRect(x - barWidth, y, x, GRAPH_SIZE));
+		NSRectFill(NSMakeRect(0, yy, width, yy + height));
+
+		// for (x = 0; [memInfo getNext:&vmdata]; x++) {
+		for (x = 0; [cpuInfo getNext:&cpudata forCPU:cpu]; x+=barWidth) {
+			// y += vmdata.active * GRAPH_SIZE;
+			y = yy + cpudata.sys * height;
+			[[preferences objectForKey:SYS_COLOR_KEY] set];
+			NSRectFill (NSMakeRect(x - barWidth, yy, x, y));
+			yy = y;
+			// y += vmdata.inactive * GRAPH_SIZE;
+			y += cpudata.nice * height;
+			[[preferences objectForKey:NICE_COLOR_KEY] set];
+			NSRectFill (NSMakeRect(x - barWidth, yy, x, y));
+			// y = vmdata.wired * GRAPH_SIZE;
+			yy = y;
+			
+			y += cpudata.user * height;
+			[[preferences objectForKey:USER_COLOR_KEY] set];
+			NSRectFill (NSMakeRect(x - barWidth, yy, x, y));
+			yy = y;
+			
+			// free data here
+			y += cpudata.idle * height;
+			[[preferences objectForKey:IDLE_COLOR_KEY] set];
+			NSRectFill (NSMakeRect(x - barWidth, yy, x, y));
+		}
 	}
 	
 	// transfer graph image to icon image
@@ -110,7 +121,10 @@
 	// VMData			vmdata, vmdata0;
 	CPUData			cpudata, cpudata0;
 	int barWidth = (int)[[preferences objectForKey:BAR_WIDTH_SIZE_KEY] floatValue];
-	float			y, yy;
+	float			y, yy = 0;
+	unsigned 		cpu;
+	float			height = GRAPH_SIZE / [cpuInfo numCPUs];
+	float			width = GRAPH_SIZE;
 	
 	// double interval = 0.1 * [[preferences objectForKey:UPDATE_FREQUENCY_KEY] floatValue];
 	
@@ -119,34 +133,39 @@
 	// offset the old graph image
 	[graphImage compositeToPoint:NSMakePoint(-barWidth, 0) operation:NSCompositeCopy];
 		
-	// [memInfo getLast:&vmdata0];
-	[cpuInfo getLast:&cpudata0];
-	// [memInfo getCurrent:&vmdata];
-	[cpuInfo getCurrent:&cpudata];
-	
-	// draw chronological graph into graph image
-	
-	// y += vmdata.active * GRAPH_SIZE;
-	y = cpudata.sys * GRAPH_SIZE;
-	[[preferences objectForKey:SYS_COLOR_KEY] set];
-	NSRectFill (NSMakeRect(GRAPH_SIZE - barWidth, 0.0, GRAPH_SIZE - barWidth, y));
-	yy = y;
-	
-	// y += vmdata.inactive * GRAPH_SIZE;
-	y += cpudata.nice * GRAPH_SIZE;
-	[[preferences objectForKey:NICE_COLOR_KEY] set];
-	NSRectFill (NSMakeRect(GRAPH_SIZE - barWidth, yy, GRAPH_SIZE - barWidth, y));
-	yy = y;
-	
-	// y = vmdata.wired * GRAPH_SIZE;
-	y += cpudata.user * GRAPH_SIZE;
-	[[preferences objectForKey:USER_COLOR_KEY] set];
-	NSRectFill (NSMakeRect(GRAPH_SIZE - barWidth, yy, GRAPH_SIZE - barWidth, y));
-
-	// free data here
-	[[preferences objectForKey:IDLE_COLOR_KEY] set];
-	NSRectFill (NSMakeRect(GRAPH_SIZE - barWidth, y, GRAPH_SIZE - barWidth, GRAPH_SIZE));
-
+	for (cpu = 0; cpu < [cpuInfo numCPUs]; cpu++ ) {
+		yy = cpu * height;
+		
+		// [memInfo getLast:&vmdata0];
+		[cpuInfo getLast:&cpudata0 forCPU:cpu];
+		// [memInfo getCurrent:&vmdata];
+		[cpuInfo getCurrent:&cpudata forCPU:cpu];
+		
+		// draw chronological graph into graph image
+		
+		// y += vmdata.active * GRAPH_SIZE;
+		y = yy;
+		[[preferences objectForKey:SYS_COLOR_KEY] set];
+		NSRectFill (NSMakeRect(width - barWidth, yy, width - barWidth, y));
+		yy = y;
+		
+		// y += vmdata.inactive * GRAPH_SIZE;
+		y += cpudata.nice * height;
+		[[preferences objectForKey:NICE_COLOR_KEY] set];
+		NSRectFill (NSMakeRect(width - barWidth, yy, width - barWidth, y));
+		yy = y;
+		
+		// y = vmdata.wired * GRAPH_SIZE;
+		y += cpudata.user * height;
+		[[preferences objectForKey:USER_COLOR_KEY] set];
+		NSRectFill (NSMakeRect(width - barWidth, yy, width - barWidth, y));
+		yy = y;
+		
+		// free data here
+		y += cpudata.idle * height;
+		[[preferences objectForKey:IDLE_COLOR_KEY] set];
+		NSRectFill (NSMakeRect(width - barWidth, yy, width - barWidth, y));
+	}
 
 	// transfer graph image to icon image
 	[graphImage unlockFocus];
