@@ -1,6 +1,8 @@
 CPU History:
 future:
 - look at dsandler's multicore patch
+	- try building straight
+	- line-by-line code review
 - a system to keep release notes synced and build a disk image with what I need?
 - bugs:
 	- 1. app blows away graph

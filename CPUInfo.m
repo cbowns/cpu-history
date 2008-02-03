@@ -57,7 +57,7 @@
 	self = [super init];
 	
 	size = numItems;
-	allcpudata = calloc(numCPUs, sizeof(CPUDataPtr));
+	allcpudata = calloc(numCPUs*numItems, sizeof(CPUDataPtr));
 	if (allcpudata == NULL) {
 		NSLog (@"%s Failed to allocate buffer for CPUInfo", _cmd);
 		return (nil);
