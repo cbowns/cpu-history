@@ -52,7 +52,7 @@
 		   &numCPUs, &sizeOfNumCPUs,
 		   NULL, /*newlen*/ 0U);
 	if(status != 0) {
-		numCPUs = 1; // TODO we're going to assume one CPU for the moment.
+		numCPUs = 1; // It's either this, or premature death
 		NSLog(@"%s error status, assuming one CPU", _cmd);
 	}
 	
@@ -145,9 +145,6 @@
 	}
 	
 	// deallocate the last one, since we don't want memory leaks.
-	/*
-		TODO refresh: test in Shark / malloc debug: this DOES leak if we take this dealloc out, right?
-	*/
 	if(lastProcessorInfo) {
 		size_t lastProcessorInfoSize = sizeof(integer_t) * numLastProcessorInfo;
 		vm_deallocate(mach_task_self(), (vm_address_t)lastProcessorInfo, lastProcessorInfoSize);

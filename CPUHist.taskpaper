@@ -1,9 +1,9 @@
 CPU History:
 future:
 - look at dsandler's multicore patch
-	- try building straight
 	- line-by-line code review
 - a system to keep release notes synced and build a disk image with what I need?
+- nice values no longer exist in 10.5?
 - bugs:
 	- 1. app blows away graph
 		- happens until the CPU data buffer has been fully filled, and you hold down "restore defaults" through TWO timer firings, then it's fixed.
@@ -85,3 +85,5 @@ Archive:
 - before shipping: build a full deployment vers, and move prefs file beforehand: any last bugs/missing things @done @project(before 1.0 release)
 - write up app, release on cbowns.com @done @project(before 1.0 release)
 	- also on blog @done @project(before 1.0 release)
+	- try building straight @done @project(future)
+		- does not graph system usage @done @project(future)
