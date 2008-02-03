@@ -139,7 +139,7 @@
 		#ifdef NSLOG_DEBUG
 		NSLog(@"CPU %d: User: %f\n", i, cpudata[inptr].user);
 		NSLog(@"CPU %d: Sys: %f\n", i, cpudata[inptr].sys);
-		NSLog(@"CPU %d: Nice: %f\n", i, cpudata[inptr].nice);
+		// NSLog(@"CPU %d: Nice: %f\n", i, cpudata[inptr].nice);
 		NSLog(@"CPU %d: Idle: %f\n", i, cpudata[inptr].idle);
 		#endif
 	}
