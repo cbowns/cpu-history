@@ -37,9 +37,11 @@
 */
 - (CPUInfo *) initWithCapacity:(unsigned)numItems
 {
+	self = [super init];
+
 	unsigned i;
 
-	/*
+/*
 		from Hosey's CPU Usage.app:
 	*/	
 	//We could get the number of processors the same way that we get the CPU usage info, but that allocates memory.
@@ -54,10 +56,10 @@
 		NSLog(@"%s error status, assuming one CPU", _cmd);
 	}
 	
-	self = [super init];
+	size = numItems; // set our size to numItems because that's array length
 	
-	size = numItems;
-	allcpudata = calloc(numCPUs*numItems, sizeof(CPUDataPtr));
+	// Allocate the cpu data matrix
+	allcpudata = calloc(numCPUs, sizeof(CPUDataPtr));
 	if (allcpudata == NULL) {
 		NSLog (@"%s Failed to allocate buffer for CPUInfo", _cmd);
 		return (nil);
@@ -65,16 +67,20 @@
 	for(i = 0; i < numCPUs; i++) {
 		allcpudata[i] = calloc(numItems, sizeof(CPUData));
 	}
+	
 	// Set up our data structure ptrs
 	inptr = 0;
 	outptr = -1;
 	
 	// set the lastProcessorInfo array so we can get to work when we call refresh:
 	natural_t numProcessors_nobodyCares = 0U;
-	kern_return_t err = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, (natural_t *)&numProcessors_nobodyCares, (processor_info_array_t *)&lastProcessorInfo, (mach_msg_type_number_t *)&numLastProcessorInfo);
+	kern_return_t err = host_processor_info(mach_host_self(),
+	                                        PROCESSOR_CPU_LOAD_INFO,
+	                                        (natural_t *)&numProcessors_nobodyCares,
+	                                        (processor_info_array_t *)&lastProcessorInfo,
+	                                        (mach_msg_type_number_t *)&numLastProcessorInfo);
 	if(err != KERN_SUCCESS) {
 		NSLog(@"%s failed to get cpu statistics", _cmd);
-		
 		// if we can't get this info, then we're toast. Exit gracefully.
 		return (nil);
 	}
@@ -100,18 +106,14 @@
 	mach_msg_type_number_t numProcessorInfo;
 	unsigned i;
 
-	kern_return_t err = host_processor_info(mach_host_self(), 
-											PROCESSOR_CPU_LOAD_INFO, 
-											(natural_t *)&numProcessors, 
-											(processor_info_array_t *)&processorInfo, 
-											(mach_msg_type_number_t *)&numProcessorInfo);
+	kern_return_t err = host_processor_info(mach_host_self(),
+	                                        PROCESSOR_CPU_LOAD_INFO,
+	                                        (natural_t *)&numProcessors,
+	                                        (processor_info_array_t *)&processorInfo,
+	                                        (mach_msg_type_number_t *)&numProcessorInfo);
 	if(err != KERN_SUCCESS) {
-		NSLog(@"%s failed to get cpu statistics", _cmd);
+		NSLog(@"%s failed to get cpu statistics", _cmd); // Uh oh.
 	}
-	
-	/*
-		TODO make this multicore. First, we're gonna need a multicore machine to test it on.
-	*/
 
 	for(i = 0U; i < numCPUs; ++i) {
 		// NB: numCPUs ought to be the same as numProcessors -- otherwise ...?
@@ -134,7 +136,12 @@
 		cpudata[inptr].sys = (double)sys / (double)total;
 		cpudata[inptr].nice = (double)nice / (double)total;
 		cpudata[inptr].idle = (double)idle / (double)total;
-		NSLog(@"CPU %d: IDLE: %f\n", i, (double)idle / (double)total);
+		#ifdef NSLOG_DEBUG
+		NSLog(@"CPU %d: User: %f\n", i, cpudata[inptr].user);
+		NSLog(@"CPU %d: Sys: %f\n", i, cpudata[inptr].sys);
+		NSLog(@"CPU %d: Nice: %f\n", i, cpudata[inptr].nice);
+		NSLog(@"CPU %d: Idle: %f\n", i, cpudata[inptr].idle);
+		#endif
 	}
 	
 	// deallocate the last one, since we don't want memory leaks.
