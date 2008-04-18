@@ -1,10 +1,12 @@
 CPU History:
 future:
-- look at dsandler's multicore patch
-	- line-by-line code review
-		- get # of processors with http://www.cocoadev.com/index.pl?NSProcessInfo
+- look at dsandler's multicore patch @done
+	- line-by-line code review @done
+		- get # of processors with http://www.cocoadev.com/index.pl?NSProcessInfo @done
+- put a split in the view if cpus > 1: @done
+	- conditional code in drawing, etc. new height offset: ( total - spacer ) / numCPUs @done
+- fill the array with zero data, paint the transparent bar to the entire display
 
-- a system to keep release notes synced and build a disk image with what I need?
 - bugs:
 	- 1. app blows away graph
 		- happens until the CPU data buffer has been fully filled, and you hold down "restore defaults" through TWO timer firings, then it's fixed.
@@ -15,6 +17,7 @@ future:
 	- 2. cmd-w doesn't close prefs window or about window
 	- 3. floater doesn't remember position
 	- 4. 
+- a system to keep release notes synced and build a disk image with what I need?
 
 Mem -> CPU conversion key:
 - wired = user
