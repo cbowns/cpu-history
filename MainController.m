@@ -27,8 +27,14 @@
 #import "MainController.h"
 
 
+#ifndef NSLOG_DEBUG
+#define NSLOG_DEBUG
+#endif
+
 #define GRAPH_SIZE	128
 // define GRAPH_WIDTH	8
+
+#define GRAPH_SPACER 8
 
 @implementation MainController
 
@@ -59,10 +65,15 @@
 - (void)drawComplete
 // completely redraw graphImage, put graph into displayImage
 {	
+	
+	#ifdef NSLOG_DEBUG
+	NSLog(@"%s redrawing complete graph", _cmd);
+	#endif
+
 	CPUData			cpudata;
 	
-	unsigned 		cpu;
-	float			height = GRAPH_SIZE / [cpuInfo numCPUs];
+	unsigned 		cpu, numCPUs = [cpuInfo numCPUs];
+	float			height = GRAPH_SIZE / numCPUs;
 	float			width = GRAPH_SIZE;
 	int				x;
 	float			y, yy = 0;
@@ -74,17 +85,22 @@
 	// draw the cpu usage graph
 	
 	[cpuInfo startIterate];
-	for (cpu = 0; cpu < [cpuInfo numCPUs]; cpu++ ) {
+	for (cpu = 0; cpu < numCPUs; cpu++ ) {
 		yy = cpu * height;
 
 		[[preferences objectForKey:IDLE_COLOR_KEY] set];
 		NSRectFill(NSMakeRect(0, yy, width, yy + height));
 
 		// for (x = 0; [memInfo getNext:&vmdata]; x++) {
-		for (x = 0; [cpuInfo getNext:&cpudata forCPU:cpu]; x+=barWidth) {
+		for (x = 0; [cpuInfo getNext:&cpudata forCPU:cpu]; x += barWidth) {
 			// y += vmdata.active * GRAPH_SIZE;
+			#ifdef NSLOG_DEBUG
+			// NSLog(@"CPU %d: User: %f, Sys: %f, Idle: %f", cpu, cpudata.user, cpudata.sys, cpudata.idle);
+			#endif
 			y = yy + cpudata.sys * height;
 			[[preferences objectForKey:SYS_COLOR_KEY] set];
+			// NSLog(@"CPU %d: Sys: %f\n", i, cpudata.sys);
+			
 			NSRectFill (NSMakeRect(x - barWidth, yy, x, y));
 			yy = y;
 			// y += vmdata.inactive * GRAPH_SIZE;
@@ -121,9 +137,17 @@
 	// VMData			vmdata, vmdata0;
 	CPUData			cpudata, cpudata0;
 	int barWidth = (int)[[preferences objectForKey:BAR_WIDTH_SIZE_KEY] floatValue];
-	float			y, yy = 0;
-	unsigned 		cpu;
-	float			height = GRAPH_SIZE / [cpuInfo numCPUs];
+	float			y = 0, yy = 0;
+	unsigned 		cpu, numCPUs = [cpuInfo numCPUs];
+	
+	float			height = GRAPH_SIZE / numCPUs;
+	
+	
+	if (numCPUs > 1)
+	{
+		height = ( GRAPH_SIZE - (GRAPH_SPACER * numCPUs - 1) / 2 ) / numCPUs;
+	}
+	
 	float			width = GRAPH_SIZE;
 	
 	// double interval = 0.1 * [[preferences objectForKey:UPDATE_FREQUENCY_KEY] floatValue];
@@ -133,8 +157,22 @@
 	// offset the old graph image
 	[graphImage compositeToPoint:NSMakePoint(-barWidth, 0) operation:NSCompositeCopy];
 		
-	for (cpu = 0; cpu < [cpuInfo numCPUs]; cpu++ ) {
-		yy = cpu * height;
+	for (cpu = 0; cpu < numCPUs; cpu++ ) {
+		if (cpu != 0)
+		{
+			// yy = 
+			yy = y;
+			y += GRAPH_SPACER;
+			// [[NSColor whiteColor] set];
+			[[NSColor colorWithCalibratedRed:0.0 green:0.0 blue:0.0 alpha:0.0] set];
+			NSRectFill (NSMakeRect(width - barWidth, yy, width - barWidth, y));
+			// y += cpudata.sys * height;
+			yy = y;
+		}
+		else
+		{
+			yy = cpu * height;
+		}
 		
 		// [memInfo getLast:&vmdata0];
 		[cpuInfo getLast:&cpudata0 forCPU:cpu];
@@ -142,18 +180,25 @@
 		[cpuInfo getCurrent:&cpudata forCPU:cpu];
 		
 		// draw chronological graph into graph image
+		#ifdef NSLOG_DEBUG
+		// NSLog(@"CPU %d: User: %f, Sys: %f, Idle: %f", cpu, cpudata.user, cpudata.sys, cpudata.idle);
+		#endif
+		
 		
 		// y += vmdata.active * GRAPH_SIZE;
-		y = yy;
+		// y += vmdata.inactive * GRAPH_SIZE;
+		// y = yy;
+		y += cpudata.sys * height;
 		[[preferences objectForKey:SYS_COLOR_KEY] set];
 		NSRectFill (NSMakeRect(width - barWidth, yy, width - barWidth, y));
 		yy = y;
-		
-		// y += vmdata.inactive * GRAPH_SIZE;
+
 		y += cpudata.nice * height;
+		// y += cpudata.nice * height;
 		[[preferences objectForKey:NICE_COLOR_KEY] set];
 		NSRectFill (NSMakeRect(width - barWidth, yy, width - barWidth, y));
 		yy = y;
+		
 		
 		// y = vmdata.wired * GRAPH_SIZE;
 		y += cpudata.user * height;
@@ -164,6 +209,7 @@
 		// free data here
 		y += cpudata.idle * height;
 		[[preferences objectForKey:IDLE_COLOR_KEY] set];
+		// [[NSColor blueColor] set];
 		NSRectFill (NSMakeRect(width - barWidth, yy, width - barWidth, y));
 	}
 

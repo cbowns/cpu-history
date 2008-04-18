@@ -1,10 +1,12 @@
 CPU History:
 future:
-- look at dsandler's multicore patch
-	- try building straight
-		- does not graph system usage
-	- line-by-line code review
-- a system to keep release notes synced and build a disk image with what I need?
+- look at dsandler's multicore patch @done
+	- line-by-line code review @done
+		- get # of processors with http://www.cocoadev.com/index.pl?NSProcessInfo @done
+- put a split in the view if cpus > 1: @done
+	- conditional code in drawing, etc. new height offset: ( total - spacer ) / numCPUs @done
+- fill the array with zero data, paint the transparent bar to the entire display
+
 - bugs:
 	- 1. app blows away graph
 		- happens until the CPU data buffer has been fully filled, and you hold down "restore defaults" through TWO timer firings, then it's fixed.
@@ -13,10 +15,10 @@ future:
 			- any changes with data source being reset? shouldn't be…
 		- what about removing the notifications in favor of straight method callbacks? first, what's the underlying problem: don't solve what doesn't need solving
 	- 2. cmd-w doesn't close prefs window or about window
-- future upgrades:
-	- CPU usage across processors:
-		- get # of processors with http://www.cocoadev.com/index.pl?NSProcessInfo
-		- add another graph
+	- 3. floater doesn't remember position
+	- 4. 
+- a system to keep release notes synced and build a disk image with what I need?
+
 Mem -> CPU conversion key:
 - wired = user
 - active = sys
@@ -86,3 +88,9 @@ Archive:
 - before shipping: build a full deployment vers, and move prefs file beforehand: any last bugs/missing things @done @project(before 1.0 release)
 - write up app, release on cbowns.com @done @project(before 1.0 release)
 	- also on blog @done @project(before 1.0 release)
+	- try building straight @done @project(future)
+		- does not graph system usage @done @project(future)
+- future upgrades: @done @project(future)
+	- CPU usage across processors: @done @project(future)
+- nice values no longer exist in 10.5? @done @project(future)
+		- add another graph @done @project(future)
