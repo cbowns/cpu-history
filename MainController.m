@@ -81,10 +81,17 @@
 		NSRectFill(NSMakeRect(0, yy, width, yy + height));
 
 		// for (x = 0; [memInfo getNext:&vmdata]; x++) {
-		for (x = 0; [cpuInfo getNext:&cpudata forCPU:cpu]; x+=barWidth) {
+		for (x = 0; [cpuInfo getNext:&cpudata forCPU:cpu]; x += barWidth) {
 			// y += vmdata.active * GRAPH_SIZE;
+			#ifdef NSLOG_DEBUG
+			NSLog(@"CPU %d: User: %f\n", cpu, cpudata.user);
+			NSLog(@"CPU %d: Sys: %f\n", cpu, cpudata.sys);
+			NSLog(@"CPU %d: Idle: %f\n", cpu, cpudata.idle);
+			#endif
 			y = yy + cpudata.sys * height;
 			[[preferences objectForKey:SYS_COLOR_KEY] set];
+			// NSLog(@"CPU %d: Sys: %f\n", i, cpudata.sys);
+			
 			NSRectFill (NSMakeRect(x - barWidth, yy, x, y));
 			yy = y;
 			// y += vmdata.inactive * GRAPH_SIZE;
@@ -142,16 +149,24 @@
 		[cpuInfo getCurrent:&cpudata forCPU:cpu];
 		
 		// draw chronological graph into graph image
+		#ifdef NSLOG_DEBUG
+		NSLog(@"CPU %d: User: %f\n", cpu, cpudata.user);
+		NSLog(@"CPU %d: Sys: %f\n", cpu, cpudata.sys);
+		NSLog(@"CPU %d: Idle: %f\n", cpu, cpudata.idle);
+		#endif
+		
 		
 		// y += vmdata.active * GRAPH_SIZE;
-		y = yy;
-		[[preferences objectForKey:SYS_COLOR_KEY] set];
+		// y += vmdata.inactive * GRAPH_SIZE;
+/*		y = yy;
+		// y += cpudata.nice * height;
+		[[preferences objectForKey:NICE_COLOR_KEY] set];
 		NSRectFill (NSMakeRect(width - barWidth, yy, width - barWidth, y));
 		yy = y;
-		
-		// y += vmdata.inactive * GRAPH_SIZE;
-		y += cpudata.nice * height;
-		[[preferences objectForKey:NICE_COLOR_KEY] set];
+*/		
+		// y = yy;
+		y += cpudata.sys * height;
+		[[preferences objectForKey:SYS_COLOR_KEY] set];
 		NSRectFill (NSMakeRect(width - barWidth, yy, width - barWidth, y));
 		yy = y;
 		

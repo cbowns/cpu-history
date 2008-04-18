@@ -2,8 +2,9 @@ CPU History:
 future:
 - look at dsandler's multicore patch
 	- line-by-line code review
+		- get # of processors with http://www.cocoadev.com/index.pl?NSProcessInfo
+
 - a system to keep release notes synced and build a disk image with what I need?
-- nice values no longer exist in 10.5?
 - bugs:
 	- 1. app blows away graph
 		- happens until the CPU data buffer has been fully filled, and you hold down "restore defaults" through TWO timer firings, then it's fixed.
@@ -12,10 +13,9 @@ future:
 			- any changes with data source being reset? shouldn't be…
 		- what about removing the notifications in favor of straight method callbacks? first, what's the underlying problem: don't solve what doesn't need solving
 	- 2. cmd-w doesn't close prefs window or about window
-- future upgrades:
-	- CPU usage across processors:
-		- get # of processors with http://www.cocoadev.com/index.pl?NSProcessInfo
-		- add another graph
+	- 3. floater doesn't remember position
+	- 4. 
+
 Mem -> CPU conversion key:
 - wired = user
 - active = sys
@@ -87,3 +87,7 @@ Archive:
 	- also on blog @done @project(before 1.0 release)
 	- try building straight @done @project(future)
 		- does not graph system usage @done @project(future)
+- future upgrades: @done @project(future)
+	- CPU usage across processors: @done @project(future)
+- nice values no longer exist in 10.5? @done @project(future)
+		- add another graph @done @project(future)

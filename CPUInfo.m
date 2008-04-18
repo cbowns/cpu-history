@@ -41,10 +41,8 @@
 
 	unsigned i;
 
-/*
-		from Hosey's CPU Usage.app:
-	*/	
-	//We could get the number of processors the same way that we get the CPU usage info, but that allocates memory.
+/* from Hosey's CPU Usage.app:
+	We could get the number of processors the same way that we get the CPU usage info, but that allocates memory. */
 	enum { miblen = 2U };
 	int mib[miblen] = { CTL_HW, HW_NCPU };
 	size_t sizeOfNumCPUs = sizeof(numCPUs);
@@ -137,10 +135,10 @@
 		cpudata[inptr].nice = (double)nice / (double)total;
 		cpudata[inptr].idle = (double)idle / (double)total;
 		#ifdef NSLOG_DEBUG
-		NSLog(@"CPU %d: User: %f\n", i, cpudata[inptr].user);
-		NSLog(@"CPU %d: Sys: %f\n", i, cpudata[inptr].sys);
+		// NSLog(@"CPU %d: User: %f\n", i, cpudata[inptr].user);
+		// NSLog(@"CPU %d: Sys: %f\n", i, cpudata[inptr].sys);
 		// NSLog(@"CPU %d: Nice: %f\n", i, cpudata[inptr].nice);
-		NSLog(@"CPU %d: Idle: %f\n", i, cpudata[inptr].idle);
+		// NSLog(@"CPU %d: Idle: %f\n", i, cpudata[inptr].idle);
 		#endif
 	}
 	
