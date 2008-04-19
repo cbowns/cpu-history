@@ -1,22 +1,21 @@
 CPU History:
-future:
-- look at dsandler's multicore patch @done
-	- line-by-line code review @done
-		- get # of processors with http://www.cocoadev.com/index.pl?NSProcessInfo @done
-- put a split in the view if cpus > 1: @done
-	- conditional code in drawing, etc. new height offset: ( total - spacer ) / numCPUs @done
-- fill the array with zero data, paint the transparent bar to the entire display
-
 - bugs:
 	- 1. app blows away graph
-		- happens until the CPU data buffer has been fully filled, and you hold down "restore defaults" through TWO timer firings, then it's fixed.
-			- can also be repro'd just by changing prefs about showing separate graph or putting graph on top
-		- diff CPU source against memory monitor:
-			- any changes with data source being reset? shouldn't be…
-		- what about removing the notifications in favor of straight method callbacks? first, what's the underlying problem: don't solve what doesn't need solving
-	- 2. cmd-w doesn't close prefs window or about window
-	- 3. floater doesn't remember position
-	- 4. 
+		- getting overwritten by the idle time "clearing" method
+		- problem: we are storing 128 history values, but our bar width only goes down to 2 px: the redraw doesn't perform as expected
+			- either fix the drawing code to only pull the last x*barwidth ones, or do something else.
+	- 1. a.
+		- multicore support:
+		- test with @boredzo's mac pro
+	- 2. cmd-w doesn't close prefs window or about window: escape does
+		- no known way to fix?
+	- 3. floater doesn't remember last position
+		- set a pref for window position, draw graph to that location when we make it.
+	- 4. make window snap to screen edges
+		- see: MGSnappingWindow
+	- 5. transparency for graphing window
+		- hook up prefs to window setting
+		- transparency of dock icon as well?
 - a system to keep release notes synced and build a disk image with what I need?
 
 Mem -> CPU conversion key:
@@ -94,3 +93,16 @@ Archive:
 	- CPU usage across processors: @done @project(future)
 - nice values no longer exist in 10.5? @done @project(future)
 		- add another graph @done @project(future)
+- look at dsandler's multicore patch @done @project(future)
+	- line-by-line code review @done @project(future)
+		- get # of processors with http://www.cocoadev.com/index.pl?NSProcessInfo @done @project(future)
+- put a split in the view if cpus > 1: @done @project(future)
+	- conditional code in drawing, etc. new height offset: ( total - spacer ) / numCPUs @done @project(future)
+- fill the array with zero data, paint the transparent bar to the entire display @done @project(future)
+- bring increment changes to drawComplete @done @project(future)
+- fix drawing of fresh window: draw transparent bar across entire graph to start @done @project(future)
+		- happens until the CPU data buffer has been fully filled, and you hold down "restore defaults" through TWO timer firings, then it's fixed. @done @project(future)
+			- can also be repro'd just by changing prefs about showing separate graph or putting graph on top @done @project(future)
+		- diff CPU source against memory monitor: @done @project(future)
+			- any changes with data source being reset? shouldn't be… @done @project(future)
+		- what about removing the notifications in favor of straight method callbacks? first, what's the underlying problem: don't solve what doesn't need solving @done @project(future)
