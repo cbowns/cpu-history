@@ -67,7 +67,7 @@
 // completely redraw graphImage, put graph into displayImage
 {	
 
-// #undef NSLOG_DEBUG
+#undef NSLOG_DEBUG
 
 
 	
@@ -103,11 +103,11 @@
 		{
 			[[NSColor colorWithCalibratedRed:0.0 green:0.0 blue:0.0 alpha:0.0] set];
 			#ifdef NSLOG_DEBUG
-			NSLog(@"%s spacer:\t\t(%.2f, %.2f) by (%.2f, %.2f)", _cmd, 0.0, ybottom, width, graphSpacer);
-			NSLog(@"%s y = %.2f, ybottom = %.2f", _cmd, y, ybottom);
+			NSLog(@"%s spacer:\t\t(%.2f, %.2f) by (%.2f, %.2f)", _cmd, 0.0, ybottom - graphSpacer, width, graphSpacer);
+			NSLog(@"%s y = %.2f, ybottom = %.2f", _cmd, y, ybottom - graphSpacer);
 			#endif
 			
-			NSRectFill (NSMakeRect(0, ybottom, width, graphSpacer));
+			NSRectFill (NSMakeRect(0, ybottom - graphSpacer, width, graphSpacer));
 		}
 		
 		// set the idle background
@@ -147,17 +147,6 @@
 			#endif
 			NSRectFill (NSMakeRect(x - barWidth, ybottom, barWidth, y));
 			ybottom += y;
-		}
-		
-		if (cpu != 0) // we need to draw the transparent spacer
-		{
-			[[NSColor colorWithCalibratedRed:0.0 green:0.0 blue:0.0 alpha:0.0] set];
-			#ifdef NSLOG_DEBUG
-			NSLog(@"%s spacer:\t\t(%.2f, %.2f) by (%.2f, %.2f)", _cmd, 0.0, yBase, width, graphSpacer);
-			NSLog(@"%s y = %.2f, ybottom = %.2f", _cmd, y, yBase);
-			#endif
-			
-			NSRectFill (NSMakeRect(0, yBase, width, graphSpacer));
 		}
 		
 	}
@@ -204,7 +193,7 @@
 		if (cpu != 0)
 		{
 			[[NSColor colorWithCalibratedRed:0.0 green:0.0 blue:0.0 alpha:0.0] set];
-			NSRectFill (NSMakeRect(width - (float)barWidth, ybottom, (float)barWidth, graphSpacer));
+			NSRectFill (NSMakeRect(width - (float)barWidth, ybottom - graphSpacer, (float)barWidth, graphSpacer));
 		}
 		
 		[cpuInfo getLast:&cpudata0 forCPU:cpu];

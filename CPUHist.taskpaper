@@ -5,15 +5,15 @@ CPU History:
 		- test with @boredzo
 	- floater window position
 	- transparency
-	- divider width
+	- divider width @done
 
 - bugs:
 	- multicore support:
 		- migrate code changes to drawDeltas @done
 			- switch code back to delta by default @done
 		- test with @boredzo's mac pro
-	- let the user pick a divider width
-		- it's drawing too high I think
+	- let the user pick a divider width @done
+		- it's drawing too high I think @done
 	- floater doesn't remember last position
 		- set a pref for window position, draw graph to that location when we make it.
 			- changing prefs snaps graph back to center of screen @done
