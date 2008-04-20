@@ -34,7 +34,7 @@
 #define GRAPH_SIZE	128
 // define GRAPH_WIDTH	8
 
-#define GRAPH_SPACER 8
+// define GRAPH_SPACER 8
 
 @implementation MainController
 
@@ -57,7 +57,7 @@
 		[window orderWindow:NSWindowBelow relativeTo:[preferences windowNumber]];
 		[window setLevel:([[preferences objectForKey:GRAPH_WINDOW_ON_TOP_KEY] boolValue] ?
 			NSFloatingWindowLevel : NSNormalWindowLevel)];
-		[window center];
+		// [window center];
 	} else
 		[window orderOut:self];
 }
@@ -67,8 +67,7 @@
 // completely redraw graphImage, put graph into displayImage
 {	
 
-
-	#undef NSLOG_DEBUG
+// #undef NSLOG_DEBUG
 
 
 	
@@ -78,10 +77,11 @@
 
 	CPUData			cpudata;
 	unsigned 		cpu, numCPUs = [cpuInfo numCPUs];
-	float			height = ( GRAPH_SIZE - (GRAPH_SPACER * (numCPUs - 1) ) ) / numCPUs; // returns just GRAPH_SIZE on single-core machines.
+	float			graphSpacer = [[preferences objectForKey:GRAPH_SPACER_WIDTH] floatValue];
+	float			height = ( GRAPH_SIZE - (graphSpacer * (numCPUs - 1) ) ) / numCPUs; // returns just GRAPH_SIZE on single-core machines.
 	float			width = GRAPH_SIZE;
 	float			x = 0.0, y = 0.0, ybottom = 0.0;
-	int barWidth = (int)[[preferences objectForKey:BAR_WIDTH_SIZE_KEY] floatValue];
+	float barWidth = (float)[[preferences objectForKey:BAR_WIDTH_SIZE_KEY] floatValue];
 	
 	[graphImage lockFocus];
 	// draw the cpu usage graph
@@ -91,8 +91,9 @@
 		[cpuInfo startBackwardIterate];
 
 		// init the base (bottom) of this cpu's graph space.
-		float yBase = cpu * (height + GRAPH_SPACER);
+		float yBase = cpu * (height + graphSpacer);
 		ybottom = yBase;
+		NSLog(@"\n\n%s ybottom: %.2f", _cmd, ybottom);
 		
 		#ifdef NSLOG_DEBUG
 		NSLog(@"%s cpu %i: drawing starts at %f px high\n\n", _cmd, cpu, ybottom);
@@ -101,14 +102,19 @@
 		if (cpu != 0) // we need to draw the transparent spacer
 		{
 			[[NSColor colorWithCalibratedRed:0.0 green:0.0 blue:0.0 alpha:0.0] set];
-			NSRectFill (NSMakeRect(0, ybottom, width, GRAPH_SPACER));
+			#ifdef NSLOG_DEBUG
+			NSLog(@"%s spacer:\t\t(%.2f, %.2f) by (%.2f, %.2f)", _cmd, 0.0, ybottom, width, graphSpacer);
+			NSLog(@"%s y = %.2f, ybottom = %.2f", _cmd, y, ybottom);
+			#endif
+			
+			NSRectFill (NSMakeRect(0, ybottom, width, graphSpacer));
 		}
 		
 		// set the idle background
 		[[preferences objectForKey:IDLE_COLOR_KEY] set];
 		NSRectFill(NSMakeRect(0, ybottom, width, height));
 		// loop through the previous CPU data and draw them.
-		for (x = width; x > 0.0 && [cpuInfo getPrev:&cpudata forCPU:cpu]; x -= (float)barWidth) {
+		for (x = width; x > 0.0 && [cpuInfo getPrev:&cpudata forCPU:cpu]; x -= barWidth) {
 			#ifdef NSLOG_DEBUG
 			NSLog(@"%s width left to draw: %.2f", _cmd, x);
 			NSLog(@"CPU %d: User: %.4f, Sys: %.4f, Idle: %.4f", cpu, cpudata.user, cpudata.sys, cpudata.idle);
@@ -121,27 +127,39 @@
 			NSLog(@"%s system:\t\t(%.2f, %.2f) by (%.2f, %.2f)", _cmd, x - (float)barWidth, ybottom, (float)barWidth, y);
 			NSLog(@"%s y = %.2f, ybottom = %.2f", _cmd, y, ybottom);
 			#endif
-			NSRectFill (NSMakeRect(x - (float)barWidth, ybottom, (float)barWidth, y));
+			NSRectFill (NSMakeRect(x - barWidth, ybottom, barWidth, y));
 			ybottom += y;
 			
 			y = cpudata.user * height;
 			[[preferences objectForKey:USER_COLOR_KEY] set];
 			#ifdef NSLOG_DEBUG
-			NSLog(@"%s user:\t\t(%.2f, %.2f) by (%.2f, %.2f)", _cmd, x - (float)barWidth, ybottom, (float)barWidth, y);
+			NSLog(@"%s user:\t\t(%.2f, %.2f) by (%.2f, %.2f)", _cmd, x - barWidth, ybottom, barWidth, y);
 			NSLog(@"%s y = %.2f, ybottom = %.2f", _cmd, y, ybottom);
 			#endif
-			NSRectFill (NSMakeRect(x - (float)barWidth, ybottom, (float)barWidth, y));
+			NSRectFill (NSMakeRect(x - barWidth, ybottom, barWidth, y));
 			ybottom += y;
 			
 			y = cpudata.idle * height;
 			[[preferences objectForKey:IDLE_COLOR_KEY] set];
 			#ifdef NSLOG_DEBUG
-			NSLog(@"%s idle:\t\t(%.2f, %.2f) by (%.2f, %.2f)", _cmd, x - (float)barWidth, ybottom, (float)barWidth, y);
+			NSLog(@"%s idle:\t\t(%.2f, %.2f) by (%.2f, %.2f)", _cmd, x - barWidth, ybottom, barWidth, y);
 			NSLog(@"%s y = %.2f, ybottom = %.2f", _cmd, y, ybottom);
 			#endif
-			NSRectFill (NSMakeRect(x - (float)barWidth, ybottom, (float)barWidth, y));
+			NSRectFill (NSMakeRect(x - barWidth, ybottom, barWidth, y));
 			ybottom += y;
 		}
+		
+		if (cpu != 0) // we need to draw the transparent spacer
+		{
+			[[NSColor colorWithCalibratedRed:0.0 green:0.0 blue:0.0 alpha:0.0] set];
+			#ifdef NSLOG_DEBUG
+			NSLog(@"%s spacer:\t\t(%.2f, %.2f) by (%.2f, %.2f)", _cmd, 0.0, yBase, width, graphSpacer);
+			NSLog(@"%s y = %.2f, ybottom = %.2f", _cmd, y, yBase);
+			#endif
+			
+			NSRectFill (NSMakeRect(0, yBase, width, graphSpacer));
+		}
+		
 	}
 	
 	// transfer graph image to icon image
@@ -163,7 +181,8 @@
 
 	CPUData			cpudata, cpudata0;
 	unsigned 		cpu, numCPUs = [cpuInfo numCPUs];
-	float			height = ( GRAPH_SIZE - (GRAPH_SPACER * (numCPUs - 1) ) ) / numCPUs;
+	float			graphSpacer = [[preferences objectForKey:GRAPH_SPACER_WIDTH] floatValue];
+	float			height = ( GRAPH_SIZE - (graphSpacer * (numCPUs - 1) ) ) / numCPUs;
 	float			width = GRAPH_SIZE;
 	float			y = 0.0, ybottom = 0.0;
 	int barWidth = (int)[[preferences objectForKey:BAR_WIDTH_SIZE_KEY] floatValue];
@@ -175,7 +194,7 @@
 	[graphImage compositeToPoint:NSMakePoint(-barWidth, 0) operation:NSCompositeCopy];
 		
 	for (cpu = 0; cpu < numCPUs; cpu++ ) {
-		float yBase = cpu * (height + GRAPH_SPACER);
+		float yBase = cpu * (height + graphSpacer);
 		ybottom = yBase;
 		
 		#ifdef NSLOG_DEBUG
@@ -185,7 +204,7 @@
 		if (cpu != 0)
 		{
 			[[NSColor colorWithCalibratedRed:0.0 green:0.0 blue:0.0 alpha:0.0] set];
-			NSRectFill (NSMakeRect(width - (float)barWidth, ybottom, (float)barWidth, GRAPH_SPACER));
+			NSRectFill (NSMakeRect(width - (float)barWidth, ybottom, (float)barWidth, graphSpacer));
 		}
 		
 		[cpuInfo getLast:&cpudata0 forCPU:cpu];
@@ -250,7 +269,8 @@
 // get a new sample and refresh the graph
 {
 	[cpuInfo refresh];
-	[self drawDelta];
+	// [self drawDelta];
+	[self drawComplete];
 	[self setApplicationIcon];
 	
 	if ([[preferences objectForKey:SHOW_GRAPH_WINDOW_KEY] boolValue]) {

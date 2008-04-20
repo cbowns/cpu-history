@@ -4,6 +4,7 @@ CPU History:
 		- finish graphing code changes @done
 		- test with @boredzo
 	- floater window position
+	- transparency
 	- divider width
 
 - bugs:
@@ -12,9 +13,10 @@ CPU History:
 			- switch code back to delta by default @done
 		- test with @boredzo's mac pro
 	- let the user pick a divider width
+		- it's drawing too high I think
 	- floater doesn't remember last position
 		- set a pref for window position, draw graph to that location when we make it.
-		- changing prefs snaps graph back to center of screen
+			- changing prefs snaps graph back to center of screen @done
 	- 4. make window snap to screen edges
 		- see: MGSnappingWindow
 	- 5. transparency for graphing window
@@ -22,6 +24,7 @@ CPU History:
 		- transparency of dock icon as well?
 	- 2. cmd-w doesn't close prefs window or about window: escape does
 		- no known way to fix?
+	- allow larger graphing window
 
 - a system to keep release notes synced and build a disk image with what I need?
 

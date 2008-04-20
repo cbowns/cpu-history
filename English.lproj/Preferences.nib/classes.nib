@@ -32,6 +32,8 @@
 				<string>id</string>
 				<key>dockIconSizeSlider</key>
 				<string>id</string>
+				<key>graphSpacerSlider</key>
+				<string>id</string>
 				<key>graphWindowOnTop</key>
 				<string>id</string>
 				<key>graphWindowOptionsView</key>

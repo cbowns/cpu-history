@@ -58,6 +58,7 @@
 		[NSNumber numberWithInt:128], GRAPH_WINDOW_SIZE_KEY,
 		[NSNumber numberWithFloat:1.0], DOCK_ICON_SIZE_KEY,
 		[NSNumber numberWithInt:4], BAR_WIDTH_SIZE_KEY,
+		[NSNumber numberWithFloat:4.0], GRAPH_SPACER_WIDTH,
 		nil]);
 }
 
@@ -82,18 +83,7 @@
 	
 	self = [super init];
         currentSettings = [Preferences defaultPreferences];
-/*	SCANCOLOR (WIRED_COLOR_KEY);
-	SCANCOLOR (ACTIVE_COLOR_KEY);
-	SCANCOLOR (INACTIVE_COLOR_KEY);
-	SCANCOLOR (FREE_COLOR_KEY);
-	SCANCOLOR (PAGEIN_COLOR_KEY);
-	SCANCOLOR (PAGEOUT_COLOR_KEY);
-	GETNUMBER (PAGING_SCALE_MAX_KEY);
-	GETNUMBER (PAGEIN_ATOP_PAGEOUT_KEY);
-	GETNUMBER (SHOW_PAGING_RATE_KEY);
-*/
 	// transparency = 1.0;			/* paging was drawn without transparency in version 1.1 */
-	// GETNUMBER (OLD_TRANSPARENCY_KEY);
 
 	SCANCOLOR (USER_COLOR_KEY);
 	SCANCOLOR (SYS_COLOR_KEY);
@@ -105,6 +95,7 @@
 	GETNUMBER (GRAPH_WINDOW_SIZE_KEY);
 	GETNUMBER (DOCK_ICON_SIZE_KEY);
 	GETNUMBER (BAR_WIDTH_SIZE_KEY);
+	GETNUMBER (GRAPH_SPACER_WIDTH);
 	transparency = obj ? [obj floatValue] : 0.8;	/* global transparency setting of version 1.1 */
 	[[NSColorPanel sharedColorPanel] setShowsAlpha:YES];
 	return (self);
@@ -148,18 +139,6 @@
 		}
 	}
 	
-/*	[wiredColor setColor:[currentSettings objectForKey:WIRED_COLOR_KEY]];
-	[activeColor setColor:[currentSettings objectForKey:ACTIVE_COLOR_KEY]];
-	[inactiveColor setColor:[currentSettings objectForKey:INACTIVE_COLOR_KEY]];
-	[freeColor setColor:[currentSettings objectForKey:FREE_COLOR_KEY]];
-	[pageinColor setColor:[currentSettings objectForKey:PAGEIN_COLOR_KEY]];
-	[pageoutColor setColor:[currentSettings objectForKey:PAGEOUT_COLOR_KEY]];
-	[pagingScale selectItemAtIndex:[pagingScale
-		indexOfItemWithTag:[[currentSettings objectForKey:PAGING_SCALE_MAX_KEY] intValue]]];
-	[pageinAtopPageout selectCellWithTag:[[currentSettings objectForKey:PAGEIN_ATOP_PAGEOUT_KEY] intValue]];
-	[showPagingRate setState:[[currentSettings objectForKey:SHOW_PAGING_RATE_KEY] boolValue]];
-*/
-
 	[userColor setColor:[currentSettings objectForKey:USER_COLOR_KEY]];
 	[sysColor setColor:[currentSettings objectForKey:SYS_COLOR_KEY]];
 	[niceColor setColor:[currentSettings objectForKey:NICE_COLOR_KEY]];
@@ -173,6 +152,7 @@
 	[graphWindowSize setFloatValue:[[currentSettings objectForKey:GRAPH_WINDOW_SIZE_KEY] floatValue]];
 	[dockIconSizeSlider setFloatValue:[[currentSettings objectForKey:DOCK_ICON_SIZE_KEY] floatValue]];
 	[barWidthSlider setFloatValue:[[currentSettings objectForKey:BAR_WIDTH_SIZE_KEY] floatValue]];
+	[graphSpacerSlider setFloatValue:[[currentSettings objectForKey:GRAPH_SPACER_WIDTH] floatValue]];
 	[self adjustGraphWindowControls];
 	[panel makeKeyAndOrderFront:nil];
 }
@@ -218,19 +198,6 @@
 - (IBAction)preferencesChanged:(id)sender
 {
 	int	freq;
-	
-/*	[currentSettings setObject:[wiredColor color] forKey:WIRED_COLOR_KEY];
-	[currentSettings setObject:[activeColor color] forKey:ACTIVE_COLOR_KEY];
-	[currentSettings setObject:[inactiveColor color] forKey:INACTIVE_COLOR_KEY];
-	[currentSettings setObject:[freeColor color] forKey:FREE_COLOR_KEY];
-	[currentSettings setObject:[pageinColor color] forKey:PAGEIN_COLOR_KEY];
-	[currentSettings setObject:[pageoutColor color] forKey:PAGEOUT_COLOR_KEY];
-	[currentSettings setObject:[NSNumber numberWithInt:[[pagingScale selectedItem] tag]] forKey:PAGING_SCALE_MAX_KEY];
-	[currentSettings setObject:[NSNumber numberWithInt:[[pageinAtopPageout selectedCell] tag]] forKey:PAGEIN_ATOP_PAGEOUT_KEY];
-	[currentSettings setObject:[NSNumber numberWithInt:[showPagingRate state]] forKey:SHOW_PAGING_RATE_KEY];
-*/
-
-
 
 	[currentSettings setObject:[userColor color] forKey:USER_COLOR_KEY];
 	[currentSettings setObject:[sysColor color] forKey:SYS_COLOR_KEY];
@@ -245,6 +212,7 @@
 	[currentSettings setObject:[NSNumber numberWithInt:[graphWindowSize intValue]] forKey:GRAPH_WINDOW_SIZE_KEY];
 	[currentSettings setObject:[NSNumber numberWithFloat:[dockIconSizeSlider floatValue]] forKey:DOCK_ICON_SIZE_KEY];
 	[currentSettings setObject:[NSNumber numberWithInt:[barWidthSlider intValue]] forKey:BAR_WIDTH_SIZE_KEY];
+	[currentSettings setObject:[NSNumber numberWithFloat:[graphSpacerSlider floatValue]] forKey:GRAPH_SPACER_WIDTH];
 	[self adjustGraphWindowControls];
 	[[NSNotificationCenter defaultCenter] postNotificationName:PREFERENCES_CHANGED object:nil];
 }

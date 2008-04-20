@@ -26,58 +26,25 @@
 
 #import <Cocoa/Cocoa.h>
 
-/*
-	TODO define: delete MemMon #defines
-*/
-// define WIRED_COLOR_KEY		@"WiredColor"
-// define ACTIVE_COLOR_KEY	@"ActiveColor"
-// define INACTIVE_COLOR_KEY	@"InactiveColor"
-// define FREE_COLOR_KEY		@"FreeColor"
-// 
-// define PAGEIN_COLOR_KEY	@"PageinColor"
-// define PAGEOUT_COLOR_KEY	@"PageoutColor"
-// define PAGING_SCALE_MAX_KEY	@"PagingScaleMax"
-// define PAGEIN_ATOP_PAGEOUT_KEY	@"PageinAtopPageout"
-// define SHOW_PAGING_RATE_KEY	@"ShowPagingRate"
+#define USER_COLOR_KEY            @"UserColor"
+#define SYS_COLOR_KEY             @"SysColor"
+#define NICE_COLOR_KEY            @"NiceColor"
+#define IDLE_COLOR_KEY            @"IdleColor"
 
-/*
-	CPU History
-*/
-#define USER_COLOR_KEY		@"UserColor"
-#define SYS_COLOR_KEY		@"SysColor"
-#define NICE_COLOR_KEY		@"NiceColor"
-#define IDLE_COLOR_KEY		@"IdleColor"
+#define UPDATE_FREQUENCY_KEY      @"UpdateFrequency"
+#define SHOW_GRAPH_WINDOW_KEY     @"ShowGraphWindow"
+#define GRAPH_WINDOW_ON_TOP_KEY   @"GraphWindowOnTop"
+#define GRAPH_WINDOW_SIZE_KEY     @"GraphWindowSize"
+#define DOCK_ICON_SIZE_KEY        @"DockIconSize"
+#define BAR_WIDTH_SIZE_KEY        @"BarWidthSize"
 
-#define UPDATE_FREQUENCY_KEY	@"UpdateFrequency"
-#define SHOW_GRAPH_WINDOW_KEY	@"ShowGraphWindow"
-#define GRAPH_WINDOW_ON_TOP_KEY	@"GraphWindowOnTop"
-#define GRAPH_WINDOW_SIZE_KEY	@"GraphWindowSize"
-#define DOCK_ICON_SIZE_KEY	@"DockIconSize"
-#define BAR_WIDTH_SIZE_KEY @"BarWidthSize"
+#define GRAPH_SPACER_WIDTH        @"GraphSpacerWidth"
 
-#define PREFERENCES_CHANGED	@"PrefsChanged"
+#define PREFERENCES_CHANGED       @"PrefsChanged"
 
 
 @interface Preferences : NSObject
 {
-	/*
-		TODO interface: remove MemMon stuff
-	*/
-/*	IBOutlet id		wiredColor;
-	IBOutlet id		activeColor;
-	IBOutlet id		inactiveColor;
-	IBOutlet id		freeColor;
-	
-	IBOutlet id		pageinColor;
-	IBOutlet id		pageoutColor;
-	IBOutlet id		pageinAtopPageout;
-	IBOutlet id		pagingScale;
-	IBOutlet id		showPagingRate;
-*/
-
-
-
-
 	IBOutlet id		userColor;
 	IBOutlet id		sysColor;
 	IBOutlet id		niceColor;
@@ -92,6 +59,8 @@
 	IBOutlet id		graphWindowOptionsView;
 	IBOutlet id		dockIconSizeSlider;
 	IBOutlet id		barWidthSlider;
+	IBOutlet id		graphSpacerSlider;
+	
 	NSMutableDictionary	*currentSettings;
 }
 
