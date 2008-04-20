@@ -37,8 +37,10 @@ typedef struct cpudata {
 - (CPUInfo *)initWithCapacity:(unsigned)numItems;
 - (void)refresh;
 - (unsigned)numCPUs;
-- (void)startIterate;
+- (void)startForwardIterate;
+- (void)startBackwardIterate;
 - (BOOL)getNext:(CPUDataPtr)ptr forCPU:(unsigned)cpu;
+- (BOOL)getPrev:(CPUDataPtr)ptr forCPU:(unsigned)cpu;
 - (void)getCurrent:(CPUDataPtr)ptr forCPU:(unsigned)cpu;
 - (void)getLast:(CPUDataPtr)ptr forCPU:(unsigned)cpu;
 - (int)getSize;

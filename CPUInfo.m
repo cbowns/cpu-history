@@ -39,7 +39,7 @@
 {
 	self = [super init];
 
-	unsigned i;
+	unsigned i, j;
 
 /* from Hosey's CPU Usage.app:
 	We could get the number of processors the same way that we get the CPU usage info, but that allocates memory. */
@@ -82,6 +82,17 @@
 		// if we can't get this info, then we're toast. Exit gracefully.
 		return (nil);
 	}
+	
+	for(i = 0U; i < numCPUs; i++)
+	{
+		CPUDataPtr cpudata = allcpudata[i];
+		for (j = 0U; j < numItems; j++)
+		{
+			cpudata[j].idle = 1.0;
+		}
+	}
+
+
 	
 	return (self);
 }
@@ -156,11 +167,15 @@
 }
 
 
-- (void)startIterate
+- (void)startForwardIterate
 {
 	outptr = inptr;
 }
 
+- (void)startBackwardIterate
+{
+	outptr = (inptr - 1 < 0 ? size - 1 : inptr - 1);
+}
 
 - (BOOL)getNext:(CPUDataPtr)ptr forCPU:(unsigned)cpu
 {
@@ -174,6 +189,17 @@
 	return (TRUE);
 }
 
+- (BOOL)getPrev:(CPUDataPtr)ptr forCPU:(unsigned)cpu
+{
+	if (outptr == -1)
+		return (FALSE);
+	*ptr = allcpudata[cpu][outptr--];
+	if (outptr < 0)
+		outptr = size - 1;
+	if (outptr == inptr)
+		outptr = -1;
+	return (TRUE);
+}
 
 - (void)getCurrent:(CPUDataPtr)ptr forCPU:(unsigned)cpu
 {

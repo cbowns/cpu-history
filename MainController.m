@@ -66,6 +66,11 @@
 - (void)drawComplete
 // completely redraw graphImage, put graph into displayImage
 {	
+
+
+	#undef NSLOG_DEBUG
+
+
 	
 	#ifdef NSLOG_DEBUG
 	NSLog(@"%s redrawing complete graph", _cmd);
@@ -77,7 +82,7 @@
 	float			height = ( GRAPH_SIZE - (GRAPH_SPACER * (numCPUs - 1) ) ) / numCPUs; // returns just GRAPH_SIZE on single-core machines.
 	
 	float			width = GRAPH_SIZE;
-	int				x = 0;
+	float			x = 0.0;
 	float			y = 0.0, ybottom = 0.0;
 	int barWidth = (int)[[preferences objectForKey:BAR_WIDTH_SIZE_KEY] floatValue];
 	
@@ -85,57 +90,61 @@
 	// draw the cpu usage graph
 	
 	
-	for (cpu = 0; cpu < numCPUs; cpu++ ) {
-		[cpuInfo startIterate];
-		ybottom = cpu * height;
-		NSLog(@"%s cpu %i: %f", _cmd, cpu, ybottom);
+	for (cpu = 0U; cpu < numCPUs; cpu++ ) {
+		[cpuInfo startBackwardIterate];
+
+		// init the base (bottom) of this cpu's graph space.
+		float yBase = cpu * (height + GRAPH_SPACER);
+		ybottom = yBase;
 		
-		if (cpu != 0)
+		#ifdef NSLOG_DEBUG
+		NSLog(@"%s cpu %i: drawing starts at %f px high\n\n", _cmd, cpu, ybottom);
+		#endif
+		
+		if (cpu != 0) // we need to draw the transparent spacer
 		{
-			ybottom += GRAPH_SPACER;
-			NSLog(@"%s cpu %i: %f", _cmd, cpu, ybottom);
+			// continue;
 			[[NSColor colorWithCalibratedRed:0.0 green:0.0 blue:0.0 alpha:0.0] set];
 			NSRectFill (NSMakeRect(0, ybottom, width, GRAPH_SPACER));
-			y = ybottom;
-		}
-		else
-		{
-			[[NSColor purpleColor] set];
-			NSRectFill (NSMakeRect(0, ybottom, width, height));
 		}
 		
 		// set the idle background
-		/*
-			TODO these two lines are responsible for the redrawing erasure bug
-		*/
 		[[preferences objectForKey:IDLE_COLOR_KEY] set];
-		NSRectFill(NSMakeRect(0, ybottom, width, ybottom + height));
-		
-		for (x = 0; [cpuInfo getNext:&cpudata forCPU:cpu]; x += barWidth) {
-			
+		NSRectFill(NSMakeRect(0, ybottom, width, height));
+		// loop through the previous CPU data and draw them.
+		for (x = width; x > 0.0 && [cpuInfo getPrev:&cpudata forCPU:cpu]; x -= (float)barWidth) {
 			#ifdef NSLOG_DEBUG
-			NSLog(@"CPU %d: User: %f, Sys: %f, Idle: %f", cpu, cpudata.user, cpudata.sys, cpudata.idle);
+			NSLog(@"%s width left to draw: %.2f", _cmd, x);
+			NSLog(@"CPU %d: User: %.4f, Sys: %.4f, Idle: %.4f", cpu, cpudata.user, cpudata.sys, cpudata.idle);
 			#endif
 			
-			y = ybottom + cpudata.sys * height;
+			ybottom = yBase;
+			y = cpudata.sys * height;
 			[[preferences objectForKey:SYS_COLOR_KEY] set];
-			NSRectFill (NSMakeRect(x, ybottom, x + barWidth, y));
-			ybottom = y;
+			#ifdef NSLOG_DEBUG
+			NSLog(@"%s system:\t\t(%.2f, %.2f) by (%.2f, %.2f)", _cmd, x - (float)barWidth, ybottom, (float)barWidth, y);
+			NSLog(@"%s y = %.2f, ybottom = %.2f", _cmd, y, ybottom);
+			#endif
+			NSRectFill (NSMakeRect(x - (float)barWidth, ybottom, (float)barWidth, y));
+			ybottom += y;
 			
-			y += cpudata.nice * height;
-			[[preferences objectForKey:NICE_COLOR_KEY] set];
-			NSRectFill (NSMakeRect(x, ybottom, x + barWidth, y));
-			ybottom = y;
-			
-			y += cpudata.user * height;
+			y = cpudata.user * height;
 			[[preferences objectForKey:USER_COLOR_KEY] set];
-			NSRectFill (NSMakeRect(x, ybottom, x + barWidth, y));
-			ybottom = y;
+			#ifdef NSLOG_DEBUG
+			NSLog(@"%s user:\t\t(%.2f, %.2f) by (%.2f, %.2f)", _cmd, x - (float)barWidth, ybottom, (float)barWidth, y);
+			NSLog(@"%s y = %.2f, ybottom = %.2f", _cmd, y, ybottom);
+			#endif
+			NSRectFill (NSMakeRect(x - (float)barWidth, ybottom, (float)barWidth, y));
+			ybottom += y;
 			
-			y += cpudata.idle * height;
+			y = cpudata.idle * height;
 			[[preferences objectForKey:IDLE_COLOR_KEY] set];
-			NSRectFill (NSMakeRect(x, ybottom, x + barWidth, y));
-			ybottom = y;
+			#ifdef NSLOG_DEBUG
+			NSLog(@"%s idle:\t\t(%.2f, %.2f) by (%.2f, %.2f)", _cmd, x - (float)barWidth, ybottom, (float)barWidth, y);
+			NSLog(@"%s y = %.2f, ybottom = %.2f", _cmd, y, ybottom);
+			#endif
+			NSRectFill (NSMakeRect(x - (float)barWidth, ybottom, (float)barWidth, y));
+			ybottom += y;
 		}
 	}
 	
@@ -203,13 +212,6 @@
 		[[preferences objectForKey:SYS_COLOR_KEY] set];
 		NSRectFill (NSMakeRect(width - barWidth, ybottom, width - barWidth, y));
 		ybottom = y;
-
-		y += cpudata.nice * height;
-		// y += cpudata.nice * height;
-		[[preferences objectForKey:NICE_COLOR_KEY] set];
-		NSRectFill (NSMakeRect(width - barWidth, ybottom, width - barWidth, y));
-		ybottom = y;
-		
 		
 		// y = vmdata.wired * GRAPH_SIZE;
 		y += cpudata.user * height;
@@ -217,7 +219,6 @@
 		NSRectFill (NSMakeRect(width - barWidth, ybottom, width - barWidth, y));
 		ybottom = y;
 		
-		// free data here
 		y += cpudata.idle * height;
 		[[preferences objectForKey:IDLE_COLOR_KEY] set];
 		// [[NSColor blueColor] set];
@@ -247,9 +248,8 @@
 - (void)refreshGraph
 // get a new sample and refresh the graph
 {
-	// [memInfo refresh];
 	[cpuInfo refresh];
-	[self drawDelta];
+	[self drawComplete];
 	[self setApplicationIcon];
 	
 	if ([[preferences objectForKey:SHOW_GRAPH_WINDOW_KEY] boolValue]) {
@@ -356,7 +356,6 @@
 	[NSApp setApplicationIconImage:[NSImage imageNamed:@"CPUHistory.icns"]];
 	
 	preferences = [[Preferences alloc] init];
-	// memInfo = [[MemInfo alloc] initWithCapacity:GRAPH_SIZE];
 	cpuInfo = [[CPUInfo alloc] initWithCapacity:GRAPH_SIZE];
 	if (nil == cpuInfo) //then we need to bomb out. We can't do anything else.
 	{
@@ -395,11 +394,7 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showHideWindow) name:PREFERENCES_CHANGED object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateGraph) name:PREFERENCES_CHANGED object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setTimer) name:PREFERENCES_CHANGED object:nil];
-
-/*	if ([self systemVersion] < 0x1010 && [self isLoginItem])
-		[NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(setTimer) userInfo:nil repeats:NO];
-	else
-*/ // We can stop supporting 10.1 now. Welcome to 2003, people.
+	
 	[self setTimer];
 }
 

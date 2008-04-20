@@ -1,21 +1,27 @@
 CPU History:
+- blockers for 1.1:
+	- graph not working @done
+		- finish graphing code changes
+	- floater window position
+	- divider width
+
 - bugs:
-	- 1. app blows away graph
-		- getting overwritten by the idle time "clearing" method
-		- problem: we are storing 128 history values, but our bar width only goes down to 2 px: the redraw doesn't perform as expected
-			- either fix the drawing code to only pull the last x*barwidth ones, or do something else.
-	- 1. a.
-		- multicore support:
+	- multicore support:
+		- migrate code changes to drawDeltas
+			- switch code back to delta by default
 		- test with @boredzo's mac pro
-	- 2. cmd-w doesn't close prefs window or about window: escape does
-		- no known way to fix?
-	- 3. floater doesn't remember last position
+	- let the user pick a divider width
+	- floater doesn't remember last position
 		- set a pref for window position, draw graph to that location when we make it.
+		- changing prefs snaps graph back to center of screen
 	- 4. make window snap to screen edges
 		- see: MGSnappingWindow
 	- 5. transparency for graphing window
 		- hook up prefs to window setting
 		- transparency of dock icon as well?
+	- 2. cmd-w doesn't close prefs window or about window: escape does
+		- no known way to fix?
+
 - a system to keep release notes synced and build a disk image with what I need?
 
 Mem -> CPU conversion key:
@@ -106,3 +112,9 @@ Archive:
 		- diff CPU source against memory monitor: @done @project(future)
 			- any changes with data source being reset? shouldn't be… @done @project(future)
 		- what about removing the notifications in favor of straight method callbacks? first, what's the underlying problem: don't solve what doesn't need solving @done @project(future)
+	- 1. app blows away graph @done @project(CPU History)
+		- getting overwritten by the idle time "clearing" method @done @project(CPU History)
+		- problem: we are storing 128 history values, but our bar width only goes down to 2 px: the redraw doesn't perform as expected @done @project(CPU History)
+			- either fix the drawing code to only pull the last x*barwidth ones, or do something else. @done @project(CPU History)
+		- drawing code not performing as expected. @done @project(CPU History)
+	- 1. a. @done @project(CPU History)
