@@ -1,14 +1,15 @@
 CPU History:
 - blockers for 1.1:
 	- graph not working @done
-		- finish graphing code changes
+		- finish graphing code changes @done
+		- test with @boredzo
 	- floater window position
 	- divider width
 
 - bugs:
 	- multicore support:
-		- migrate code changes to drawDeltas
-			- switch code back to delta by default
+		- migrate code changes to drawDeltas @done
+			- switch code back to delta by default @done
 		- test with @boredzo's mac pro
 	- let the user pick a divider width
 	- floater doesn't remember last position

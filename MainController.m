@@ -73,17 +73,14 @@
 
 	
 	#ifdef NSLOG_DEBUG
-	NSLog(@"%s redrawing complete graph", _cmd);
+	NSLog(@"%s", _cmd);
 	#endif
 
 	CPUData			cpudata;
-	
 	unsigned 		cpu, numCPUs = [cpuInfo numCPUs];
 	float			height = ( GRAPH_SIZE - (GRAPH_SPACER * (numCPUs - 1) ) ) / numCPUs; // returns just GRAPH_SIZE on single-core machines.
-	
 	float			width = GRAPH_SIZE;
-	float			x = 0.0;
-	float			y = 0.0, ybottom = 0.0;
+	float			x = 0.0, y = 0.0, ybottom = 0.0;
 	int barWidth = (int)[[preferences objectForKey:BAR_WIDTH_SIZE_KEY] floatValue];
 	
 	[graphImage lockFocus];
@@ -103,7 +100,6 @@
 		
 		if (cpu != 0) // we need to draw the transparent spacer
 		{
-			// continue;
 			[[NSColor colorWithCalibratedRed:0.0 green:0.0 blue:0.0 alpha:0.0] set];
 			NSRectFill (NSMakeRect(0, ybottom, width, GRAPH_SPACER));
 		}
@@ -159,17 +155,18 @@
 
 - (void)drawDelta
 // update graphImage (based on previous graphImage), put graph into displayImage
-{	
+{
+
+	#ifdef NSLOG_DEBUG
 	NSLog(@"%s", _cmd);
-	// VMData			vmdata, vmdata0;
+	#endif
+
 	CPUData			cpudata, cpudata0;
-	int barWidth = (int)[[preferences objectForKey:BAR_WIDTH_SIZE_KEY] floatValue];
-	float			y = 0, ybottom = 0;
 	unsigned 		cpu, numCPUs = [cpuInfo numCPUs];
-	
 	float			height = ( GRAPH_SIZE - (GRAPH_SPACER * (numCPUs - 1) ) ) / numCPUs;
 	float			width = GRAPH_SIZE;
-	
+	float			y = 0.0, ybottom = 0.0;
+	int barWidth = (int)[[preferences objectForKey:BAR_WIDTH_SIZE_KEY] floatValue];
 	// double interval = 0.1 * [[preferences objectForKey:UPDATE_FREQUENCY_KEY] floatValue];
 	
 	[graphImage lockFocus];
@@ -178,51 +175,55 @@
 	[graphImage compositeToPoint:NSMakePoint(-barWidth, 0) operation:NSCompositeCopy];
 		
 	for (cpu = 0; cpu < numCPUs; cpu++ ) {
+		float yBase = cpu * (height + GRAPH_SPACER);
+		ybottom = yBase;
+		
+		#ifdef NSLOG_DEBUG
+		NSLog(@"%s cpu %i: drawing starts at %f px high\n\n", _cmd, cpu, ybottom);
+		#endif
+		
 		if (cpu != 0)
 		{
-			// ybottom = 
-			ybottom = y;
-			y += GRAPH_SPACER;
-			// [[NSColor whiteColor] set];
 			[[NSColor colorWithCalibratedRed:0.0 green:0.0 blue:0.0 alpha:0.0] set];
-			NSRectFill (NSMakeRect(width - barWidth, ybottom, width - barWidth, y));
-			// y += cpudata.sys * height;
-			ybottom = y;
-		}
-		else
-		{
-			ybottom = cpu * height;
+			NSRectFill (NSMakeRect(width - (float)barWidth, ybottom, (float)barWidth, GRAPH_SPACER));
 		}
 		
-		// [memInfo getLast:&vmdata0];
 		[cpuInfo getLast:&cpudata0 forCPU:cpu];
-		// [memInfo getCurrent:&vmdata];
 		[cpuInfo getCurrent:&cpudata forCPU:cpu];
 		
 		// draw chronological graph into graph image
 		#ifdef NSLOG_DEBUG
-		// NSLog(@"CPU %d: User: %f, Sys: %f, Idle: %f", cpu, cpudata.user, cpudata.sys, cpudata.idle);
+		NSLog(@"CPU %d: User: %f, Sys: %f, Idle: %f", cpu, cpudata.user, cpudata.sys, cpudata.idle);
 		#endif
 		
 		
-		// y += vmdata.active * GRAPH_SIZE;
-		// y += vmdata.inactive * GRAPH_SIZE;
-		// y = ybottom;
-		y += cpudata.sys * height;
+		y = cpudata.sys * height;
 		[[preferences objectForKey:SYS_COLOR_KEY] set];
-		NSRectFill (NSMakeRect(width - barWidth, ybottom, width - barWidth, y));
-		ybottom = y;
+		#ifdef NSLOG_DEBUG
+		NSLog(@"%s system:\t\t(%.2f, %.2f) by (%.2f, %.2f)", _cmd, width - (float)barWidth, ybottom, (float)barWidth, y);
+		NSLog(@"%s y = %.2f, ybottom = %.2f", _cmd, y, ybottom);
+		#endif
+		NSRectFill (NSMakeRect(width - (float)barWidth, ybottom, (float)barWidth, y));
+		ybottom += y;
 		
-		// y = vmdata.wired * GRAPH_SIZE;
-		y += cpudata.user * height;
+		
+		y = cpudata.user * height;
 		[[preferences objectForKey:USER_COLOR_KEY] set];
-		NSRectFill (NSMakeRect(width - barWidth, ybottom, width - barWidth, y));
-		ybottom = y;
+		#ifdef NSLOG_DEBUG
+		NSLog(@"%s user:\t\t(%.2f, %.2f) by (%.2f, %.2f)", _cmd, width - (float)barWidth, ybottom, (float)barWidth, y);
+		NSLog(@"%s y = %.2f, ybottom = %.2f", _cmd, y, ybottom);
+		#endif
+		NSRectFill (NSMakeRect(width - (float)barWidth, ybottom, (float)barWidth, y));
+		ybottom += y;
 		
-		y += cpudata.idle * height;
+		
+		y = cpudata.idle * height;
 		[[preferences objectForKey:IDLE_COLOR_KEY] set];
-		// [[NSColor blueColor] set];
-		NSRectFill (NSMakeRect(width - barWidth, ybottom, width - barWidth, y));
+		#ifdef NSLOG_DEBUG
+		NSLog(@"%s idle:\t\t(%.2f, %.2f) by (%.2f, %.2f)", _cmd, width - (float)barWidth, ybottom, (float)barWidth, y);
+		NSLog(@"%s y = %.2f, ybottom = %.2f", _cmd, y, ybottom);
+		#endif
+		NSRectFill (NSMakeRect(width - (float)barWidth, ybottom, (float)barWidth, y));
 	}
 
 	// transfer graph image to icon image
@@ -249,7 +250,7 @@
 // get a new sample and refresh the graph
 {
 	[cpuInfo refresh];
-	[self drawComplete];
+	[self drawDelta];
 	[self setApplicationIcon];
 	
 	if ([[preferences objectForKey:SHOW_GRAPH_WINDOW_KEY] boolValue]) {
