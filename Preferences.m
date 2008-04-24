@@ -40,8 +40,8 @@
 		
 		
 		[NSNumber numberWithInt:10], UPDATE_FREQUENCY_KEY,	/* unit is 1/10 second */
-		[NSNumber numberWithBool:NO], SHOW_GRAPH_WINDOW_KEY,
-		[NSNumber numberWithBool:NO], GRAPH_WINDOW_ON_TOP_KEY,
+		[NSNumber numberWithBool:YES], SHOW_GRAPH_WINDOW_KEY,
+		[NSNumber numberWithBool:YES], GRAPH_WINDOW_ON_TOP_KEY,
 		[NSNumber numberWithInt:128], GRAPH_WINDOW_SIZE_KEY,
 		[NSNumber numberWithFloat:1.0], DOCK_ICON_SIZE_KEY,
 		[NSNumber numberWithInt:4], BAR_WIDTH_SIZE_KEY,
