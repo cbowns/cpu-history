@@ -33,22 +33,9 @@
 + (NSMutableDictionary *)defaultPreferences
 {
 	return ([[NSMutableDictionary alloc] initWithObjectsAndKeys:
-/*		[[NSColor yellowColor] colorWithAlphaComponent:0.8], WIRED_COLOR_KEY,
-		[[NSColor magentaColor] colorWithAlphaComponent:0.8], ACTIVE_COLOR_KEY,
-		[[NSColor cyanColor] colorWithAlphaComponent:0.8], INACTIVE_COLOR_KEY,
-		[[NSColor blueColor] colorWithAlphaComponent:0.8], FREE_COLOR_KEY,
-		
-		[NSColor whiteColor], PAGEIN_COLOR_KEY,
-		[NSColor blackColor], PAGEOUT_COLOR_KEY,
-		[NSNumber numberWithInt:250], PAGING_SCALE_MAX_KEY,
-		[NSNumber numberWithBool:YES], PAGEIN_ATOP_PAGEOUT_KEY,
-		[NSNumber numberWithBool:YES], SHOW_PAGING_RATE_KEY,
-*/		
-		
-		// Colors taken from samples of 10.5's Activity Monitor
-		[NSColor colorWithCalibratedRed:0.304875 green:0.931411 blue:0.294072 alpha:1.0 ], USER_COLOR_KEY,
-		[NSColor colorWithCalibratedRed:0.933211 green:0.219913 blue:0.200565 alpha:1.0 ], SYS_COLOR_KEY,
-		[NSColor colorWithCalibratedRed:0.200638 green:0.000533 blue:1.0 alpha:1.0 ], NICE_COLOR_KEY,
+		[[NSColor greenColor] colorWithAlphaComponent:1.0], USER_COLOR_KEY,
+		[[NSColor redColor] colorWithAlphaComponent:1.0], SYS_COLOR_KEY,
+		[[NSColor blueColor] colorWithAlphaComponent:1.0], NICE_COLOR_KEY,
 		[[NSColor blackColor] colorWithAlphaComponent:1.0], IDLE_COLOR_KEY,
 		
 		
