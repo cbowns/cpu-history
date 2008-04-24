@@ -10,9 +10,9 @@
 //
 //  Modified by Christopher Bowns, starting 2008-1-1.
 
-#ifndef NSLOG_DEBUG
-#define NSLOG_DEBUG
-#endif
+// #ifndef NSLOG_DEBUG
+// #define NSLOG_DEBUG
+// #endif
 
 #import "CPUInfo.h"
 
@@ -146,10 +146,10 @@
 		cpudata[inptr].nice = (double)nice / (double)total;
 		cpudata[inptr].idle = (double)idle / (double)total;
 		#ifdef NSLOG_DEBUG
-		// NSLog(@"CPU %d: User: %f\n", i, cpudata[inptr].user);
-		// NSLog(@"CPU %d: Sys: %f\n", i, cpudata[inptr].sys);
-		// NSLog(@"CPU %d: Nice: %f\n", i, cpudata[inptr].nice);
-		// NSLog(@"CPU %d: Idle: %f\n", i, cpudata[inptr].idle);
+		NSLog(@"CPU %d: User: %.2f\n", i, cpudata[inptr].user);
+		NSLog(@"CPU %d: Sys: %.2f\n", i, cpudata[inptr].sys);
+		NSLog(@"CPU %d: Nice: %.2f\n", i, cpudata[inptr].nice);
+		NSLog(@"CPU %d: Idle: %.2f\n", i, cpudata[inptr].idle);
 		#endif
 	}
 	

@@ -27,9 +27,9 @@
 #import "MainController.h"
 
 
-#ifndef NSLOG_DEBUG
-#define NSLOG_DEBUG
-#endif
+// #ifndef NSLOG_DEBUG
+// define NSLOG_DEBUG
+// #endif
 
 #define GRAPH_SIZE	128
 
@@ -69,10 +69,6 @@
 - (void)drawComplete
 // completely redraw graphImage, put graph into displayImage
 {	
-
-#undef NSLOG_DEBUG
-
-
 	
 	#ifdef NSLOG_DEBUG
 	NSLog(@"%s", _cmd);
@@ -96,9 +92,9 @@
 		// init the base (bottom) of this cpu's graph space.
 		float yBase = cpu * (height + graphSpacer);
 		ybottom = yBase;
-		NSLog(@"\n\n%s ybottom: %.2f", _cmd, ybottom);
 		
 		#ifdef NSLOG_DEBUG
+		NSLog(@"\n\n%s ybottom: %.2f", _cmd, ybottom);
 		NSLog(@"%s cpu %i: drawing starts at %f px high\n\n", _cmd, cpu, ybottom);
 		#endif
 		
