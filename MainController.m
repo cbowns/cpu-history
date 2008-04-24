@@ -32,12 +32,8 @@
 #endif
 
 #define GRAPH_SIZE	128
-// define GRAPH_WIDTH	8
-
-// define GRAPH_SPACER 8
 
 @implementation MainController
-
 
 - (void)drawImageOnWindow
 {
@@ -54,7 +50,7 @@
 	if ([[preferences objectForKey:SHOW_GRAPH_WINDOW_KEY] boolValue]) {
 		size = [[preferences objectForKey:GRAPH_WINDOW_SIZE_KEY] floatValue];
 		[window setContentSize:NSMakeSize(size, size)];
-		[window orderWindow:NSWindowBelow relativeTo:[preferences windowNumber]];
+		[window orderWindow:NSWindowAbove relativeTo:[preferences windowNumber]];
 		[window setLevel:([[preferences objectForKey:GRAPH_WINDOW_ON_TOP_KEY] boolValue] ?
 			NSFloatingWindowLevel : NSNormalWindowLevel)];
 		// [window center];
