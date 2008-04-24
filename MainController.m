@@ -261,8 +261,8 @@
 // get a new sample and refresh the graph
 {
 	[cpuInfo refresh];
-	// [self drawDelta];
-	[self drawComplete];
+	[self drawDelta];
+	// [self drawComplete];
 	[self setApplicationIcon];
 	
 	if ([[preferences objectForKey:SHOW_GRAPH_WINDOW_KEY] boolValue]) {
