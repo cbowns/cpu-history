@@ -53,6 +53,13 @@
 		[window orderWindow:NSWindowAbove relativeTo:[preferences windowNumber]];
 		[window setLevel:([[preferences objectForKey:GRAPH_WINDOW_ON_TOP_KEY] boolValue] ?
 			NSFloatingWindowLevel : NSNormalWindowLevel)];
+		[window setFrameAutosaveName:@"CPU History floater"];
+		if(![window setFrameUsingName:@"CPU History floater"])
+			[window center];
+		else {
+			NSRect frame = [window frame];
+			[window setFrame:frame display:NO];
+		}
 		// [window center];
 	} else
 		[window orderOut:self];
