@@ -1,31 +1,70 @@
-{\rtf1\ansi\ansicpg1252\cocoartf949
+{\rtf1\ansi\ansicpg1252\cocoartf949\cocoasubrtf270
 {\fonttbl\f0\fswiss\fcharset0 Helvetica;}
 {\colortbl;\red255\green255\blue255;}
 {\info
 {\author Christopher Bowns}}\margl1440\margr1440\vieww12240\viewh14180\viewkind1
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
 
-\f0\b\fs32 \cf0 CPU History 1.0.1 Release Notes:\
-
-\b0 \
-
-\fs24 This is the first release of CPU History. It's stable and usable enough to be a 1.0 release, but is not as fully-featured as some may like. Please let me know what you'd like to see improve or be added, my contact information is at the bottom.\
+\f0\b\fs32 \cf0 CPU History 1.1 Read Me and Release Notes:\
 \
 
-\b\fs28 Future Improvements/Current Limitations:
-\b0 \
-
-\fs24 \
-Add support to graph two or more cores of a multicore machine. At the moment, it will only graph CPU 0. My current development machine is an iBook G4 at the moment, so there's no incentive: when I get a MacBook Pro in the near future, you can bet this feature will quickly be added.\
+\fs28 What is CPU History?
+\fs32 \
 \
 
-\b\fs28 Known Bugs and Goals for 1.1:
+\b0\fs24 If you want a graph of CPU usage in the Dock and nothing more, Activity Monitor is a lot of overhead for no good reason. CPU History is a solution.\
+\
+CPU History is a streamlined replacement for Apple's CPU Monitor (development stopped after 10.2, and no longer works on 10.5). 10.3 saw the replacement of CPU Monitor with Activity Monitor, but Activity Monitor uses lots of memory and CPU to update its list of running applications, network activity, and other system usage statistics.\
+\
+In timing tests, Activity Monitor (and its sister process, pmTool) used a combined 18-20% CPU on an iBook G4. CPU History 1.0 used 1.2-1.8% CPU to graph the same information. On a MacBook Pro, Activity Monitor and pmTool used a combined 2.9% CPU, while CPU History 1.1 used 0.1% CPU.\
+\
+CPU History 1.1 fully supports multicore machines, has a floating window for the graph, lets you customize update intervals (0.1s \'96 60s), graph colors, and bar widths, and graphs as small as single pixel differences in CPU usage.\
+\
+Activity Monitor, by comparison, has a floater, but only lets you customize update intervals (your choice of 0.5, 1, 2, or 5 seconds), set colors for the graph, and resolves to only two pixels in the graph.\
+\
+\
+
+\b\fs28 Changes from CPU History 1.0:
 \b0\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li140\fi-140\ql\qnatural\pardirnatural
+\cf0 \
+- The graph no longer erases all data when altering preferences (fixed a drawing bug).\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li140\fi-140\ql\qnatural
+\cf0 \CocoaLigature0 \
+- Full support for multicore machines. (thanks @dsandler for a patch to get things started)\
 \
-- The graph erases all data when changing preferences.\
-- The About and Preferences windows do not respond to command-w to close.\
+- Ability to change divider size between core graphs (from 0\'9616 px).\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li140\fi-140\ql\qnatural\pardirnatural
+\cf0 \CocoaLigature1 \
+- Changed default graph colors to be identical to 10.5's Activity Monitor: solid red, green, blue, and black\
+\
+- Floater window now remembers where you placed it between launches (thanks @boredzo for the suggestion)\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+\cf0 \
+\
+Currently, CPU History does everything that I desire: full multicore support, graphing in the Dock icon, dynamic bar sizes and colors, and a fine-grained update interval.\
+\
+However, there's a lot that would be neat to add, so please let me know what you'd like to see improved or be added: my contact information is further down.\
+\
+
+\b\fs28 \
+Goals for 1.2:
+\b0\fs24 \
 \pard\tx0\tx1120\tx2240\tx3360\tx4480\tx5600\tx6720\tx7840\tx8960\tx10080\tx11200\tx12320\tx13440\tx14560\tx15680\tx16800\tx17920\tx19040\tx20160\tx21280\tx22400\tx23520\tx24640\tx25760\tx26880\tx28000\tx29120\tx30240\tx31360\tx32480\tx33600\tx34720\ql\qnatural
 \cf0 \CocoaLigature0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+\cf0 \CocoaLigature1 - Add option for transparency of floater\
+- Make floater snap to window edge\
+\
+
+\b\fs28 Known Bugs (or: more goals for 1.2):
+\b0\fs24 \
+\
+- The About and Preferences windows do not respond to command-w to close.\
+- Niced processes don't get graphed separately (possible OS X bug)\
+\pard\tx0\tx1120\tx2240\tx3360\tx4480\tx5600\tx6720\tx7840\tx8960\tx10080\tx11200\tx12320\tx13440\tx14560\tx15680\tx16800\tx17920\tx19040\tx20160\tx21280\tx22400\tx23520\tx24640\tx25760\tx26880\tx28000\tx29120\tx30240\tx31360\tx32480\tx33600\tx34720\ql\qnatural
+\cf0 \CocoaLigature0 \
+\
 \pard\tx0\tx1120\tx2240\tx3360\tx4480\tx5600\tx6720\tx7840\tx8960\tx10080\tx11200\tx12320\tx13440\tx14560\tx15680\tx16800\tx17920\tx19040\tx20160\tx21280\tx22400\tx23520\tx24640\tx25760\tx26880\tx28000\tx29120\tx30240\tx31360\tx32480\tx33600\tx34720\ql\qnatural
 
 \b\fs28 \cf0 Acknowledgements:
@@ -54,6 +93,14 @@ website: http://cbowns.com/cpuhistory\
 \
 \
 \
+\
+\
+\
+\
+
+\b\fs32 Licensing Information:
+\b0\fs24 \
+\
 \pard\tx0\tx1120\tx2240\tx3360\tx4480\tx5600\tx6720\tx7840\tx8960\tx10080\tx11200\tx12320\tx13440\tx14560\tx15680\tx16800\tx17920\tx19040\tx20160\tx21280\tx22400\tx23520\tx24640\tx25760\tx26880\tx28000\tx29120\tx30240\tx31360\tx32480\tx33600\tx34720\sl280\ql\qnatural
 
 \b\fs28 \cf0 License - Memory Monitor
@@ -68,6 +115,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public 
 You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\
 \
 The GNU General Public License is online available at http://www.gnu.org/copyleft/gpl.html.\
+\
 \
 \pard\tx0\tx1120\tx2240\tx3360\tx4480\tx5600\tx6720\tx7840\tx8960\tx10080\tx11200\tx12320\tx13440\tx14560\tx15680\tx16800\tx17920\tx19040\tx20160\tx21280\tx22400\tx23520\tx24640\tx25760\tx26880\tx28000\tx29120\tx30240\tx31360\tx32480\tx33600\tx34720\ql\qnatural
 

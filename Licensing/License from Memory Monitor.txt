@@ -1,0 +1,1 @@
+See the Release Notes for CPU History and Memory Monitor (the parent application) license information.

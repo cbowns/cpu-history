@@ -1,0 +1,46 @@
+{\rtf1\ansi\ansicpg1252\cocoartf949\cocoasubrtf270
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\info
+{\author Christopher Bowns}}\margl1440\margr1440\vieww12240\viewh15840\viewkind1
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f0\b\fs28 \cf0 Testing notes:
+\b0\fs24 \
+\
+CPU History 1.1 saw the addition of:\
+\
+- multicore support (1.1 has been tested on my dual-core MBP, but single/quad/octo-core machines need a good examination)\
+\
+	- added an option to dynamically change the width of the core divider\
+\
+- fixed a graphing bug (complete obliteration of graph history on preference change)\
+\
+	- which now enables dynamic redrawing of the graph when you change the bar widths\
+\
+- added support for remembering the position of the floating window\
+\
+ \
+
+\b\fs28 Areas to verify correct behaviour:\
+
+\b0\fs24 \
+- does the floater remember exactly where you left it, from quit to next launch?\
+\
+- single, quad, or octo-core machines:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li860\fi-860\ql\qnatural\pardirnatural
+\cf0 	- does the graph look right (compare to Activity Monitor: minor differences will appear, but watch for major redrawing bugs)\
+\
+	- when you change preferences, does the graph change drastically from what was there previously? Preference changes trigger a full graph redraw, while normal timer updates merely offset the previous graph image and draw new bars at the end; this complete redraw has been quite problematic.\
+\
+	- when you change the spacer width between cores, do crazy things happen, or does it smoothly resize as expected?\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+\cf0 \
+\
+
+\b\fs28 In case of things being broken:
+\b0\fs24 \
+\
+Contact me via Twitter (@cbowns), catch me on AIM: cipherswarm, or drop me an email: cpuhistory-bugs@cbowns.com\
+\
+Much, much thanks for your help with this. Putting the polish on an application is the most painful, but most rewarding part of Mac development.}
