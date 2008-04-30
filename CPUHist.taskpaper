@@ -1,30 +1,15 @@
 CPU History:
-- blockers for 1.1:
-	- graph not working @done
-		- finish graphing code changes @done
-		- test with @boredzo
-	- floater window position
-	- divider width @done
-
-- bugs:
-	- multicore support:
-		- migrate code changes to drawDeltas @done
-			- switch code back to delta by default @done
-		- test with @boredzo's mac pro
-	- let the user pick a divider width @done
-		- it's drawing too high I think @done
-	- floater doesn't remember last position
-		- set a pref for window position, draw graph to that location when we make it.
-			- changing prefs snaps graph back to center of screen @done
+blockers for 1.2:
 	- make window snap to screen edges
-		- see: MGSnappingWindow
+		- see: MGSnappingWindow, also CPU Usag
 	- transparency for graphing window
 		- hook up prefs to window setting
 		- transparency of dock icon as well?
 	- cmd-w doesn't close prefs window or about window: escape does
-		- no known way to fix?
-	- allow larger graphing window, a la Act Mon
+		- no known way to fix? map escape to cmd-w?
 
+- bugs:
+	- allow larger graphing window, a la Act Mon
 - a system to keep release notes synced and build a disk image with what I need?
 
 Mem -> CPU conversion key:
@@ -121,3 +106,18 @@ Archive:
 			- either fix the drawing code to only pull the last x*barwidth ones, or do something else. @done @project(CPU History)
 		- drawing code not performing as expected. @done @project(CPU History)
 	- 1. a. @done @project(CPU History)
+- blockers for 1.1: @done @project(CPU History)
+	- graph not working @done @project(CPU History)
+		- finish graphing code changes @done @project(CPU History)
+		- test with @boredzo @done @project(CPU History)
+	- floater window position @done @project(CPU History)
+	- divider width @done @project(CPU History)
+	- multicore support: @done @project(CPU History)
+		- migrate code changes to drawDeltas @done @project(CPU History)
+			- switch code back to delta by default @done @project(CPU History)
+		- test with @boredzo's mac pro @done @project(CPU History)
+	- let the user pick a divider width @done @project(CPU History)
+		- it's drawing too high I think @done @project(CPU History)
+	- floater doesn't remember last position @done @project(CPU History)
+		- set a pref for window position, draw graph to that location when we make it. @done @project(CPU History)
+			- changing prefs snaps graph back to center of screen @done @project(CPU History)
