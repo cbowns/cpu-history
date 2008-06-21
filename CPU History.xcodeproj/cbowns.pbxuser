@@ -148,8 +148,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 235774252;
-			PBXWorkspaceStateSaveDate = 235774252;
+			PBXPerProjectTemplateStateSaveDate = 235780749;
+			PBXWorkspaceStateSaveDate = 235780749;
 		};
 		perUserProjectItems = {
 			E50FC8C90D441B23008511D2 = E50FC8C90D441B23008511D2 /* PBXTextBookmark */;
@@ -181,7 +181,7 @@
 			E5EE54710DBD5EE100050D80 = E5EE54710DBD5EE100050D80 /* PBXTextBookmark */;
 			E5EE54720DBD5EE100050D80 = E5EE54720DBD5EE100050D80 /* PBXTextBookmark */;
 			E5EE54730DBD5EE100050D80 = E5EE54730DBD5EE100050D80 /* PBXTextBookmark */;
-			E5F481630E0DA14100EB99FD /* PBXTextBookmark */ = E5F481630E0DA14100EB99FD /* PBXTextBookmark */;
+			E5F481630E0DA14100EB99FD = E5F481630E0DA14100EB99FD /* PBXTextBookmark */;
 		};
 		sourceControlManager = E580F1410D3026A200C5732E /* Source Control */;
 		userBuildSettings = {
