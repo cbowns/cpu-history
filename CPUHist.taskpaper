@@ -1,7 +1,9 @@
 CPU History:
+blockers for 1.1:
+- fix preference window layout
 blockers for 1.2:
 	- make window snap to screen edges
-		- see: MGSnappingWindow, also CPU Usag
+		- see: MGSnappingWindow, also CPU Usage
 	- transparency for graphing window
 		- hook up prefs to window setting
 		- transparency of dock icon as well?
