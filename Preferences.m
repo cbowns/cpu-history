@@ -92,7 +92,7 @@
 - (void)showUpdateFrequency:(int)freq
 {
 	[updateFrequency setStringValue:[NSString
-		localizedStringWithFormat:NSLocalizedString(@"every\n%.1f sec.", @""), freq / 10.0]];
+		localizedStringWithFormat:NSLocalizedString(@"every\n%.1f sec", @""), freq / 10.0]];
 }
 
 
