@@ -29,7 +29,7 @@
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeArchitecture = i386;
-		activeBuildConfigurationName = Deployment;
+		activeBuildConfigurationName = Development;
 		activeExecutable = E580F1290D30269D00C5732E /* CPU History */;
 		activeTarget = 21756FEA09FBAD77009CBAB7 /* CPU History */;
 		addToTargets = (
@@ -148,8 +148,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 235780749;
-			PBXWorkspaceStateSaveDate = 235780749;
+			PBXPerProjectTemplateStateSaveDate = 235848289;
+			PBXWorkspaceStateSaveDate = 235848289;
 		};
 		perUserProjectItems = {
 			E50FC8C90D441B23008511D2 = E50FC8C90D441B23008511D2 /* PBXTextBookmark */;

@@ -1,6 +1,4 @@
 CPU History:
-blockers for 1.1:
-- fix preference window layout
 blockers for 1.2:
 	- make window snap to screen edges
 		- see: MGSnappingWindow, also CPU Usage
@@ -123,3 +121,4 @@ Archive:
 	- floater doesn't remember last position @done @project(CPU History)
 		- set a pref for window position, draw graph to that location when we make it. @done @project(CPU History)
 			- changing prefs snaps graph back to center of screen @done @project(CPU History)
+- fix preference window layout @done(2008-06-21) @project(blockers for 1.1)
