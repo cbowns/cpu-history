@@ -101,7 +101,7 @@
 	id	obj;
 	
 	BOOL enabled = [[currentSettings objectForKey:SHOW_GRAPH_WINDOW_KEY] boolValue];
-	NSColor *color = enabled ? [NSColor controlTextColor] : [NSColor controlHighlightColor];
+	NSColor *color = enabled ? [NSColor controlTextColor] : [NSColor disabledControlTextColor];
 	NSEnumerator *enumerator = [[graphWindowOptionsView subviews] objectEnumerator];
 	
 	while ((obj = [enumerator nextObject])) {
