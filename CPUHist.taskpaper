@@ -1,22 +1,29 @@
 CPU History:
-blockers for 1.2:
-	- make window snap to screen edges
-		- see: MGSnappingWindow, also CPU Usage
-	- transparency for graphing window
-		- hook up prefs to window setting
-		- transparency of dock icon as well?
-	- cmd-w doesn't close prefs window or about window: escape does
-		- no known way to fix? map escape to cmd-w?
+1.2:
+- cmd-w doesn't close prefs window or about window: escape does
+	no known way to fix? map escape to cmd-w?
 
-- bugs:
-	- allow larger graphing window, a la Act Mon
+
+bugs:
+- it counts CPUs from the bottom up. CPU 1 of 4 is the bottom, contrary to what I expected.
+- make window snap to screen edges
+	see: MGSnappingWindow, also CPU Usage
+- transparency for graphing window
+	hook up prefs to window setting
+	transparency of dock icon as well?
+future ideas:
 - a system to keep release notes synced and build a disk image with what I need?
+- allow larger graphing window, a la Act Mon
+- add a percentage text overlay like loadindock
+Reference:
+	Mem -> CPU conversion key:
+	- wired = user
+	- active = sys
+	- inactive = nice
+	- free = idle
 
-Mem -> CPU conversion key:
-- wired = user
-- active = sys
-- inactive = nice
-- free = idle
+
+
 Archive:
 - get it to build @done @project(CPU Mon)
 - make another pass through the source to take out extraneous references to CPUUsage @done @project(CPU Mon)
