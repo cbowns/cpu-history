@@ -293,8 +293,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>9</integer>
-									<integer>1</integer>
+									<integer>16</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -316,7 +315,7 @@
 							<real>185</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>204 117 969 691 0 0 1440 878 </string>
+						<string>206 119 969 691 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -341,10 +340,6 @@
 										<string>E55793210D40543D0025C9B4</string>
 										<key>PBXProjectModuleLabel</key>
 										<string>TranslucentView.m</string>
-										<key>_historyCapacity</key>
-										<integer>40</integer>
-										<key>bookmark</key>
-										<string>E578325A0E297A810047F37A</string>
 										<key>history</key>
 										<array>
 											<string>E577D1860D4BBFE8006821FA</string>
@@ -359,9 +354,8 @@
 											<string>E5D8917E0E0ED166003C05C0</string>
 											<string>E5D8917F0E0ED166003C05C0</string>
 											<string>E5D891800E0ED166003C05C0</string>
-											<string>E5D891810E0ED166003C05C0</string>
 											<string>E57832570E297A810047F37A</string>
-											<string>E57832580E297A810047F37A</string>
+											<string>E578325A0E297A810047F37A</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -381,8 +375,6 @@
 											<string>E58AC5860DC22D4F00183D80</string>
 											<string>E5EB73740E0ECD82001F57E5</string>
 											<string>E5D891880E0ED166003C05C0</string>
-											<string>E5D891890E0ED166003C05C0</string>
-											<string>E57832590E297A810047F37A</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -398,7 +390,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {762, 504}}</string>
 								<key>RubberWindowFrame</key>
-								<string>204 117 969 691 0 0 1440 878 </string>
+								<string>206 119 969 691 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -423,7 +415,7 @@
 										<key>Frame</key>
 										<string>{{10, 27}, {762, 114}}</string>
 										<key>RubberWindowFrame</key>
-										<string>204 117 969 691 0 0 1440 878 </string>
+										<string>206 119 969 691 0 0 1440 878 </string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -505,11 +497,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>E57832530E26D3460047F37A</string>
+				<string>E5C7F5A00EC799D8007A7EA9</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>E57832540E26D3460047F37A</string>
+				<string>E5C7F5A10EC799D8007A7EA9</string>
 				<string>E55793200D40543D0025C9B4</string>
-				<string>E57832550E26D3460047F37A</string>
+				<string>E5C7F5A20EC799D8007A7EA9</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
@@ -654,14 +646,14 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>E5D8918F0E0ED166003C05C0</string>
+				<string>E5C7F5940EC799D7007A7EA9</string>
 				<string>1CCC7628064C1048000F2A68</string>
 				<string>1CCC7629064C1048000F2A68</string>
-				<string>E5D891900E0ED166003C05C0</string>
-				<string>E5D891910E0ED166003C05C0</string>
-				<string>E5D891920E0ED166003C05C0</string>
-				<string>E5D891930E0ED166003C05C0</string>
-				<string>E5D891940E0ED166003C05C0</string>
+				<string>E5C7F5950EC799D7007A7EA9</string>
+				<string>E5C7F5960EC799D7007A7EA9</string>
+				<string>E5C7F5970EC799D7007A7EA9</string>
+				<string>E5C7F5980EC799D7007A7EA9</string>
+				<string>E5C7F5990EC799D7007A7EA9</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -691,10 +683,10 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>/Users/cbowns/Documents/GTD/2. Current Projects/Source Code/CPU History src/CPU History.xcodeproj</string>
+		<string>/Users/cbowns/Development/CPU History src/CPU History.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>204 117 969 691 0 0 1440 878 </string>
+	<string>206 119 969 691 0 0 1440 878 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
